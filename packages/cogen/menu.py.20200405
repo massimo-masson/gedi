@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+def config(root,application=None):
+    auto = root.branch(u'Configurazione')
+    auto.thpage(u'!!Anagrafiche piani dei conti',table='cogen.pdc_anagrafica')
+    auto.thpage(u'!!Conti', table='cogen.pdc_conto')
+    # auto.lookups('Altre tabelle', lookup_manager='cogen')

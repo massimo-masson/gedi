@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<GenRoBag>
+	<db dbname="gedi"/>
+
+	<packages/>
+
+	<authentication pkg="adm">
+		<py_auth defaultTags="user" method="authenticate" pkg="adm"/>
+	</authentication>
+</GenRoBag>

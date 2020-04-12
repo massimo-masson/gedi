@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<GenRoBag>
+	<db dbname="gedi" implementation="sqlite"/>
+
+	<packages>
+		<gnrcore_sys pkgcode='gnrcore:sys'/>
+		<gnrcore_adm pkgcode='gnrcore:adm'/>
+		<cogen pkgcode='gedi:cogen'/>
+	</packages>
+
+	<authentication pkg="gnrcore:sys">
+		<py_auth defaultTags="user" method="authenticate" pkg="adm"/>
+        	<xml_auth defaultTags="user,xml">
+			<admin pwd="gedi" tags="superadmin,_DEV_,admin,user"/>
+        	</xml_auth>
+	</authentication>
+</GenRoBag>

@@ -4,19 +4,19 @@
 class Table(object):
     def config_db(self, pkg):
         tbl = pkg.table('pdc_anagrafica', pkey='id', 
-                name_long='!!Anagrafica piano dei conti',
-                name_plural='!!Anagrafiche piani dei conti',
+                name_long=u'!![it]Anagrafica piano dei conti',
+                name_plural=u'!![it]Anagrafiche piani dei conti',
                 caption_field='codice')
 
         self.sysFields(tbl)
 
-        codice=tbl.column('codice', dtype='A', size=':15', 
-                name_long='!!Codice pdc',
+        tbl_codice=tbl.column('codice', dtype='A', size=':15', 
+                name_long=u'!![it]Codice pdc',
                 unique=True, validate_notnull=True, indexed=True)
 
-        descrizione=tbl.column('descrizione', dtype='A', size=':64', 
-                name_long='!!Descrizione pdc', 
+        tbl_descrizione=tbl.column('descrizione', dtype='A', size=':64', 
+                name_long=u'!![it]Descrizione pdc', 
                 validate_notnull=True)
 
-        note=tbl.column('note', dtype='A', size=':255', 
-                name_long='!!Note')
+        tbl_note=tbl.column('note', dtype='A', size=':255', 
+                name_long=u'!![it]Note')

@@ -11,6 +11,7 @@ class View(BaseComponent):
         r.fieldcell('codice')
         r.fieldcell('pdc_codice')
         r.fieldcell('descrizione')
+        r.fieldcell('imputabile')
         r.fieldcell('note')
 
     def th_order(self):
@@ -27,6 +28,7 @@ class ViewFromPDC(BaseComponent):
         r.fieldcell('codice', edit=True)
         r.fieldcell('pdc_codice', edit=True)
         r.fieldcell('descrizione', edit=True)
+        r.fieldcell('imputabile', edit=True)
         r.fieldcell('pdc_tassonomia_id', edit=True)
         r.fieldcell('note', edit=True)
 
@@ -45,6 +47,7 @@ class Form(BaseComponent):
         fb.field('codice')
         fb.field('pdc_codice')
         fb.field('descrizione')
+        fb.field('imputabile')
         fb.field('note')
 
 
@@ -63,13 +66,14 @@ class FormFromPDC(BaseComponent):
         #fb.field('pdc_codice', readOnly='y')
         fb.field('descrizione')
 
-        # riga 2
-        fb.field('note', colspan=2, width='100%')
-
-        # riga 3
+        # riga 
         fb.field('pdc_tassonomia_id', hasDownArrow=True)
-        fb.field('@pdc_tassonomia_id.descrizione', 
-            colspan=2, width='100%', readOnly=True)
+        fb.field('@pdc_tassonomia_id.descrizione', readOnly=True)
+            # colspan=2, width='100%')
+        fb.field('imputabile')
+
+        # riga 
+        fb.field('note', colspan=2, width='100%')
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')

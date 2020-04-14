@@ -40,3 +40,8 @@ class Table(object):
         tbl_pdc_tassonomia_id.relation('cogen.pdc_tassonomia.id', mode='foreignkey',
                 relation_name='tassonomia_conti',
                 onDelete='raise')
+
+        # colonna imputabile: se vero rappresenta un livello di imputazione
+        tbl_imputabile=tbl.column('imputabile', dtype='B',
+                name_long=u'!![it]Livello di input',
+                validate_notnull=True, default=False)

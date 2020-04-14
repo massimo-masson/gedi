@@ -27,6 +27,7 @@ class ViewFromPDC(BaseComponent):
         r.fieldcell('codice', edit=True)
         r.fieldcell('pdc_codice', edit=True)
         r.fieldcell('descrizione', edit=True)
+        r.fieldcell('pdc_tassonomia_id', edit=True)
         r.fieldcell('note', edit=True)
 
     def th_order(self):
@@ -55,11 +56,20 @@ class FormFromPDC(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
+        
+        # riga 1
         fb.field('@pdc_codice.descrizione', colspan=2, width='100%', readOnly=True)
         fb.field('codice')
         #fb.field('pdc_codice', readOnly='y')
         fb.field('descrizione')
+
+        # riga 2
         fb.field('note', colspan=2, width='100%')
+
+        # riga 3
+        fb.field('pdc_tassonomia_id', hasDownArrow=True)
+        fb.field('@pdc_tassonomia_id.descrizione', 
+            colspan=2, width='100%', readOnly=True)
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')

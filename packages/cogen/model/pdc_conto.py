@@ -32,3 +32,11 @@ class Table(object):
         # colonna note
         tbl_note=tbl.column('note', dtype='A', size=':255', 
                 name_long=u'!![it]Note')
+
+        # colonna tassonomia: FK
+        tbl_pdc_tassonomia_id=tbl.column('pdc_tassonomia_id', size='22',
+                name_long=u'!![it]Tassonomia',
+                validate_notnull=True)
+        tbl_pdc_tassonomia_id.relation('cogen.pdc_tassonomia.id', mode='foreignkey',
+                relation_name='tassonomia_conti',
+                onDelete='raise')

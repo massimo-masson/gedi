@@ -6,7 +6,11 @@ def config(root,application=None):
 
     # menu anagrafiche
     anagr = gedi.branch('!![it]Anagrafiche')
-    anagr.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
+
+    # menu anagrafiche - ditte
+    anagr_ditte = anagr.branch('!![it]Ditte')
+    anagr_ditte.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
+    anagr_ditte.thpage('!![it]Esercizi contabili',table='cogen.ditta_esercizio')
 
     # menu configurazione
     config = gedi.branch('!![it]Configurazione')
@@ -17,7 +21,7 @@ def config(root,application=None):
 
     # menu configurazione - sistema
     config_sistema = config.branch('!![it]Sistema')
-    config_sistema.thpage(u'!![it]Tabella epilogo conti', 
+    config_sistema.thpage('!![it]Tabella epilogo conti', 
                 table='cogen.pdc_epilogo')
-    config_sistema.thpage(u'!![it]Tabella tassonomia conti',
+    config_sistema.thpage('!![it]Tabella tassonomia conti',
                 table='cogen.pdc_tassonomia')

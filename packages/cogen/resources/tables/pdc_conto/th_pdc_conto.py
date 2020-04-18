@@ -76,5 +76,6 @@ class FormFromPDC(BaseComponent):
         fb.field('note', colspan=2, width='100%')
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=.8, modal=True)
 

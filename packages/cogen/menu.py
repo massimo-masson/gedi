@@ -6,13 +6,14 @@ def config(root,application=None):
 
     # menu anagrafiche
     anagr = gedi.branch('!![it]Anagrafiche')
+    anagr.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
 
     # menu configurazione
     config = gedi.branch('!![it]Configurazione')
     config.thpage('!![it]Piani dei conti',table='cogen.pdc_anagrafica')
     #config.thpage('!!__Conti', table='cogen.pdc_conto')
     #config.lookups('!![it]Tabelle lookup', lookup_manager='cogen')
-    config.thpage('!![it]Codici IVA', table='cogen.IVA_codice')
+    config.thpage('!![it]Codici IVA', table='cogen.iva_codice')
 
     # menu configurazione - sistema
     config_sistema = config.branch('!![it]Sistema')

@@ -8,15 +8,16 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('sigla')
+        r.fieldcell('codice')
         r.fieldcell('descrizione')
-        r.fieldcell('aliquota')
+        r.fieldcell('partita_iva')
+        r.fieldcell('codice_fiscale')
 
     def th_order(self):
-        return 'sigla'
+        return 'codice'
 
     def th_query(self):
-        return dict(column='sigla', op='contains', val='', runOnStart=True)
+        return dict(column='codice', op='contains', val='')
 
 
 
@@ -25,9 +26,10 @@ class Form(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
-        fb.field('sigla')
+        fb.field('codice')
         fb.field('descrizione')
-        fb.field('aliquota')
+        fb.field('partita_iva')
+        fb.field('codice_fiscale')
 
 
     def th_options(self):

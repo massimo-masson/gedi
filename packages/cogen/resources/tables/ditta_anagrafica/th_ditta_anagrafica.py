@@ -35,7 +35,12 @@ class Form(BaseComponent):
         self.dittaCorpo(bc.contentPane(region='center'))
 
     def dittaInfo(self, pane):
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        div1 = pane.div(margin='2px', 
+                border='1px solid silver',
+                rounded=5,
+                shadow='4px 4px 8px #666')
+
+        fb = div1.formbuilder(cols=2, border_spacing='4px')
         # riga 1
         fb.field('codice')
         fb.field('descrizione')
@@ -53,7 +58,7 @@ class Form(BaseComponent):
                 margin='2px')
         
         # altro
-        altro = tc.contentPane(title='AlTrO')
+        altro = tc.contentPane(title='Altro...')
         altro.div('...to do...')
 
     def th_options(self):

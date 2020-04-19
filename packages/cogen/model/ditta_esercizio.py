@@ -22,7 +22,7 @@ class Table(object):
                     validate_notnull=True)
         ditta_anagrafica.relation('cogen.ditta_anagrafica.id', 
                     relation_name='esercizi', mode='foreignkey', 
-                    onDelete='raise')
+                    onDelete='cascade')
         
         # piano dei conti di riferimento
         pdc_anagrafica = tbl.column('pdc_anagrafica_id', size='22', 
@@ -31,3 +31,10 @@ class Table(object):
         pdc_anagrafica.relation('cogen.pdc_anagrafica.id', 
                     relation_name='esercizi', mode='foreignkey', 
                     onDelete='raise')
+        pdc_anagrafica_descrizione = tbl.aliasColumn('pdc_anagrafica_descrizione',
+                    relation_path='@pdc_anagrafica_id.descrizione',
+                    name_long='!![it]Descrizione pdc')
+
+        # chiusura esercizio e esercizio corrente
+        chiuso = tbl.column('chiuso', dtype='B', name_long='!![it]Chiuso')
+        corrente = tbl.column('corrente', dtype='B', name_long='!![it]Corrente')

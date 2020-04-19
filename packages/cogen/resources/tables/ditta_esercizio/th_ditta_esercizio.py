@@ -8,14 +8,22 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('codice')
-        r.fieldcell('descrizione')
-        r.fieldcell('anno')
-        r.fieldcell('ditta_anagrafica_id')
-        r.fieldcell('pdc_anagrafica_id')
+        r.fieldcell('codice', sort='d')
+
+        # set colonne 
+        esercizio = r.columnset('colset_esercizio', name='!![it]Esercizio')
+        esercizio.fieldcell('descrizione')
+        esercizio.fieldcell('anno')
+        esercizio.fieldcell('chiuso')
+        esercizio.fieldcell('corrente')
+
+        specifiche = r.columnset('colset_specifiche', name='!![it]Specifiche')
+        specifiche.fieldcell('ditta_anagrafica_id')
+        specifiche.fieldcell('pdc_anagrafica_id')
+        specifiche.fieldcell('pdc_anagrafica_descrizione')
 
     def th_order(self):
-        return 'codice'
+        return 'codice:d'
 
     def th_query(self):
         return dict(column='codice', op='contains', val='', runOnStart=True)
@@ -24,19 +32,28 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        fb = pane.formbuilder(cols=4, border_spacing='4px')
+        
         fb.field('codice')
         fb.field('descrizione')
+        fb.field('corrente', width='3em')
+        fb.field('chiuso', width='3em')
+
         fb.field('anno')
         fb.field('ditta_anagrafica_id', hasDownArrow=True)
         fb.field('pdc_anagrafica_id', hasDownArrow=True)
+        #fb.field('pdc_anagrafica_descrizione')
+        fb.field('@pdc_anagrafica_id.descrizione', readOnly=True)
 
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
+        
 
 class ViewFromDitta(View):
     pass
 
 class FormFromDitta(Form):
-    pass
+
+    def th_options(self):
+        return dict(dialog_parentRatio=.8, modal=True)

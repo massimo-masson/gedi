@@ -23,30 +23,34 @@ class View(BaseComponent):
 class Form(BaseComponent):
 
     def th_form(self, form):
-        #pane = form.record
-        #fb = pane.formbuilder(cols=2, border_spacing='4px')
-        #fb.field('codice')
-        #fb.field('descrizione')
-        #fb.field('note', colspan=2, width='100%')
         bc = form.center.borderContainer()
         self.pdcInfo(bc.contentPane(region='top', datapath='.record'))
         self.pdcConti(bc.contentPane(region='center'))
     
     def pdcInfo(self, pane):
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        div1 = pane.div(margin='2px', 
+                border='1px solid silver',
+                rounded=5,
+                shadow='4px 4px 8px #666')
+
+        fb = div1.formbuilder(cols=2, border_spacing='4px')
         fb.field('codice')
         fb.field('descrizione')
         fb.field('note', colspan=2, width='100%', 
-            tag='simpleTextArea', height='10ex')
+            tag='simpleTextArea', height='5em')
 
     def pdcConti(self, pane):
-        #pane.inlineTableHandler(relation='@conti',
+        tc = pane.tabContainer()
+
+        # TAB Conti
+        conti = tc.contentPane(title='!![it]Elenco conti')
+        #conti.inlineTableHandler(relation='@conti',
         #        pbl_classes=True,
         #        viewResource='ViewFromPDC',
         #        grid_selfDragRows=True,
         #        margin='2px',
         #        searchOn=True)
-        pane.dialogTableHandler(relation='@conti',
+        conti.dialogTableHandler(relation='@conti',
                 viewResource='ViewFromPDC',
                 formResource='FormFromPDC',
                 margin='2px')

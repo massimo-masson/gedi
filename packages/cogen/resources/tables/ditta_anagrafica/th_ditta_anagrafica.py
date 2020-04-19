@@ -57,9 +57,12 @@ class Form(BaseComponent):
                 formResource='FormFromDitta',
                 margin='2px')
         
-        # altro
-        altro = tc.contentPane(title='Altro...')
-        altro.div('...to do...')
+        # registri IVA
+        registri_IVA = tc.contentPane(title='!![it]Registri IVA')
+        registri_IVA.dialogTableHandler(relation='@registri_iva',
+                viewResource='ViewFromDitta',
+                formResource='FormFromDitta',
+                margin='2px')
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')

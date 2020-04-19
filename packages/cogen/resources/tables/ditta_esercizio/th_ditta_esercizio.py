@@ -14,10 +14,13 @@ class View(BaseComponent):
         esercizio = r.columnset('colset_esercizio', name='!![it]Esercizio')
         esercizio.fieldcell('descrizione')
         esercizio.fieldcell('anno')
-        esercizio.fieldcell('chiuso')
+        esercizio.fieldcell('chiuso', 
+                range_chiuso='value==true', range_chiuso_color='dark red')
         esercizio.fieldcell('corrente')
 
-        specifiche = r.columnset('colset_specifiche', name='!![it]Specifiche')
+        # set specifiche
+        specifiche = r.columnset('colset_specifiche', name='!![it]Specifiche',
+                background='green')
         specifiche.fieldcell('ditta_anagrafica_id')
         specifiche.fieldcell('pdc_anagrafica_id')
         specifiche.fieldcell('pdc_anagrafica_descrizione')

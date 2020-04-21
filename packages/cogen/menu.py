@@ -4,12 +4,16 @@
 def config(root,application=None):
     gedi = root.branch('GeDi')
 
+    #gedi.webpage('Hello, gedi!', filepath='hello_gedi.py')
+
     # menu anagrafiche
     anagr = gedi.branch('!![it]Anagrafiche')
 
     # menu anagrafiche - ditte
-    anagr_ditte = anagr.branch('!![it]Ditte')
-    anagr_ditte.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
+    #anagr_ditte = anagr.branch('!![it]Ditte')
+    anagr.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
+    #anagr.thpage('!![it]clienti e fornitori',table='cogen.clifor_anagrafica')
+    anagr.thpage('!![it]Tutti i cli/for',table='cogen.clifor_anagrafica')
 
     # menu configurazione
     config = gedi.branch('!![it]Configurazione')

@@ -20,7 +20,6 @@ class View(BaseComponent):
         return dict(column='codice', op='contains', val='', runOnStart=True)
 
 
-
 class Form(BaseComponent):
 
     def th_form(self, form):

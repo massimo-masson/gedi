@@ -22,18 +22,50 @@ class View(BaseComponent):
         #return dict(column='is_cliente', op='istrue')
         return dict(column='codice', op='contains', val='')
 
+    def th_top_barclifor(self, top):
+        '''Barra sezioni tutti, clienti, fornitori'''
+        top.slotToolbar('5,sections@clifor,*,sections@ditta_anagrafica_id,5',
+                childname='clifor', _position='<bar', 
+                sections_ditta_anagrafica_id_multiButton=False,
+                gradient_from='#999', gradient_to='#666')
+
+    def th_sections_clifor(self):
+        '''sezione per pulsanti titti/clienti/fornitori'''
+        return [
+            dict(code='tutti', caption='!![it]Tutti'),
+            dict(code='clienti', caption='!![it]Clienti', condition='$is_cliente=1'),
+            dict(code='fornitori', caption='!![it]Fornitori', condition='$is_fornitore=1')
+        ]
+
     ###def th_options(self):
     ###    return dict(partitioned=True)
 
+class ViewCliForFromDitta(View):
+    '''Senza toolbar e sezioni'''
+    def th_top_barclifor(self, top):
+        pass
+    def th_sections_clifor(self):
+        pass
+
 class ViewClienti(View):
 
+    def th_top_barclifor(self, top):
+        pass
+    def th_sections_clifor(self):
+        pass
+
     def th_query(self):
-        return dict(column='is_clienti', op='value', val=1)
+        return dict(column='is_cliente', op='value', val=1)
 
 class ViewFornitori(View):
     
+    def th_top_barclifor(self, top):
+        pass
+    def th_sections_clifor(self):
+        pass
+
     def th_query(self):
-        return dict(column='is_fornitori', op='istrue')
+        return dict(column='is_fornitore', op='istrue')
 
 class Form(BaseComponent):
 

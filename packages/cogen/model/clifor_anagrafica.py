@@ -14,13 +14,13 @@ class Table(object):
         
         descrizione = tbl.column('ragione_sociale', size=':256', 
                     name_long='!![it]Ragione sociale', 
-                    name_short='!![it]Rag. Soc.')
+                    name_short='!![it]Rag.Soc.')
 
         is_cliente = tbl.column('is_cliente', dtype='B', 
                     name_long='!![it]Cliente', name_short='!![it]Cli')
 
         is_fornitore = tbl.column('is_fornitore', dtype='B', 
-                    name_long='!![it]Fornitore', name_short='!![it]Forn')
+                    name_long='!![it]Fornitore', name_short='!![it]For')
 
         descrizione = tbl.column('descrizione', size=':256', 
                     name_long='!![it]Descrizione', name_short='!![it]Desc.')   

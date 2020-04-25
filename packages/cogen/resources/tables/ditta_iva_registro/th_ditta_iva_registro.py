@@ -22,7 +22,6 @@ class View(BaseComponent):
         return dict(column='codice', op='contains', val='', runOnStart=True)
 
 
-
 class Form(BaseComponent):
 
     def th_form(self, form):
@@ -40,7 +39,14 @@ class Form(BaseComponent):
 
 
 class ViewFromDitta(View):
-    pass
+    def th_top_barclifor(self, top):
+        top.slotToolbar(
+                #'5,sections@iva_registro_tipo_id,*,sections@ditta_anagrafica_id,5',
+                '5,sections@iva_registro_tipo_id,*,5',
+                childname='tipiregistro', _position='<bar', 
+                #sections_ditta_anagrafica_id_multiButton=False,
+                gradient_from='#999', gradient_to='#666')
+
 
 class FormFromDitta(Form):
     def th_options(self):

@@ -11,9 +11,9 @@ def config(root,application=None):
 
     # menu anagrafiche - ditte
     #anagr_ditte = anagr.branch('!![it]Ditte')
-    anagr.thpage('!![it]Anagrafica ditte',table='cogen.ditta_anagrafica')
+    anagr.thpage('!![it]Ditte',table='cogen.ditta_anagrafica')
     #anagr.thpage('!![it]clienti e fornitori',table='cogen.clifor_anagrafica')
-    anagr.thpage('!![it]Tutti i cli/for',table='cogen.clifor_anagrafica')
+    anagr.thpage('!![it]Clienti e fornitori',table='cogen.clifor_anagrafica')
 
     # menu configurazione
     config = gedi.branch('!![it]Configurazione')

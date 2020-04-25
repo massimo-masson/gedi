@@ -11,19 +11,19 @@ class View(BaseComponent):
         r.fieldcell('codice', sort='d')
 
         # set colonne 
-        esercizio = r.columnset('colset_esercizio', name='!![it]Esercizio')
-        esercizio.fieldcell('descrizione')
-        esercizio.fieldcell('anno')
-        esercizio.fieldcell('chiuso', 
+        #esercizio = r.columnset('colset_esercizio', name='!![it]Esercizio')
+        r.fieldcell('descrizione')
+        r.fieldcell('anno')
+        r.fieldcell('chiuso', 
                 range_chiuso='value==true', range_chiuso_color='dark red')
-        esercizio.fieldcell('corrente')
+        r.fieldcell('corrente')
 
         # set specifiche
-        specifiche = r.columnset('colset_specifiche', name='!![it]Specifiche',
-                background='green')
-        specifiche.fieldcell('ditta_anagrafica_id')
-        specifiche.fieldcell('pdc_anagrafica_id')
-        specifiche.fieldcell('pdc_anagrafica_descrizione')
+        #specifiche = r.columnset('colset_specifiche', name='!![it]Specifiche',
+        #        background='green')
+        r.fieldcell('ditta_anagrafica_id')
+        r.fieldcell('pdc_anagrafica_id')
+        r.fieldcell('pdc_anagrafica_descrizione')
 
     def th_order(self):
         return 'codice:d'

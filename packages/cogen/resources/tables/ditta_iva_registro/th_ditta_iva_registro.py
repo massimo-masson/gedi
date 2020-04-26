@@ -44,6 +44,7 @@ class ViewFromDitta(View):
                 #'5,sections@iva_registro_tipo_id,*,sections@ditta_anagrafica_id,5',
                 '5,sections@iva_registro_tipo_id,*,5',
                 childname='tipiregistro', _position='<bar', 
+                multiselect=True,
                 #sections_ditta_anagrafica_id_multiButton=False,
                 gradient_from='#999', gradient_to='#666')
 

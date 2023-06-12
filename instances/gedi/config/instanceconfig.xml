@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<GenRoBag>
+	<db dbname="gedi2023" implementation="postgres" host="localhost" user="postgres" password="postgres" port="5432"/>
+
+	<packages>
+		<gnrcore_sys pkgcode="gnrcore:sys" />
+		<gnrcore_adm pkgcode="gnrcore:adm" />
+        <gnr_it_glbl pkgcode="gnr_it:glbl"/>
+		<pn pkgcode="gedi:pn" />
+   	</packages>
+
+	<authentication pkg="adm">
+		<py_auth defaultTags="user" method="authenticate" pkg="adm"/>
+	</authentication>
+</GenRoBag>

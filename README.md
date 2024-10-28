@@ -1,4 +1,4 @@
 # GeDi
 Gestionale Direzionale
 
-Simulatore contabile
+Simulatore contabile: gestione registrazioni per gruppi identificabili.

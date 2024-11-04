@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
 <GenRoBag>
-	<db	dbname="gedi2024" implementation="postgres" host="localhost" 
-		user="postgres" password="postgres" port="5432"/>
+	<db dbname="gedisl" implementation="sqlite"/>
 
 	<packages>
 		<gnrcore_sys pkgcode="gnrcore:sys" />

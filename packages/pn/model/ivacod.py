@@ -34,17 +34,34 @@
 # for a dedicated propietary license.
 # 
 
-def config(root,application=None):
-    gedi = root.branch('GeDi')
+class Table(object):
+    def config_db(self, pkg):
+        '''ivacod: codici IVA'''
 
-    # menu PDC
-    pdc = gedi.branch('!![it]PDC')
+        tbl = pkg.table('ivacod', pkey='id', 
+                name_long='!![it]Codice IVA',
+                name_plural='!![it]Codici IVA',
+                caption_field='cod')
 
-    pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+        self.sysFields(tbl)
 
-    # menu IVA
-    iva = gedi.branch('!![it]IVA')
+        tbl.column('cod', dtype='A', size=':22', 
+                name_long='!![it]Codice IVA',
+                unmodifiable=True,
+                unique=True, validate_notnull=True, indexed=True)
 
-    iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
+        tbl.column('desc', dtype='A', size=':256', 
+                name_long='!![it]Descrizione codice', 
+                validate_notnull=True)
+
+        tbl.column('note', dtype='A', size=':1024', 
+                name_long='!![it]Note')
+        
+        # ftel_iva_naturacodici__id: foreign key to ftel_iva_naturacodici__id
+        ftel_iva_naturacodici__id = tbl.column('ftel_iva_naturacodici__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]Natura codice IVA'
+                                    # validate_notnull = True
+                                    )
+        ftel_iva_naturacodici__id.relation('pn.ftel_iva_naturacodici.id', mode = 'foreignkey',
+                                relation_name = 'natura_codice_iva', 
+                                onDelete = 'raise')

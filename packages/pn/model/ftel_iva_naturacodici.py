@@ -36,47 +36,38 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''pdcr: conto di uno dei piani dei conti
+        '''ftel_iva_naturacodici: natura dei codici IVA in fattura elettronica
         
-        Un conto appartiene ad un piano dei conti, in relazione 1:n.
-        il codice e' libero ed esteso, pensato per importare conti da altri sistemi
-        senza particolari vincoli.
-
-        Epilogo: serve per determinare la chiusura dei conti, puo' essere:
-                CE epilogo a Conto Economico
-                SP epilogo a Stato Patrimoniale
-
-        Tipo dettaglio: il conto puo' avere un dettaglio ulteriore, ad esempio
-        un codice di anagrafica. Esempio: il conto "clienti" dettaglia il codice
-        del cliente nel dettaglio. "Clienti" e' il tipo dettaglio
-
-        Dettaglio conto: una volta definito il "tipo dettaglio", il dettaglio
-        rappresenta l'anagrafica di riferimento per dettagliare quello specifico conto.
+        Ai fini della fatturazione elettronica i codici IVA su cui non 
+        si applica l'IVA devono avere un codice che rappresenta la nautra IVA.
+        Ad esempio:
+            N1   "escluse ex art. 15"
+            N2.1 "non soggette ex artt. 7 - 7-septies DPR 633/72"
+            N2.2 "non soggette - altri casi"
+            ...
         '''
 
-        tbl = pkg.table('pdcr', pkey='id', 
-                        name_long='!![it]Conto',
-                        name_plural='!![it]Conti',
+        tbl = pkg.table('ftel_iva_naturacodici', pkey='id', 
+                        name_long='!![it]Natura codice IVA',
+                        name_plural='!![it]Natura codici IVA',
                         caption_field='cod')
 
         self.sysFields(tbl)
 
-        tbl.column('cod', dtype='A', size=':64', 
-                   name_long='!![it]Codice conto',
+        tbl.column('cod', dtype='A', size=':16', 
+                   name_long='!![it]Codice natura IVA',
                    unmodifiable=True,
                    unique=True, validate_notnull=True, indexed=True)
 
         tbl.column('desc', dtype='A', size=':256', 
-                   name_long='!![it]Descrizione conto', 
+                   name_long='!![it]Descrizione codice', 
                    validate_notnull=True)
+
+        tbl.column('valido_dal', dtype='D',
+                   name_long = "!![it]Data inizio validita'")
+
+        tbl.column('valido_al', dtype='D',
+                   name_long = "!![it]Data fine validita'")
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
-
-        # pdccod__id: foreign key to pdccod
-        tbl_pdccod__id = tbl.column('pdccod__id', dtype = 'A', size = '22',
-                                    name_long = '!![it]PDC di riferimento',
-                                    validate_notnull = True)
-        tbl_pdccod__id.relation('pn.pdccod.id', mode = 'foreignkey',
-                                relation_name = 'conti', 
-                                onDelete = 'raise')

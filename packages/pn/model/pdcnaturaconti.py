@@ -34,19 +34,29 @@
 # for a dedicated propietary license.
 # 
 
-def config(root,application=None):
-    gedi = root.branch('GeDi')
+class Table(object):
+    def config_db(self, pkg):
+        '''pdcnaturaconti: tabella per definizione della natura dei conti'''
 
-    # menu PDC
-    pdc = gedi.branch('!![it]PDC')
+        tbl = pkg.table('pdcnaturaconti', pkey='id', 
+                        name_long='!![it]Natura conti',
+                        #name_plural='!![it]Tassonomia',
+                        caption_field='cod')
 
-    pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+        self.sysFields(tbl, hierarchical='cod')
 
-    pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
+        tbl.column('cod', dtype='A', size=':22', 
+                   name_long='!![it]Codice natura',
+                   unmodifiable=True,
+                   unique=True, validate_notnull=True, indexed=True)
 
-    # menu IVA
-    iva = gedi.branch('!![it]IVA')
+        tbl.column('desc', dtype='A', size=':256', 
+                   name_long='!![it]Descrizione tassonomia', 
+                   validate_notnull=True)
 
-    iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
+        tbl.column('epilogo', dtype='A', size=':16', 
+                   name_long='!![it]Sezione epilogo chiusura conti', 
+                   validate_notnull=True)
+
+        tbl.column('note', dtype='A', size=':1024', 
+                   name_long='!![it]Note')

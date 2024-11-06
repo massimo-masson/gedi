@@ -44,6 +44,7 @@ class View(BaseComponent):
         r.fieldcell('cod')
         r.fieldcell('desc')
         r.fieldcell('note')
+        r.fieldcell('cod_epilogo')
         r.fieldcell('pdccod__id')
 
     def th_order(self):
@@ -58,6 +59,7 @@ class ViewFromPDCCOD(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('desc', edit=True)
+        r.fieldcell('cod_epilogo')
         r.fieldcell('note', edit=True)
         #r.fieldcell('pdccod__id')
 
@@ -83,8 +85,18 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=3, border_spacing='4px')
         fb.field('cod')
         fb.field('desc', colspan=2, width='100%')
+
+        fb.field('cod_epilogo')
+        fb.field('pdcnaturaconti__id', hasDownArrow=True, 
+                 auxColumns='$cod,$desc',
+                 selected_epilogo = '.cod_epilogo'
+                 )
+        fb.field('@pdcnaturaconti__id.desc', readonly=True)
+        #fb.div()
+
         fb.field('note', colspan=3, width='100%')
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='800px')
+        return dict(dialog_parentRatio=0.8)

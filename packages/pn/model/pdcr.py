@@ -73,10 +73,23 @@ class Table(object):
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
 
+        # codice conto epilogo per chiusura e riapertura
+        tbl.column('cod_epilogo', dtype='A', size=':16', 
+                   name_long='!![it]Epilogo chiusura conto')
+
         # pdccod__id: foreign key to pdccod
         tbl_pdccod__id = tbl.column('pdccod__id', dtype = 'A', size = '22',
                                     name_long = '!![it]PDC di riferimento',
                                     validate_notnull = True)
         tbl_pdccod__id.relation('pn.pdccod.id', mode = 'foreignkey',
                                 relation_name = 'conti', 
+                                onDelete = 'raise')
+
+        # pdcnaturaconto__id: foreign key to naturaconto
+        tbl_pdcnaturaconto__id = tbl.column('pdcnaturaconti__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]natura del conto',
+                                    #validate_notnull = True
+                                    )
+        tbl_pdcnaturaconto__id.relation('pn.pdcnaturaconti.id', mode = 'foreignkey',
+                                relation_name = 'epilogo_conti', 
                                 onDelete = 'raise')

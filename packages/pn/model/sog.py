@@ -41,7 +41,7 @@ class Table(object):
         tbl = pkg.table('sog', pkey='cod', 
                 name_long='!![it]Soggetto operativo',
                 name_plural='!![it]Soggetti operativi',
-                caption_field='cod')
+                caption_field='desc')
 
         self.sysFields(tbl)
 

@@ -36,28 +36,41 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''pdccod: codice dello schema di piano dei conti
+        '''rcgrp: registrazione contabile - gruppo registrazione
         
-        E' possibile avere piu' di un piano dei conti.
-        Il raggruppamento dei conti fa riferimento al codice definito in pdccod
-
-        In relazione 1:n con la tabella pdcr, che contiene i record dell specifico pdc
+        Le registrazioni contabili appartengono a un gruppo di registrazione.
+        In questo modo, selezionando uno o piu' gruppi di registrazione e'
+        possibile avere diverse configurazioni contabili, scenari, simulazioni
         '''
 
-        tbl = pkg.table('pdccod', pkey='id', 
-                        name_long='!![it]Piano dei conti',
-                        name_plural='!![it]Piani dei conti',
+        tbl = pkg.table('rcgrp', pkey='codkey', 
+                        pkey_columns='cod,sog__cod',
+                        name_long='!![it]Gruppo registrazione',
+                        name_plural='!![it]Gruppi registrazione',
                         caption_field='cod')
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, id=False, ins=True, upd=True)
 
-        tbl.column('cod', dtype='A', size=':22', 
-                   name_long='!![it]Codice piano dei conti',
+        # pk multipla cod(32)+sog_cod(4) = 36
+        tbl.column('codkey', dtype='A', size=':36', name_long='CodKey', indexed='y')
+
+        tbl.column('cod', dtype='A', size=':32', 
+                   name_long='!![it]Codice gruppo registrazione',
                    unmodifiable=True,
-                   unique=True, validate_notnull=True, indexed=True)
+                   #unique=True, 
+                   validate_notnull=True, indexed=True)
+
+        # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
+        sog__cod = tbl.column('sog__cod', dtype = 'A', size = '4',
+                                    name_long = '!![it]Soggetto di riferimento',
+                                    validate_notnull = True
+                                    )
+        sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
+                                relation_name = 'gruppi_registrazione', 
+                                onDelete = 'raise')
 
         tbl.column('desc', dtype='A', size=':256', 
-                   name_long='!![it]Descrizione pdc', 
+                   name_long='!![it]Descrizione gruppo', 
                    validate_notnull=True)
 
         tbl.column('note', dtype='A', size=':1024', 

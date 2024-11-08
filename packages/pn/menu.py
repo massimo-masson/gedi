@@ -37,6 +37,11 @@
 def config(root,application=None):
     gedi = root.branch('GeDi')
 
+    # menu CONTABILE
+    contab = gedi.branch('!![it]CONTABILE')
+
+    contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
+
     # menu PDC
     pdc = gedi.branch('!![it]PDC')
 

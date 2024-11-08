@@ -55,8 +55,8 @@ class Table(object):
                    validate_notnull=True)
 
         tbl.column('epilogo', dtype='A', size=':16', 
-                   name_long='!![it]Sezione epilogo chiusura conti', 
-                   validate_notnull=True)
+                   name_long='!![it]Sezione epilogo chiusura conti')
+                   #validate_notnull=True)
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')

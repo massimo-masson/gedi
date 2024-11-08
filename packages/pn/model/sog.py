@@ -34,23 +34,25 @@
 # for a dedicated propietary license.
 # 
 
-def config(root,application=None):
-    gedi = root.branch('GeDi')
+class Table(object):
+    def config_db(self, pkg):
+        '''sog: soggetto operativo nel db (multiditta)'''
 
-    # menu PDC
-    pdc = gedi.branch('!![it]PDC')
+        tbl = pkg.table('sog', pkey='cod', 
+                name_long='!![it]Soggetto operativo',
+                name_plural='!![it]Soggetti operativi',
+                caption_field='cod')
 
-    pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+        self.sysFields(tbl)
 
-    pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
+        tbl.column('cod', dtype='A', size=':4', 
+                name_long='!![it]Soggetto operativo',
+                unmodifiable=True,
+                unique=True, validate_notnull=True, indexed=True)
 
-    # menu IVA
-    iva = gedi.branch('!![it]IVA')
+        tbl.column('desc', dtype='A', size=':256', 
+                name_long='!![it]Descrizione', 
+                validate_notnull=True)
 
-    iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
-
-    # menu CONFIGURAZIONE
-    conf = gedi.branch('!![it]CONFIGURAZIONE')
-    conf.thpage('!![it]Soggetti operativi', table = 'pn.sog')
+        tbl.column('note', dtype='A', size=':1024', 
+                name_long='!![it]Note')

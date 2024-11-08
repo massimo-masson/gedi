@@ -8,21 +8,22 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('parent_id')
+        #r.fieldcell('parent_id')
         r.fieldcell('cod')
-        r.fieldcell('hierarchical_cod')
-        r.fieldcell('_parent_h_cod')
-        r.fieldcell('hierarchical_pkey')
-        r.fieldcell('_parent_h_pkey')
+        #r.fieldcell('hierarchical_cod')
+        #r.fieldcell('_parent_h_cod')
+        #r.fieldcell('hierarchical_pkey')
+        #r.fieldcell('_parent_h_pkey')
         r.fieldcell('desc')
         r.fieldcell('epilogo')
-        r.fieldcell('note')
+        #r.fieldcell('note')
 
     def th_order(self):
         return 'parent_id'
 
     def th_query(self):
-        return dict(column='parent_id', op='contains', val='')
+        return dict(column='parent_id', op='contains', val='', 
+                    runOnStart=True)
 
 
 
@@ -31,15 +32,16 @@ class Form(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
-        fb.field('parent_id')
+        #fb.field('parent_id')
         fb.field('cod')
         fb.field('hierarchical_cod')
-        fb.field('_parent_h_cod')
-        fb.field('hierarchical_pkey')
-        fb.field('_parent_h_pkey')
-        fb.field('desc')
         fb.field('epilogo')
-        fb.field('note')
+        fb.div()
+        #fb.field('_parent_h_cod')
+        #fb.field('hierarchical_pkey')
+        #fb.field('_parent_h_pkey')
+        fb.field('desc', colspan=2, width='100%')
+        fb.field('note', colspan=2, width='100%')
 
 
     def th_options(self):

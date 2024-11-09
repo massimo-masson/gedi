@@ -8,18 +8,15 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('codkey')
         r.fieldcell('cod')
-        r.fieldcell('sog__cod')
-        r.fieldcell('rcgrpcls__cod')
         r.fieldcell('desc')
         r.fieldcell('note')
 
     def th_order(self):
-        return 'codkey'
+        return 'cod'
 
     def th_query(self):
-        return dict(column='codkey', op='contains', val='', runOnStart=True)
+        return dict(column='cod', op='contains', val='', runOnStart=True)
 
 
 
@@ -28,18 +25,9 @@ class Form(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
-        #fb.field('codkey')
-
         fb.field('cod')
-        fb.field('sog__cod', hasDownArrow=True)
-        #fb.field('@sog__cod.desc', readOnly=True)
-
-        fb.field('desc', colspan=2, width='100%')
-
-        fb.field('rcgrpcls__cod', hasDownArrow=True)
-        fb.div('@rcgrpcls__cod.desc')
-
-        fb.field('note', colspan=2, width='100%')
+        fb.field('desc')
+        fb.field('note')
 
 
     def th_options(self):

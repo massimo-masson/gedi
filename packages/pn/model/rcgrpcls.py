@@ -34,31 +34,32 @@
 # for a dedicated propietary license.
 # 
 
-def config(root,application=None):
-    gedi = root.branch('GeDi')
+class Table(object):
+    def config_db(self, pkg):
+        '''rcgrpcls: registrazione contabile - classi per gruppi registrazione
+        
+        E' possibile definire una classe di appartenenza per un
+        gruppo di registrazione.
+        Il gruppo di registrazione in tal modo potra' acquisire i parametri
+        caratterizzanti la classe
+        '''
 
-    # menu CONTABILE
-    contab = gedi.branch('!![it]CONTABILE')
+        tbl = pkg.table('rcgrpcls', pkey='cod', 
+                        name_long='!![it]Classe gruppo registrazione',
+                        name_plural='!![it]Classe gruppi registrazione',
+                        caption_field='desc')
 
-    contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
+        self.sysFields(tbl)
 
-    # menu PDC
-    pdc = gedi.branch('!![it]PDC')
+        tbl.column('cod', dtype='A', size=':32', 
+                   name_long='!![it]Codice classe gruppo registrazione',
+                   unmodifiable=True,
+                   unique=True, 
+                   validate_notnull=True, indexed=True)
 
-    pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+        tbl.column('desc', dtype='A', size=':256', 
+                   name_long='!![it]Descrizione classe', 
+                   validate_notnull=True)
 
-    pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
-
-    # menu IVA
-    iva = gedi.branch('!![it]IVA')
-
-    iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
-
-    # menu CONFIGURAZIONE
-    conf = gedi.branch('!![it]CONFIGURAZIONE')
-
-    conf.thpage('!![it]Soggetti operativi', table = 'pn.sog')
-
-    conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
+        tbl.column('note', dtype='A', size=':1024', 
+                   name_long='!![it]Note')

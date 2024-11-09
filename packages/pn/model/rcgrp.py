@@ -69,6 +69,15 @@ class Table(object):
                                 relation_name = 'gruppi_registrazione', 
                                 onDelete = 'raise')
 
+        # foreign key to rcgrpcls - classe del grupp di registrazione
+        rcgrpcls__cod = tbl.column('rcgrpcls__cod', dtype = 'A', size = '32',
+                                    name_long = '!![it]Classe gruppo registrazione',
+                                    validate_notnull = True
+                                    )
+        rcgrpcls__cod.relation('pn.rcgrpcls.cod', mode = 'foreignkey',
+                                relation_name = 'classi_gruppi_registrazione', 
+                                onDelete = 'raise')
+
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione gruppo', 
                    validate_notnull=True)

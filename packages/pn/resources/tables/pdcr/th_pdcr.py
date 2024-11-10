@@ -94,7 +94,10 @@ class Form(BaseComponent):
         fb.field('@pdcnaturaconti__id.desc', readonly=True)
         #fb.div()
 
-        fb.field('note', colspan=3, width='100%')
+        fb.field('note', colspan=3, width='100%',
+                 height='5em',
+                 tag='simpleTextArea', editor=True
+                 )
 
 
     def th_options(self):

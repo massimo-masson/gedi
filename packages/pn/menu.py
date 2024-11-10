@@ -42,23 +42,24 @@ def config(root,application=None):
 
     contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
 
-    # menu PDC
-    pdc = gedi.branch('!![it]PDC')
-
-    pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
-
-    pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
-
-    # menu IVA
-    iva = gedi.branch('!![it]IVA')
-
-    iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
-
     # menu CONFIGURAZIONE
     conf = gedi.branch('!![it]CONFIGURAZIONE')
 
     conf.thpage('!![it]Soggetti operativi', table = 'pn.sog')
 
     conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
+
+    # menu CONFIGURAZIONE - PDC
+    conf_pdc = conf.branch('!![it]PDC')
+
+    conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
+    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+
+    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
+
+    # menu CONFIGURAZIONE - IVA
+    conf_iva = conf.branch('!![it]IVA')
+
+    conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
+    conf_iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
+

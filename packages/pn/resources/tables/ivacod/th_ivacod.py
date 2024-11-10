@@ -44,6 +44,7 @@ class View(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('ftel_iva_naturacodici__id')
+        r.fieldcell('aliquota')
         r.fieldcell('desc')
         r.fieldcell('note')
 
@@ -59,7 +60,8 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        fb = pane.formbuilder(cols=3, border_spacing='4px')
+
         fb.field('cod')
         fb.field('ftel_iva_naturacodici__id', hasDownArrow=True,
                  #columns='$cod,$desc',
@@ -67,8 +69,13 @@ class Form(BaseComponent):
                  condition = '($valido_al IS NULL) OR ($valido_al >= :data_di_sistema)',
                  condition_data_di_sistema = self.rootenv['workdate']
                  )
-        fb.field('desc', colspan=2)
-        fb.field('note', colspan=2,
+        fb.div(' ', width='100%')
+        #fb.field('@ftel_iva_naturacodici__id.desc', readOnly=True)
+
+        fb.field('aliquota')
+        fb.field('desc', colspan=2, width='100%')
+
+        fb.field('note', colspan=3, width='100%',
                  height='5em',
                  tag='simpleTextArea', editor=True
                  )

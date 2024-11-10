@@ -46,21 +46,23 @@ class Table(object):
         self.sysFields(tbl)
 
         tbl.column('cod', dtype='A', size=':22', 
-                name_long='!![it]Codice IVA',
-                unmodifiable=True,
-                unique=True, validate_notnull=True, indexed=True)
+                   name_long='!![it]Codice IVA',
+                   unmodifiable=True,
+                   unique=True, validate_notnull=True, indexed=True)
 
         tbl.column('desc', dtype='A', size=':256', 
-                name_long='!![it]Descrizione codice', 
-                validate_notnull=True)
+                   name_long='!![it]Descrizione codice')
+        
+        tbl.column('aliquota', dtype='N', format="###.00",
+                   name_long='!![it]Aliquota IVA')
 
         tbl.column('note', dtype='A', size=':1024', 
                 name_long='!![it]Note')
         
         # ftel_iva_naturacodici__id: foreign key to ftel_iva_naturacodici__id
         ftel_iva_naturacodici__id = tbl.column('ftel_iva_naturacodici__id', dtype = 'A', size = '22',
-                                    name_long = '!![it]Natura codice IVA'
-                                    # validate_notnull = True
+                                    name_long = '!![it]Natura codice IVA',
+                                    validate_notnull = False
                                     )
         ftel_iva_naturacodici__id.relation('pn.ftel_iva_naturacodici.id', mode = 'foreignkey',
                                 relation_name = 'natura_codice_iva', 

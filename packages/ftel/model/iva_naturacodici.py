@@ -36,7 +36,7 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''ftel_iva_naturacodici: natura dei codici IVA in fattura elettronica
+        '''iva_naturacodici: natura dei codici IVA in fattura elettronica
         
         Ai fini della fatturazione elettronica i codici IVA su cui non 
         si applica l'IVA devono avere un codice che rappresenta la nautra IVA.
@@ -47,12 +47,12 @@ class Table(object):
             ...
         '''
 
-        tbl = pkg.table('ftel_iva_naturacodici', pkey='id', 
+        tbl = pkg.table('iva_naturacodici', pkey='cod', 
                         name_long='!![it]Natura codice IVA',
                         name_plural='!![it]Natura codici IVA',
-                        caption_field='cod')
+                        caption_field='coddesc')
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, id=False)
 
         tbl.column('cod', dtype='A', size=':16', 
                    name_long='!![it]Codice natura IVA',
@@ -71,3 +71,6 @@ class Table(object):
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
+        
+        tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
+                          name_long='!![it]Codice - Descrizione')

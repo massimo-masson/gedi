@@ -61,5 +61,6 @@ def config(root,application=None):
     conf_iva = conf.branch('!![it]IVA')
 
     conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    conf_iva.thpage('!![it]natura codici IVa per Fattura Elettronica', table = 'pn.ftel_iva_naturacodici')
+    conf_iva.thpage('!![it]natura codici IVa per Fattura Elettronica', 
+                    table = 'ftel.iva_naturacodici')
 

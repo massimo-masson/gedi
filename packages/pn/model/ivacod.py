@@ -59,11 +59,13 @@ class Table(object):
         tbl.column('note', dtype='A', size=':1024', 
                 name_long='!![it]Note')
         
-        # ftel_iva_naturacodici__id: foreign key to ftel_iva_naturacodici__id
-        ftel_iva_naturacodici__id = tbl.column('ftel_iva_naturacodici__id', dtype = 'A', size = '22',
-                                    name_long = '!![it]Natura codice IVA',
-                                    validate_notnull = False
-                                    )
-        ftel_iva_naturacodici__id.relation('pn.ftel_iva_naturacodici.id', mode = 'foreignkey',
-                                relation_name = 'natura_codice_iva', 
-                                onDelete = 'raise')
+        # ftel_iva_naturacodici__cod: foreign key to ftel.iva_naturacodici__cod
+        ftel_iva_naturacodici__cod = tbl.column('ftel_iva_naturacodici__cod', 
+                                               dtype = 'A', size = '16',
+                                               name_long = '!![it]Natura codice IVA',
+                                               validate_notnull = False
+                                               )
+        ftel_iva_naturacodici__cod.relation('ftel.iva_naturacodici.cod', 
+                                           mode = 'foreignkey',
+                                           relation_name = 'natura_codice_iva', 
+                                           onDelete = 'raise')

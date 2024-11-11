@@ -43,7 +43,7 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('cod')
-        r.fieldcell('ftel_iva_naturacodici__id')
+        r.fieldcell('ftel_iva_naturacodici__cod')
         r.fieldcell('aliquota')
         r.fieldcell('desc')
         r.fieldcell('note')
@@ -63,14 +63,13 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=3, border_spacing='4px')
 
         fb.field('cod')
-        fb.field('ftel_iva_naturacodici__id', hasDownArrow=True,
-                 #columns='$cod,$desc',
-                 auxColumns='$cod,$desc', 
+        fb.field('ftel_iva_naturacodici__cod', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc', 
                  condition = '($valido_al IS NULL) OR ($valido_al >= :data_di_sistema)',
-                 condition_data_di_sistema = self.rootenv['workdate']
+                 condition_data_di_sistema = self.rootenv['workdate'],
+                 colspan=2, width='100%'
                  )
-        fb.div(' ', width='100%')
-        #fb.field('@ftel_iva_naturacodici__id.desc', readOnly=True)
 
         fb.field('aliquota')
         fb.field('desc', colspan=2, width='100%')
@@ -82,4 +81,4 @@ class Form(BaseComponent):
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_height='400px', dialog_width='800px')

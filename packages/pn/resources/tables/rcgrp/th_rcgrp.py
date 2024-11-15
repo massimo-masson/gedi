@@ -41,7 +41,7 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('codkey')
+        #r.fieldcell('codkey')
         r.fieldcell('cod')
         r.fieldcell('sog__cod')
         r.fieldcell('rcgrpcls__cod')
@@ -49,10 +49,10 @@ class View(BaseComponent):
         r.fieldcell('note')
 
     def th_order(self):
-        return 'codkey'
+        return 'cod'
 
     def th_query(self):
-        return dict(column='codkey', op='contains', val='', runOnStart=True)
+        return dict(column='sog__cod', op='contains', val='', runOnStart=True)
 
 
 

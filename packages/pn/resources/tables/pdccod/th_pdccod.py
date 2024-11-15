@@ -82,7 +82,7 @@ class Form(BaseComponent):
 
         # tab pdc records
         tab_pdcr = tc.contentPane(title = '!![it]Conti')
-        tab_pdcr.dialogTableHandler(relation = '@conti',
+        tab_pdcr.dialogTableHandler(relation = '@conti_pdc',
                  pbl_classes = True,
                  viewResource = 'ViewFromPDCCOD',
         #         formResource = 'FormFromCategory',

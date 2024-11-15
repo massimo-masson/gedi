@@ -55,16 +55,38 @@ class Table(object):
         '''
 
         tbl = pkg.table('pdcr', pkey='id', 
+                        pkey_columns='pdccod__cod,cod',
                         name_long='!![it]Conto',
                         name_plural='!![it]Conti',
-                        caption_field='cod')
+                        caption_field='coddesc')
 
         self.sysFields(tbl)
+
+        #
+        # TO DO: PK COMPOSITA
+        #
+        # La PK corretta di questa tabella e':
+        # pdccod__id
+        # cod
+        #
 
         tbl.column('cod', dtype='A', size=':64', 
                    name_long='!![it]Codice conto',
                    unmodifiable=True,
-                   unique=True, validate_notnull=True, indexed=True)
+                   validate_notnull=True,
+                   #unique=True, 
+                   #indexed=True,
+                   )
+
+        # pdccod__id: foreign key to pdccod
+        tbl_pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = '22',
+                                    name_long = '!![it]PDC di riferimento',
+                                    unmodifiable=True,
+                                    validate_notnull = True
+                                    )
+        tbl_pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
+                                relation_name = 'conti_pdc', 
+                                onDelete = 'raise')
 
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione conto', 
@@ -77,14 +99,6 @@ class Table(object):
         tbl.column('cod_epilogo', dtype='A', size=':16', 
                    name_long='!![it]Epilogo chiusura conto')
 
-        # pdccod__id: foreign key to pdccod
-        tbl_pdccod__id = tbl.column('pdccod__id', dtype = 'A', size = '22',
-                                    name_long = '!![it]PDC di riferimento',
-                                    validate_notnull = True)
-        tbl_pdccod__id.relation('pn.pdccod.id', mode = 'foreignkey',
-                                relation_name = 'conti', 
-                                onDelete = 'raise')
-
         # pdcnaturaconto__id: foreign key to naturaconto
         tbl_pdcnaturaconto__id = tbl.column('pdcnaturaconti__id', dtype = 'A', size = '22',
                                     name_long = '!![it]natura del conto',
@@ -93,3 +107,6 @@ class Table(object):
         tbl_pdcnaturaconto__id.relation('pn.pdcnaturaconti.id', mode = 'foreignkey',
                                 relation_name = 'epilogo_conti', 
                                 onDelete = 'raise')
+        
+        tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
+                          name_long='!![it]Codice - Descrizione')

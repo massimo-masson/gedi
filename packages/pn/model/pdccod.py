@@ -44,12 +44,12 @@ class Table(object):
         In relazione 1:n con la tabella pdcr, che contiene i record dell specifico pdc
         '''
 
-        tbl = pkg.table('pdccod', pkey='id', 
+        tbl = pkg.table('pdccod', pkey='cod', 
                         name_long='!![it]Piano dei conti',
                         name_plural='!![it]Piani dei conti',
-                        caption_field='cod')
+                        caption_field='coddesc')
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, id=False)
 
         tbl.column('cod', dtype='A', size=':22', 
                    name_long='!![it]Codice piano dei conti',
@@ -62,3 +62,6 @@ class Table(object):
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
+
+        tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
+                          name_long='!![it]Codice - Descrizione')

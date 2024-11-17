@@ -41,6 +41,7 @@ def config(root,application=None):
     contab = gedi.branch('!![it]CONTABILE')
 
     contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
+    contab.thpage('!![it]Rilevazioni contabili', table = 'pn.rc')
 
     # menu CONFIGURAZIONE
     conf = gedi.branch('!![it]CONFIGURAZIONE')
@@ -52,15 +53,18 @@ def config(root,application=None):
     # menu CONFIGURAZIONE - PDC
     conf_pdc = conf.branch('!![it]PDC')
 
+    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
+
     conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
     #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
-
-    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
 
     # menu CONFIGURAZIONE - IVA
     conf_iva = conf.branch('!![it]IVA')
 
     conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-    conf_iva.thpage('!![it]natura codici IVa per Fattura Elettronica', 
+
+    # menu CONFIGURAZIONE - FATTURA ELETTRONICA
+    conf_ftel = conf.branch('!![it]FATTURA ELETTRONICA')
+    conf_ftel.thpage('!![it]natura codici IVa per Fattura Elettronica', 
                     table = 'ftel.iva_naturacodici')
 

@@ -45,7 +45,7 @@ class Table(object):
 
         self.sysFields(tbl)
 
-        tbl.column('cod', dtype='A', size=':22', 
+        tbl.column('cod', dtype='A', size=':32', 
                    name_long='!![it]Codice IVA',
                    unmodifiable=True,
                    unique=True, validate_notnull=True, indexed=True)
@@ -61,7 +61,7 @@ class Table(object):
         
         # ftel_iva_naturacodici__cod: foreign key to ftel.iva_naturacodici__cod
         ftel_iva_naturacodici__cod = tbl.column('ftel_iva_naturacodici__cod', 
-                                               dtype = 'A', size = '16',
+                                               dtype = 'A', size = ':16',
                                                name_long = '!![it]Natura codice IVA',
                                                validate_notnull = False
                                                )

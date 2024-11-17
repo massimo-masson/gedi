@@ -45,7 +45,7 @@ class Table(object):
 
         self.sysFields(tbl)
 
-        tbl.column('cod', dtype='A', size=':4', 
+        tbl.column('cod', dtype='A', size=':32', 
                 name_long='!![it]Soggetto operativo',
                 unmodifiable=True,
                 unique=True, validate_notnull=True, indexed=True)

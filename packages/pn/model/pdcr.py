@@ -79,7 +79,7 @@ class Table(object):
                    )
 
         # pdccod__id: foreign key to pdccod
-        tbl_pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = '22',
+        tbl_pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
                                     name_long = '!![it]PDC di riferimento',
                                     unmodifiable=True,
                                     validate_notnull = True

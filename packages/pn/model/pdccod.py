@@ -51,7 +51,7 @@ class Table(object):
 
         self.sysFields(tbl, id=False)
 
-        tbl.column('cod', dtype='A', size=':22', 
+        tbl.column('cod', dtype='A', size=':32', 
                    name_long='!![it]Codice piano dei conti',
                    unmodifiable=True,
                    unique=True, validate_notnull=True, indexed=True)

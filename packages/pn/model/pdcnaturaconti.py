@@ -45,7 +45,7 @@ class Table(object):
 
         self.sysFields(tbl, hierarchical='cod')
 
-        tbl.column('cod', dtype='A', size=':22', 
+        tbl.column('cod', dtype='A', size=':32', 
                    name_long='!![it]Codice natura',
                    unmodifiable=True,
                    unique=True, validate_notnull=True, indexed=True)

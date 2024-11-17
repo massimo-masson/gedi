@@ -36,17 +36,16 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''rcgrp: registrazione contabile - gruppo registrazione
-        
-        Le registrazioni contabili appartengono a un gruppo di registrazione.
-        In questo modo, selezionando uno o piu' gruppi di registrazione e'
-        possibile avere diverse configurazioni contabili, scenari, simulazioni
+        '''rc: rilevazione contabile (accounting journal) testata
+
+        Testata delle rilevazioni contabili, cui tutte le tabelle
+        di movimento contabile e relativo dettaglio faranno riferimento.        
         '''
 
-        tbl = pkg.table('rcgrp', pkey='id', 
-                        pkey_columns='sog__cod,cod',
-                        name_long='!![it]Gruppo registrazione',
-                        name_plural='!![it]Gruppi registrazione',
+        tbl = pkg.table('rc', pkey='id', 
+                        pkey_columns='sog__cod,id,rcgrpcls__cod',
+                        name_long='!![it]Rilevazione contabile',
+                        name_plural='!![it]Rilevazioni contabili',
                         caption_field='cod')
 
         self.sysFields(tbl)
@@ -56,16 +55,9 @@ class Table(object):
         #
         # La PK corretta di questa tabella e':
         # sog__cod
-        # cod
+        # id
+        # rcgrpcls__cod
         #
-
-        tbl.column('cod', dtype='A', size=':32', 
-                   name_long='!![it]Codice gruppo registrazione',
-                   unmodifiable=True,
-                   validate_notnull=True,
-                   #unique=True, 
-                   #indexed=True
-                   )
 
         # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
         sog__cod = tbl.column('sog__cod', dtype = 'A', size = ':32',
@@ -74,9 +66,8 @@ class Table(object):
                                     validate_notnull = True
                                     )
         sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
-                                relation_name = 'gruppi_registrazione', 
-                                onDelete = 'raise'
-                                )
+                                relation_name = 'rilevazioni_contabili', 
+                                onDelete = 'raise')
         
         # foreign key to rcgrpcls - classe del grupp di registrazione
         rcgrpcls__cod = tbl.column('rcgrpcls__cod', dtype = 'A', size = ':32',
@@ -84,13 +75,25 @@ class Table(object):
                                     validate_notnull = True
                                     )
         rcgrpcls__cod.relation('pn.rcgrpcls.cod', mode = 'foreignkey',
-                                relation_name = 'registrazioni_per_classe', 
-                                onDelete = 'raise'
-                                )
+                                relation_name = 'classi_gruppi_registrazione', 
+                                onDelete = 'raise')
 
         tbl.column('desc', dtype='A', size=':256', 
-                   name_long='!![it]Descrizione gruppo', 
+                   name_long='!![it]Descrizione rilevazione', 
                    validate_notnull=True)
 
-        tbl.column('note', dtype='A', size=':1024', 
-                   name_long='!![it]Note')
+        tbl.column('rc_data', dtype='D',
+                   name_long='!![it]Data registrazione',
+                   validate_notnull=True
+                   )
+
+        tbl.column('rc_docdata', dtype='D',
+                   name_long='!![it]Data documento'
+                   )
+
+        tbl.column('rc_docnum', dtype='A', size=':64', 
+                   name_long='!![it]DNumero documento'
+                   )
+
+        # tbl.column('note', dtype='A', size=':1024', 
+        #            name_long='!![it]Note')

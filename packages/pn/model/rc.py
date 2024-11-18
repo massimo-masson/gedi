@@ -87,6 +87,11 @@ class Table(object):
                    validate_notnull=True
                    )
 
+        tbl.column('rc_rif', dtype='A', size=':128',
+                   name_long='!![it]Riferimento registrazione',
+                   #validate_notnull=True
+                   )
+        
         tbl.column('rc_docdata', dtype='D',
                    name_long='!![it]Data documento'
                    )

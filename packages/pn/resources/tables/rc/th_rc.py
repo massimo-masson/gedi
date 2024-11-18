@@ -12,6 +12,7 @@ class View(BaseComponent):
         r.fieldcell('rcgrpcls__cod')
         r.fieldcell('desc')
         r.fieldcell('rc_data')
+        r.fieldcell('rc_rif')
         r.fieldcell('rc_docdata')
         r.fieldcell('rc_docnum')
 
@@ -32,9 +33,11 @@ class Form(BaseComponent):
         fb.field('rcgrpcls__cod')
         fb.field('desc')
         fb.field('rc_data')
+        fb.field('rc_rif')
         fb.field('rc_docdata')
         fb.field('rc_docnum')
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.8)

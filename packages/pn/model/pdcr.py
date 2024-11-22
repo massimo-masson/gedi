@@ -56,6 +56,7 @@ class Table(object):
 
         tbl = pkg.table('pdcr', pkey='id', 
                         pkey_columns='pdccod__cod,cod',
+                        partition_pdccod__cod='pdccod__cod',
                         name_long='!![it]Conto',
                         name_plural='!![it]Conti',
                         caption_field='coddesc')
@@ -110,3 +111,4 @@ class Table(object):
         
         tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
                           name_long='!![it]Codice - Descrizione')
+        

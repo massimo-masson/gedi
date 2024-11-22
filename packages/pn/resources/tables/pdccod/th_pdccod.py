@@ -71,8 +71,8 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols = 3, border_spacing = '4px')
 
         fb.field('cod')
-        fb.field('desc', colspan=2, width='100%')
-        fb.field('note', colspan=2, width='100%', # height = '100%',
+        fb.field('desc', colspan=2, width='90%')
+        fb.field('note', colspan=2, width='90%', # height = '100%',
                  height='5em',
                  tag='simpleTextArea', editor=True
                  )
@@ -92,4 +92,5 @@ class Form(BaseComponent):
         
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.8)

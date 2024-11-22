@@ -1,0 +1,6 @@
+from gnr.web.gnrwebpage import BaseComponent
+
+class LoginComponent(BaseComponent):
+    def onAuthenticating_pn(self, avatar, rootenv=None):
+        rootenv['pdccod__cod'] = 'POCI'
+    

@@ -45,7 +45,7 @@ class View(BaseComponent):
         r.fieldcell('desc')
         r.fieldcell('note')
         r.fieldcell('cod_epilogo')
-        r.fieldcell('pdccod__id')
+        r.fieldcell('pdccod__cod')
 
     def th_order(self):
         return 'cod'
@@ -53,6 +53,9 @@ class View(BaseComponent):
     def th_query(self):
         return dict(column='cod', op='contains', val='')
 
+    def th_options(self):
+        return dict(partitioned=True, ignorePartition=True)
+    
 class ViewFromPDCCOD(BaseComponent):
 
     def th_struct(self,struct):
@@ -61,7 +64,7 @@ class ViewFromPDCCOD(BaseComponent):
         r.fieldcell('desc', edit=True)
         r.fieldcell('cod_epilogo')
         r.fieldcell('note', edit=True)
-        #r.fieldcell('pdccod__id')
+        #r.fieldcell('pdccod__cod')
 
 
     def th_order(self):
@@ -69,6 +72,9 @@ class ViewFromPDCCOD(BaseComponent):
 
     def th_query(self):
         return dict(column='cod', op='contains', val='')
+    
+    def th_options(self):
+        return dict(partitioned=True)
     
 
 class Form(BaseComponent):
@@ -80,7 +86,7 @@ class Form(BaseComponent):
         # fb.field('cod')
         # fb.field('desc')
         # fb.field('note')
-        # fb.field('pdccod__id')
+        # fb.field('pdccod__cod')
 
         fb = pane.formbuilder(cols=3, border_spacing='4px')
         fb.field('cod')

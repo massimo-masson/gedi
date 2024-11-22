@@ -44,6 +44,7 @@ class Table(object):
 
         tbl = pkg.table('rc', pkey='id', 
                         pkey_columns='sog__cod,id,rcgrpcls__cod',
+                        partition_sog__cod='sog__cod',
                         name_long='!![it]Rilevazione contabile',
                         name_plural='!![it]Rilevazioni contabili',
                         caption_field='cod')
@@ -80,13 +81,18 @@ class Table(object):
 
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione rilevazione', 
-                   validate_notnull=True)
+                   #validate_notnull=True
+                   )
 
         tbl.column('rc_data', dtype='D',
                    name_long='!![it]Data registrazione',
                    validate_notnull=True
                    )
 
+        #
+        # TO DO: rimettere validate_notnull=True
+        # magari con un default autoincrementante
+        #
         tbl.column('rc_rif', dtype='A', size=':128',
                    name_long='!![it]Riferimento registrazione',
                    #validate_notnull=True
@@ -102,3 +108,8 @@ class Table(object):
 
         # tbl.column('note', dtype='A', size=':1024', 
         #            name_long='!![it]Note')
+
+    def defaultValues(self):
+        '''Valore di default per nuovi inserimenti in partizione attiva'''
+
+        return dict(sog__cod=self.db.currentEnv.get('current_sog__cod'))

@@ -45,6 +45,7 @@ class Table(object):
 
         tbl = pkg.table('rcgrp', pkey='id', 
                         pkey_columns='sog__cod,cod',
+                        partition_sog__cod='sog__cod',
                         name_long='!![it]Gruppo registrazione',
                         name_plural='!![it]Gruppi registrazione',
                         caption_field='cod')
@@ -94,3 +95,8 @@ class Table(object):
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
+
+    def defaultValues(self):
+        '''Valore di default per nuovi inserimenti in partizione attiva'''
+
+        return dict(sog__cod=self.db.currentEnv.get('current_sog__cod'))

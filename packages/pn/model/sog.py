@@ -56,3 +56,10 @@ class Table(object):
 
         tbl.column('note', dtype='A', size=':1024', 
                 name_long='!![it]Note')
+        
+    def partitioning_pkeys(self):
+        '''Lista dei soggetti per il partizionamento'''
+        where = None
+
+        soggetti = [r['pkey'] for r in self.query(where=where).fetch()]
+        return soggetti

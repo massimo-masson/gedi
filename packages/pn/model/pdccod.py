@@ -65,3 +65,11 @@ class Table(object):
 
         tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
                           name_long='!![it]Codice - Descrizione')
+
+    def partitioning_pkeys(self):
+        where=None
+        #print(x)
+
+        x = [r['pkey'] for r in self.query(where=where).fetch()]
+
+        return x        

@@ -45,7 +45,7 @@ class Table(object):
                         pkey_columns='rc__id,riga_numero',
                         name_long="!![it]Riga contabilita' generale",
                         name_plural="!![it]Righe contabilita' generale",
-                        caption_field='cod')
+                        caption_field='caption')
 
         self.sysFields(tbl)
 
@@ -83,6 +83,10 @@ class Table(object):
                    )
 
         tbl.column('avere_udc', dtype='N', size='12,2',
-                   name_long='!![it]Dare',
+                   name_long='!![it]Avere',
                    #validate_notnull=True,
                    )
+
+        tbl.formulaColumn('caption', "$riga_numero",
+                          name_long='!![it]Rif. reg.')
+

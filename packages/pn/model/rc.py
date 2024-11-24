@@ -47,7 +47,7 @@ class Table(object):
                         partition_sog__cod='sog__cod',
                         name_long='!![it]Rilevazione contabile',
                         name_plural='!![it]Rilevazioni contabili',
-                        caption_field='cod')
+                        caption_field='caption')
 
         self.sysFields(tbl)
 
@@ -95,19 +95,25 @@ class Table(object):
         #
         tbl.column('rc_rif', dtype='A', size=':128',
                    name_long='!![it]Riferimento registrazione',
+                   name_short='!![it]Rif.reg.',
                    #validate_notnull=True
                    )
         
         tbl.column('rc_docdata', dtype='D',
-                   name_long='!![it]Data documento'
+                   name_long='!![it]Data documento',
+                   name_short='!![it]Data doc.',
                    )
 
         tbl.column('rc_docnum', dtype='A', size=':64', 
-                   name_long='!![it]DNumero documento'
+                   name_long='!![it]Numero documento',
+                   name_short='!![it]Num.doc.',
                    )
 
         # tbl.column('note', dtype='A', size=':1024', 
         #            name_long='!![it]Note')
+
+        tbl.formulaColumn('caption', "$rc_data||' - '||$rc_rif",
+                          name_long='!![it]data-num')
 
     def defaultValues(self):
         '''Valore di default per nuovi inserimenti in partizione attiva'''

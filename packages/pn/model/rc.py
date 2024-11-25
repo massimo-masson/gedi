@@ -62,13 +62,13 @@ class Table(object):
 
         # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
         sog__cod = tbl.column('sog__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]Soggetto di riferimento',
-                                    unmodifiable=True,
-                                    validate_notnull = True
-                                    )
+                              name_long = '!![it]Soggetto di riferimento',
+                              unmodifiable=True,
+                              validate_notnull = True
+                              )
         sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
-                                relation_name = 'rilevazioni_contabili', 
-                                onDelete = 'raise')
+                          relation_name = 'rilevazioni_contabili', 
+                          onDelete = 'raise')
         
         # foreign key to rcgrpcls - classe del grupp di registrazione
         rcgrpcls__cod = tbl.column('rcgrpcls__cod', dtype = 'A', size = ':32',

@@ -42,66 +42,29 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('cod')
+        r.fieldcell('sog__cod')
         r.fieldcell('desc')
         r.fieldcell('note')
 
     def th_order(self):
-        return 'cod'
+        return 'sog__cod,cod'
 
     def th_query(self):
-        return dict(column='cod', op='contains', val='',
-                    runOnStart=True)
+        return dict(column='cod', op='contains', val='', runOnStart=True)
 
 
+class ViewFromSOG(View):
+    pass
 
 class Form(BaseComponent):
 
     def th_form(self, form):
-        # pane = form.record
-        # fb = pane.formbuilder(cols=2, border_spacing='4px')
-        
-        # fb.field('cod')
-        # fb.div('---')
-
-        # fb.field('desc', colspan=2, width='100%')
-
-        # fb.field('note', colspan=2, width='100%',
-        #          height='5em',
-        #          tag='simpleTextArea', editor=True
-        #          )
-
-        bc = form.center.BorderContainer()
-        self.SOGHeader(bc.contentPane(region = 'top', datapath = '.record'))
-        self.SOGBody(bc.contentPane(region = 'center'))
-
-    def SOGHeader(self, pane):
-        fb = pane.formbuilder(cols=3, border_spacing='4px')
-        
+        pane = form.record
+        fb = pane.formbuilder(cols=2, border_spacing='4px')
         fb.field('cod')
+        fb.field('sog__cod')
         fb.field('desc', colspan=2, width='100%')
-
-        fb.field('note', colspan=3, width='100%',
-                 height='5em',
-                 tag='simpleTextArea', editor=True
-                 )
-
-    def SOGBody(self, pane):
-        tc = pane.tabContainer()
-
-        # tab esercizi
-        tab_esercizi = tc.contentPane(title = "!![it]Esercizi")
-        tab_esercizi.div('todo')
-
-        # tab registri IVA
-        tab_iva_registri = tc.contentPane(title = "!![it]Registri IVA")
-        tab_iva_registri.dialogTableHandler(relation = '@registri_iva',
-                                            pbl_classes = True,
-                                            viewResource = 'ViewFromSOG',
-                                            #formResource = 'FormFromSOG',
-                                            grid_selfDragRows = True,
-                                            margin = '2px',
-                                            searchOn = True
-                                            )
+        fb.field('note', colspan=2, width='100%')
 
 
     def th_options(self):

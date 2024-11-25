@@ -91,6 +91,17 @@ class Form(BaseComponent):
         fb.div('')
         fb.div('')
 
+        fb.field('ivaregistro__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:ws',
+                 condition_ws='=#FORM.record.sog__cod'
+                 )
+        fb.field('iva_protocollo')
+        fb.field('iva_protocollo_appendice')
+        fb.div('')
+
+
     def PDCBody(self, pane):
         tc = pane.tabContainer()
 

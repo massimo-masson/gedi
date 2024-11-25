@@ -79,6 +79,15 @@ class Table(object):
                                 relation_name = 'classi_gruppi_registrazione', 
                                 onDelete = 'raise')
 
+        # foreign key to ivaregistro - eventuale registro iva
+        ivaregistro__id = tbl.column('ivaregistro__id', dtype = 'A', size = '22',
+                                     name_long = '!![it]Registro IVA',
+                                     #validate_notnull = True
+                                     )
+        ivaregistro__id.relation('pn.ivaregistro.id', mode = 'foreignkey',
+                                relation_name = 'registrazioni_ivaregistro', 
+                                onDelete = 'raise')
+
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione rilevazione', 
                    #validate_notnull=True
@@ -109,6 +118,14 @@ class Table(object):
                    name_short='!![it]Num.doc.',
                    )
 
+        tbl.column('iva_protocollo', dtype='N',
+                   name_long='!![it]Protocollo',
+                   name_short='!![it]Prot.')
+        
+        tbl.column('iva_protocollo_appendice', dtype='A', size=':32',
+                   name_long='!![it]Appendice',
+                   name_short='!![it]Pr.app.')
+        
         # tbl.column('note', dtype='A', size=':1024', 
         #            name_long='!![it]Note')
 

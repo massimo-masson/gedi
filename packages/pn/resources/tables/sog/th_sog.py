@@ -90,7 +90,14 @@ class Form(BaseComponent):
 
         # tab esercizi
         tab_esercizi = tc.contentPane(title = "!![it]Esercizi")
-        tab_esercizi.div('todo')
+        tab_esercizi.dialogTableHandler(relation = '@esercizi',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
 
         # tab registri IVA
         tab_iva_registri = tc.contentPane(title = "!![it]Registri IVA")

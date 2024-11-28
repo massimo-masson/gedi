@@ -11,6 +11,8 @@ class View(BaseComponent):
         r.fieldcell('rc__id')
         r.fieldcell('riga_numero')
         r.fieldcell('desc')
+        r.fieldcell('pdccod__cod')
+        r.fieldcell('pdcr__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
 
@@ -26,6 +28,8 @@ class ViewFromRC(View):
         r = struct.view().rows()
         r.fieldcell('riga_numero')
         r.fieldcell('desc')
+        r.fieldcell('pdccod__cod')
+        r.fieldcell('pdcr__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
 
@@ -36,9 +40,14 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=2, border_spacing='4px')
         fb.field('rc__id')
         fb.field('riga_numero')
-        fb.field('desc')
+
+        fb.field('pdccod__cod', hasDownArrow=True)
+        fb.field('pdcr__id', hasDownArrow=True)
+        
         fb.field('dare_udc')
         fb.field('avere_udc')
+
+        fb.field('desc', colspan=2, width='100%')
 
 
     def th_options(self):

@@ -67,7 +67,7 @@ class Table(object):
         # TO DO: PK COMPOSITA
         #
         # La PK corretta di questa tabella e':
-        # pdccod__id
+        # pdccod__cod
         # cod
         #
 

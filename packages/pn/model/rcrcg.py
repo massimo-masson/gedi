@@ -77,7 +77,7 @@ class Table(object):
                    name_long='!![it]Descrizione rilevazione', 
                    )
 
-        # foreign key to pdc - piano dei conti di riferimento
+        # foreign key to pdccod - piano dei conti di riferimento
         pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
                                     name_long = '!![it]PDC',
                                     #unmodifiable=True,
@@ -87,13 +87,13 @@ class Table(object):
                                 relation_name = 'pdc_registrazione', 
                                 onDelete = 'raise')
         
-        # foreign key to pdcr - conto
-        pdcr__id = tbl.column('pdcr__id', dtype = 'A', size = '22',
+        # foreign key to pdcconto - conto
+        pdcconto__id = tbl.column('pdcconto__id', dtype = 'A', size = '22',
                                     name_long = '!![it]Conto',
                                     #unmodifiable=True,
                                     validate_notnull = True
                                     )
-        pdcr__id.relation('pn.pdcr.id', mode = 'foreignkey',
+        pdcconto__id.relation('pn.pdcconto.id', mode = 'foreignkey',
                                 relation_name = 'conto_registrazione', 
                                 onDelete = 'raise')
 

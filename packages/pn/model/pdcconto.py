@@ -36,7 +36,7 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''pdcr: conto di uno dei piani dei conti
+        '''pdcconto: conto di uno dei piani dei conti
         
         Un conto appartiene ad un piano dei conti, in relazione 1:n.
         il codice e' libero ed esteso, pensato per importare conti da altri sistemi
@@ -54,7 +54,7 @@ class Table(object):
         rappresenta l'anagrafica di riferimento per dettagliare quello specifico conto.
         '''
 
-        tbl = pkg.table('pdcr', pkey='id', 
+        tbl = pkg.table('pdcconto', pkey='id', 
                         pkey_columns='pdccod__cod,cod',
                         partition_pdccod__cod='pdccod__cod',
                         name_long='!![it]Conto',

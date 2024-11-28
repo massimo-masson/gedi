@@ -12,7 +12,7 @@ class View(BaseComponent):
         r.fieldcell('riga_numero')
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
-        r.fieldcell('pdcr__id')
+        r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
 
@@ -29,7 +29,7 @@ class ViewFromRC(View):
         r.fieldcell('riga_numero')
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
-        r.fieldcell('pdcr__id')
+        r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
 
@@ -42,7 +42,7 @@ class Form(BaseComponent):
         fb.field('riga_numero')
 
         fb.field('pdccod__cod', hasDownArrow=True)
-        fb.field('pdcr__id', hasDownArrow=True)
+        fb.field('pdcconto__id', hasDownArrow=True)
         
         fb.field('dare_udc')
         fb.field('avere_udc')

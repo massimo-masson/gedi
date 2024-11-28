@@ -56,7 +56,7 @@ def config(root,application=None):
     conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
 
     conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcr')
+    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcconto')
 
     # menu CONFIGURAZIONE - IVA
     conf_iva = conf.branch('!![it]IVA')

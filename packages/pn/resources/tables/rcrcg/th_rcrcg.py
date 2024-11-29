@@ -41,8 +41,12 @@ class Form(BaseComponent):
         fb.field('rc__id')
         fb.field('riga_numero')
 
-        fb.field('pdccod__cod', hasDownArrow=True)
-        fb.field('pdcconto__id', hasDownArrow=True)
+        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
+        fb.field('pdcconto__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = 'pdccod__cod = :pdc',
+                 condition_pdc = '=#FORM.record.pdccod__cod',
+                 )
         
         fb.field('dare_udc')
         fb.field('avere_udc')

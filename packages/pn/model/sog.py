@@ -57,6 +57,18 @@ class Table(object):
         tbl.column('note', dtype='A', size=':1024', 
                 name_long='!![it]Note')
         
+        # pdccod__id: foreign key to pdccod
+        tbl_pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
+                                    name_long = '!![it]PDC',
+                                    #unmodifiable=True,
+                                    validate_notnull = True
+                                    )
+        tbl_pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
+                                relation_name = 'pdccod', 
+                                one_one=True,
+                                onDelete = 'raise')
+
+
     def partitioning_pkeys(self):
         '''Lista dei soggetti per il partizionamento'''
         where = None

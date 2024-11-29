@@ -43,7 +43,8 @@ class View(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('desc')
-        r.fieldcell('note')
+        r.fieldcell('pdccod__cod')
+        #r.fieldcell('note')
 
     def th_order(self):
         return 'cod'
@@ -80,10 +81,10 @@ class Form(BaseComponent):
         fb.field('cod')
         fb.field('desc', colspan=2, width='100%')
 
-        fb.field('note', colspan=3, width='100%',
-                 height='5em',
-                 tag='simpleTextArea', editor=True
-                 )
+        fb.field('pdccod__cod', hasDownArrow=True)
+        fb.div()
+        fb.div()
+
 
     def SOGBody(self, pane):
         tc = pane.tabContainer()
@@ -110,6 +111,19 @@ class Form(BaseComponent):
                                             searchOn = True
                                             )
 
+        # tab NOTE
+        tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
+                                  width='100%', height='100%',
+                                  #td_width='100%', td_height='100%'
+                                  #colswidth='100%',
+                                  minwidth='90%', minheight='90%',
+                                  )
+        #fb = tab_note.formbuilder(cols=1, border_spacing='4px')    
+        tab_note.field('note', width='100%', height='10em', 
+                 #td_width='100%', td_height='100%',
+                 #minwidth='90%', minheight='90%',
+                 tag='simpleTextArea', editor=True
+                 )
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')

@@ -80,6 +80,7 @@ class Table(object):
         # foreign key to pdccod - piano dei conti di riferimento
         pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
                                     name_long = '!![it]PDC',
+                                    defaultFrom='@rc__id.@sog__cod.pdccod__cod',
                                     #unmodifiable=True,
                                     validate_notnull = True
                                     )

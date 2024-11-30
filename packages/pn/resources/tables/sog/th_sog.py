@@ -100,6 +100,17 @@ class Form(BaseComponent):
                                             searchOn = True
                                             )
 
+        # tab attivita IVA
+        tab_iva_attivita = tc.contentPane(title = "!![it]Attività IVA")
+        tab_iva_attivita.dialogTableHandler(relation = '@attivita_iva',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
         # tab registri IVA
         tab_iva_registri = tc.contentPane(title = "!![it]Registri IVA")
         tab_iva_registri.dialogTableHandler(relation = '@registri_iva',

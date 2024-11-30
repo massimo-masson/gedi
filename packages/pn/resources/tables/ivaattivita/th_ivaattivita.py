@@ -43,9 +43,8 @@ class View(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('sog__cod')
-        r.fieldcell('ivaattivita__id')
+        r.fieldcell('ateco')
         r.fieldcell('desc')
-        r.fieldcell('note')
 
     def th_order(self):
         return 'sog__cod,cod'
@@ -61,18 +60,17 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         pane = form.record
-        fb = pane.formbuilder(cols=3, border_spacing='4px')
-        fb.field('sog__cod')
+        fb = pane.formbuilder(cols=2, border_spacing='4px')
+
+        fb.field('sog__cod', readOnly=True)
         fb.field('cod')
-        fb.field('ivaattivita__id', hasDownArrow=True,
-                 columns='$cod,$desc,$ateco',
-                 condition='$sog__cod=:ws',
-                 condition_ws='=#FORM.record.sog__cod'
-                 )
-        fb.field('desc', colspan=3, width='100%')
-        fb.field('note', colspan=3, width='100%')
+
+        fb.field('desc', colspan=2, width='100%')
+
+        fb.field('ateco')
+        fb.div()
 
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.8)
+        return dict(dialog_parentRatio=0.8)        

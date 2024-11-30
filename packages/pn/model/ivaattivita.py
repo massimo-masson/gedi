@@ -36,13 +36,12 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''ivaregistro: Registri IVA per soggetto'''
+        '''ivaattivita: Attività IVA per soggetto'''
 
-        tbl = pkg.table('ivaregistro', pkey='id',
+        tbl = pkg.table('ivaattivita', pkey='id',
                         pkey_columns='sog__cod,cod',
-                        #partition_sog__cod='sog__cod',
-                        name_long='!![it]Registro IVA',
-                        name_plural='!![it]Registri IVA',
+                        name_long='!![it]Attività IVA',
+                        #name_plural='!![it]Registri IVA',
                         caption_field='caption')
 
         self.sysFields(tbl)
@@ -56,7 +55,7 @@ class Table(object):
         #
 
         tbl.column('cod', dtype='A', size=':32', 
-                   name_long='!![it]Codice registro',
+                   name_long='!![it]Codice attività',
                    unmodifiable=True, #unique=True, 
                    validate_notnull=True, indexed=True)
 
@@ -67,26 +66,18 @@ class Table(object):
                               validate_notnull = True
                               )
         sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
-                          relation_name = 'registri_iva', 
-                          onDelete = 'raise')        
-
-        # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
-        attivita__id = tbl.column('ivaattivita__id', dtype = 'A', size = '22',
-                              name_long = '!![it]Attività IVA',
-                              #unmodifiable=True,
-                              #validate_notnull = True
-                              )
-        attivita__id.relation('pn.ivaattivita.id', mode = 'foreignkey',
                           relation_name = 'attivita_iva', 
-                          one_one=True,
                           onDelete = 'raise')
         
-        tbl.column('desc', dtype='A', size=':256', 
-                   name_long='!![it]Descrizione registro')
+        tbl.column('ateco', dtype='A', size=':256', 
+                   name_long='!![it]Codice Ateco')
         
-        tbl.column('note', dtype='A', size=':1024', 
-                name_long='!![it]Note')
+        tbl.column('desc', dtype='A', size=':256', 
+                   name_long='!![it]Descrizione attività')
+        
+        # tbl.column('note', dtype='A', size=':1024', 
+        #         name_long='!![it]Note')
         
         tbl.formulaColumn('caption', "$cod||' - '||$desc",
-                          name_long='!![it]Registro IVA')
+                          name_long='!![it]Attività IVA')
 

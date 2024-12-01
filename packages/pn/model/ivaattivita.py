@@ -69,8 +69,16 @@ class Table(object):
                           relation_name = 'attivita_iva', 
                           onDelete = 'raise')
         
-        tbl.column('ateco', dtype='A', size=':256', 
-                   name_long='!![it]Codice Ateco')
+        # foreign key to codice ateco
+        ateco__cod = tbl.column('ateco__cod', dtype = 'A', size = ':32',
+                              name_long = '!![it]Codice ATECO',
+                              #unmodifiable=True,
+                              #validate_notnull = True
+                              )
+        ateco__cod.relation('pn.atecocodice.cod', mode = 'foreignkey',
+                          relation_name = 'codici_ateco',
+                          one_one=True, 
+                          onDelete = 'raise')
         
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione attività')

@@ -43,7 +43,7 @@ class View(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('sog__cod')
-        r.fieldcell('ateco')
+        r.fieldcell('ateco__cod')
         r.fieldcell('desc')
 
     def th_order(self):
@@ -67,7 +67,7 @@ class Form(BaseComponent):
 
         fb.field('desc', colspan=2, width='100%')
 
-        fb.field('ateco')
+        fb.field('ateco__cod', hasDownArrow=True)
         fb.div()
 
 

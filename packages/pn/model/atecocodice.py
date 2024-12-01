@@ -34,41 +34,34 @@
 # for a dedicated propietary license.
 # 
 
-def config(root,application=None):
-    gedi = root.branch('GeDi')
+class Table(object):
+    def config_db(self, pkg):
+        '''atecocodice: lista codici ateco'''
 
-    # menu CONTABILE
-    contab = gedi.branch('!![it]CONTABILE')
+        tbl = pkg.table('atecocodice', pkey='cod', 
+                        name_long='!![it]Codice ATECO',
+                        name_plural='!![it]Codici ATECO',
+                        caption_field='coddesc')
 
-    contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
-    contab.thpage('!![it]Rilevazioni contabili', table = 'pn.rc')
+        self.sysFields(tbl, id=False)
 
-    # menu CONFIGURAZIONE
-    conf = gedi.branch('!![it]CONFIGURAZIONE')
+        tbl.column('cod', dtype='A', size=':32', 
+                   name_long='!![it]Codice ATECO',
+                   unmodifiable=True,
+                   unique=True, validate_notnull=True, indexed=True)
 
-    conf.thpage('!![it]Soggetti operativi', table = 'pn.sog')
+        tbl.column('desc', dtype='A', size=':256', 
+                   name_long='!![it]Descrizione codice', 
+                   validate_notnull=True)
 
-    conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
+        tbl.column('valido_dal', dtype='D',
+                   name_long = "!![it]Data inizio validita'")
 
-    # menu CONFIGURAZIONE - PDC
-    conf_pdc = conf.branch('!![it]PDC')
+        tbl.column('valido_al', dtype='D',
+                   name_long = "!![it]Data fine validita'")
 
-    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
-
-    conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcconto')
-
-    # menu CONFIGURAZIONE - IVA
-    conf_iva = conf.branch('!![it]IVA')
-
-    conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
-
-    # menu CONFIGURAZIONE - FATTURA ELETTRONICA
-    conf_ftel = conf.branch('!![it]FATTURA ELETTRONICA')
-    conf_ftel.thpage('!![it]natura codici IVa per Fattura Elettronica', 
-                    table = 'ftel.iva_naturacodici')
-
-    # menu CONFIGURAZIONE - ATECO
-    conf_ateco = conf.branch('!![it]ATECO')
-    conf_ateco.thpage('!![it]Codici ATECO', 
-                    table = 'pn.atecocodice')
+        tbl.column('note', dtype='A', size=':1024', 
+                   name_long='!![it]Note')
+        
+        tbl.formulaColumn('coddesc', "$cod||' - '||$desc",
+                          name_long='!![it]Codice - Descrizione')

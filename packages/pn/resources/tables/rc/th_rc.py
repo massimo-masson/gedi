@@ -110,14 +110,22 @@ class Form(BaseComponent):
         tab_rcrcg.dialogTableHandler(relation = '@righe_registrazione',
                  pbl_classes = True,
                  viewResource = 'ViewFromRC',
-        #         formResource = 'FormFromCategory',
+                 #  formResource = 'FormFromCategory',
                  grid_selfDragRows = True,
                  margin = '2px',
                  searchOn = True
                  )
 
         # tab rciva righe IVA
-        tab_rciva = tc.contentPane(title = '!![it]Movimenti IVA')
+        tab_rcriva = tc.contentPane(title = '!![it]Movimenti IVA')
+        tab_rcriva.dialogTableHandler(relation = '@righe_iva_registrazione',
+                 pbl_classes = True,
+                 viewResource = 'ViewFromRC',
+                 # formResource = 'FormFromCategory',
+                 grid_selfDragRows = True,
+                 margin = '2px',
+                 searchOn = True
+                 )
 
         # tab allegati
         tab_allegati = tc.contentPane(title = '!![it]Allegati')

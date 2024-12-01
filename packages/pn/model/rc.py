@@ -43,7 +43,8 @@ class Table(object):
         '''
 
         tbl = pkg.table('rc', pkey='id', 
-                        pkey_columns='sog__cod,id,rcgrpcls__cod',
+                        #pkey_columns='sog__cod,id,rcgrpcls__cod',
+                        pkey_columns='sog__cod,id',
                         partition_sog__cod='sog__cod',
                         name_long='!![it]Rilevazione contabile',
                         name_plural='!![it]Rilevazioni contabili',

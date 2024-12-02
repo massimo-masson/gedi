@@ -48,6 +48,8 @@ class View(BaseComponent):
         r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
+        r.fieldcell('divisione__id')
+        r.fieldcell('divisione_rc')
 
     def th_order(self):
         return 'rc__id, riga_numero'
@@ -65,6 +67,9 @@ class ViewFromRC(View):
         r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
+        r.fieldcell('divisione__id')
+        r.fieldcell('divisione_rc')
+
 
 class Form(BaseComponent):
 
@@ -77,13 +82,20 @@ class Form(BaseComponent):
         fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('pdcconto__id', hasDownArrow=True,
                  columns='$cod,$desc',
-                 condition = 'pdccod__cod = :pdc',
+                 condition = '$pdccod__cod = :pdc',
                  condition_pdc = '=#FORM.record.pdccod__cod',
                  )
-        
+        #
         fb.field('dare_udc')
         fb.field('avere_udc')
-
+        #
+        fb.field('divisione__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$sog__cod = :sog',
+                 condition_sog = '=.@rc__id.sog__cod',                 
+                 )
+        fb.field('divisione_rc', readOnly=True)
+        #
         fb.field('desc', colspan=2, width='100%')
 
 

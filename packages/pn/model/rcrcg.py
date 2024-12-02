@@ -108,6 +108,23 @@ class Table(object):
                    #validate_notnull=True,
                    )
 
+        # foreign key to divisione: default quella della testata registrazione
+        divisione__id = tbl.column('divisione__id', dtype = 'A', size = '22',
+                                   name_long = '!![it]Divisione', 
+                                   name_short='!![it]Div',
+                                   defaultFrom='@rc__id.divisione__id',
+                                   #unmodifiable=True,
+                                   validate_notnull = False
+                                   )
+        divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
+                               relation_name = 'divisione_riga', 
+                               onDelete = 'raise')
+        
+        tbl.aliasColumn('divisione_rc', '@rc__id.divisione__id',
+                        name_long='!![it]Divisione testata reg.',
+                        name_short='!![it]Div.tes.',
+                        )
+        
         tbl.formulaColumn('caption', "$riga_numero",
                           name_long='!![it]Rif. reg.')
 

@@ -89,6 +89,15 @@ class Table(object):
                                 relation_name = 'registrazioni_ivaregistro', 
                                 onDelete = 'raise')
 
+        # foreign key to divisione - eventuale divisione
+        divisione__id = tbl.column('divisione__id', dtype = 'A', size = '22',
+                                     name_long = '!![it]Divisione',
+                                     #validate_notnull = True
+                                     )
+        divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
+                                relation_name = 'registrazioni_divisione', 
+                                onDelete = 'raise')
+
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione rilevazione', 
                    #validate_notnull=True

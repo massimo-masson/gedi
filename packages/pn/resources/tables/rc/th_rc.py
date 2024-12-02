@@ -48,6 +48,8 @@ class View(BaseComponent):
         r.fieldcell('rc_rif')
         r.fieldcell('rc_docdata')
         r.fieldcell('rc_docnum')
+        r.fieldcell('ivaregistro__id')
+        r.fieldcell('divisione__id')
 
     def th_order(self):
         return 'sog__cod'
@@ -88,7 +90,12 @@ class Form(BaseComponent):
 
         fb.field('rc_docdata')
         fb.field('rc_docnum')
-        fb.div('')
+        fb.field('divisione__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:sog',
+                 condition_sog='=#FORM.record.sog__cod'
+                 )
         fb.div('')
 
         fb.field('ivaregistro__id', hasDownArrow=True,

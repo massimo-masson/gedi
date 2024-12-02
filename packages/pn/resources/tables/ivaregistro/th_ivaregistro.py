@@ -66,8 +66,11 @@ class Form(BaseComponent):
         fb.field('cod')
         fb.field('ivaattivita__id', hasDownArrow=True,
                  columns='$cod,$desc,$ateco',
-                 condition='$sog__cod=:ws',
-                 condition_ws='=#FORM.record.sog__cod'
+                 #condition='$sog__cod=:ws',
+                 #condition_ws='=#FORM.record.sog__cod'
+                 # condition funzionante, ma preferisco:
+                 condition='$sog__cod=:sog',
+                 condition_sog='=.sog__cod',
                  )
         fb.field('desc', colspan=3, width='100%')
         fb.field('note', colspan=3, width='100%')

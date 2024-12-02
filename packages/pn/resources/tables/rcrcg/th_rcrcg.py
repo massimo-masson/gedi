@@ -83,7 +83,8 @@ class Form(BaseComponent):
         fb.field('pdcconto__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  condition = '$pdccod__cod = :pdc',
-                 condition_pdc = '=#FORM.record.pdccod__cod',
+                 #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
+                 condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
                  )
         #
         fb.field('dare_udc')

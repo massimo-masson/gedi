@@ -94,7 +94,8 @@ class Form(BaseComponent):
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:sog',
-                 condition_sog='=#FORM.record.sog__cod'
+                 #condition_sog='=#FORM.record.sog__cod', # anche questa funziona
+                 condition_sog='=.sog__cod',
                  )
         fb.div('')
 
@@ -102,7 +103,8 @@ class Form(BaseComponent):
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:ws',
-                 condition_ws='=#FORM.record.sog__cod'
+                 #condition_ws='=#FORM.record.sog__cod', # anche questa funziona
+                 condition_ws='=.sog__cod'
                  )
         fb.field('iva_protocollo')
         fb.field('iva_protocollo_appendice')
@@ -138,7 +140,7 @@ class Form(BaseComponent):
         tab_allegati = tc.contentPane(title = '!![it]Allegati')
 
         # tab note
-        tab_rciva = tc.contentPane(title = '!![it]Note')
+        tab_note = tc.contentPane(title = '!![it]Note')
 
 
     def th_options(self):

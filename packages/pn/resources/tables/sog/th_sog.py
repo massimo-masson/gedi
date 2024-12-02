@@ -122,6 +122,17 @@ class Form(BaseComponent):
                                             searchOn = True
                                             )
 
+        # tab divisioni
+        tab_iva_registri = tc.contentPane(title = "!![it]Divisioni")
+        tab_iva_registri.dialogTableHandler(relation = '@divisioni',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
         # tab NOTE
         tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
                                   width='100%', height='100%',

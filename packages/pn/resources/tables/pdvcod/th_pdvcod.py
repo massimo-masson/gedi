@@ -41,64 +41,55 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('rc__id')
-        r.fieldcell('riga_numero')
+        r.fieldcell('cod')
         r.fieldcell('desc')
-        r.fieldcell('pdccod__cod')
-        r.fieldcell('pdcconto__id')
-        r.fieldcell('dare_udc')
-        r.fieldcell('avere_udc')
-        r.fieldcell('divisione__id')
-        r.fieldcell('divisione_rc')
+        r.fieldcell('note')
 
     def th_order(self):
-        return 'rc__id, riga_numero'
+        return 'cod'
 
     def th_query(self):
-        return dict(column='rc__id', op='contains', val='')
+        return dict(column='cod', op='contains', val='',
+                    runOnStart=True)
 
-class ViewFromRC(View):
-
-    def th_struct(self,struct):
-        r = struct.view().rows()
-        r.fieldcell('riga_numero')
-        r.fieldcell('desc')
-        r.fieldcell('pdccod__cod')
-        r.fieldcell('pdcconto__id')
-        r.fieldcell('dare_udc', totalize=True)
-        r.fieldcell('avere_udc', totalize=True)
-        r.fieldcell('divisione__id')
-        r.fieldcell('divisione_rc')
 
 
 class Form(BaseComponent):
 
     def th_form(self, form):
-        pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
-        fb.field('rc__id')
-        fb.field('riga_numero')
-        #
-        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
-        fb.field('pdcconto__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 condition = '$pdccod__cod = :pdc',
-                 #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
-                 condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
-                 )
-        #
-        fb.field('dare_udc')
-        fb.field('avere_udc')
-        #
-        fb.field('divisione__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 condition = '$sog__cod = :sog',
-                 condition_sog = '=.@rc__id.sog__cod',                 
-                 )
-        fb.field('divisione_rc', readOnly=True)
-        #
-        fb.field('desc', colspan=2, width='100%')
+        # pane = form.record
+        # fb = pane.formbuilder(cols=2, border_spacing='4px')
+        # fb.field('cod')
+        # fb.field('desc')
+        # fb.field('note')
 
+        bc = form.center.BorderContainer()
+        self.PDVHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.PDVBody(bc.contentPane(region = 'center'))
+
+    def PDVHeader(self, pane):
+        fb = pane.formbuilder(cols = 3, border_spacing = '4px')
+
+        fb.field('cod')
+        fb.field('desc', colspan=2, width='90%')
+        fb.field('note', colspan=2, width='90%', # height = '100%',
+                 height='5em',
+                 tag='simpleTextArea', editor=True
+                 )
+
+    def PDVBody(self, pane):
+        tc = pane.tabContainer()
+
+        # tab pdc records
+        tab_pdcr = tc.contentPane(title = '!![it]Voci')
+        tab_pdcr.dialogTableHandler(relation = '@voci_pdv',
+                 pbl_classes = True,
+                 viewResource = 'ViewFromPDVCOD',
+        #         formResource = 'FormFromCategory',
+                 grid_selfDragRows = True,
+                 margin = '2px',
+                 searchOn = True)
+        
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')

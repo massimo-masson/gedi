@@ -68,6 +68,17 @@ class Table(object):
                                 one_one=True,
                                 onDelete = 'raise')
 
+        # pdvcod__id: foreign key to pdvcod
+        tbl_pdvcod__cod = tbl.column('pdvcod__cod', dtype = 'A', size = ':32',
+                                    name_long = '!![it]PDV',
+                                    #unmodifiable=True,
+                                    validate_notnull = False,
+                                    )
+        tbl_pdvcod__cod.relation('pn.pdvcod.cod', mode = 'foreignkey',
+                                relation_name = 'pdvcod', 
+                                one_one=True,
+                                onDelete = 'raise')
+
 
     def partitioning_pkeys(self):
         '''Lista dei soggetti per il partizionamento'''

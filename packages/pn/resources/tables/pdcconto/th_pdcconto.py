@@ -93,7 +93,8 @@ class Form(BaseComponent):
         fb.field('desc', colspan=2, width='100%')
 
         fb.field('cod_epilogo')
-        fb.field('pdcnaturaconti__id', hasDownArrow=True, 
+        fb.field('pdcnaturaconti__id', hasDownArrow=True,
+                 #tag='hdbselect', 
                  auxColumns='$cod,$desc',
                  selected_epilogo = '.cod_epilogo'
                  )

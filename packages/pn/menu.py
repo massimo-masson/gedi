@@ -50,23 +50,29 @@ def config(root,application=None):
 
     conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
 
-    # menu CONFIGURAZIONE - PDC
-    conf_pdc = conf.branch('!![it]PDC')
+
+    # menu CONFIGURAZIONE - PDC / PDV
+    conf_pdc = conf.branch('!![it]PDC - PDV')
 
     conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
 
     conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
     #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcconto')
 
+    conf_pdc.thpage('!![it]Piani delle voci', table = 'pn.pdvcod')
+
+
     # menu CONFIGURAZIONE - IVA
     conf_iva = conf.branch('!![it]IVA')
 
     conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
 
+
     # menu CONFIGURAZIONE - FATTURA ELETTRONICA
     conf_ftel = conf.branch('!![it]FATTURA ELETTRONICA')
     conf_ftel.thpage('!![it]natura codici IVa per Fattura Elettronica', 
                     table = 'ftel.iva_naturacodici')
+
 
     # menu CONFIGURAZIONE - ATECO
     conf_ateco = conf.branch('!![it]ATECO')

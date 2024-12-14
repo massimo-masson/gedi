@@ -42,7 +42,8 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('sog__cod')
-        r.fieldcell('rcgrpcls__cod')
+        #r.fieldcell('rcgrpcls__cod')
+        r.fieldcell('esercizio__id')
         r.fieldcell('desc')
         r.fieldcell('rc_data')
         r.fieldcell('rc_rif')
@@ -50,9 +51,10 @@ class View(BaseComponent):
         r.fieldcell('rc_docnum')
         r.fieldcell('ivaregistro__id')
         r.fieldcell('divisione__id')
+        r.fieldcell('rcgrp__id')
 
     def th_order(self):
-        return 'sog__cod'
+        return 'sog__cod, esercizio__id, rc_data'
 
     def th_query(self):
         return dict(column='sog__cod', op='contains', val='')
@@ -81,10 +83,25 @@ class Form(BaseComponent):
     def PDCHeader(self, pane):
         fb = pane.formbuilder(cols = 4, border_spacing = '4px')
 
+        fb.field('sog__cod', readOnly=True)
+        fb.field('@rcgrp__id.classe_desc', readOnly=True)
+        fb.div('')
+        fb.div('')
+
+        fb.field('esercizio__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:sog',
+                 condition_sog='=.sog__cod',
+                 )
         fb.field('rc_data')
         fb.field('rc_rif')
-        fb.field('rcgrpcls__cod')
-        fb.field('sog__cod', readOnly=True)
+        fb.field('rcgrp__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:sog',
+                 condition_sog='=.sog__cod',
+                 )
 
         fb.field('desc', colspan=4, width='90%')
 

@@ -43,8 +43,9 @@ class Table(object):
         '''
 
         tbl = pkg.table('rc', pkey='id', 
-                        #pkey_columns='sog__cod,id,rcgrpcls__cod',
-                        pkey_columns='sog__cod,id',
+                        #pkey_columns='sog__cod,rc_rif',
+                        #pkey_columns='sog__cod,rc_rif,id',
+                        #pkey_columns='id,sog__cod',
                         partition_sog__cod='sog__cod',
                         name_long='!![it]Rilevazione contabile',
                         name_plural='!![it]Rilevazioni contabili',
@@ -57,8 +58,7 @@ class Table(object):
         #
         # La PK corretta di questa tabella e':
         # sog__cod
-        # id
-        # rcgrpcls__cod
+        # rc_rif
         #
 
         # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
@@ -71,13 +71,22 @@ class Table(object):
                           relation_name = 'rilevazioni_contabili', 
                           onDelete = 'raise')
         
-        # foreign key to rcgrpcls - classe del grupp di registrazione
-        rcgrpcls__cod = tbl.column('rcgrpcls__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]Classe gruppo registrazione',
-                                    validate_notnull = True
+        # foreign key to esercizio
+        esercizio__id = tbl.column('esercizio__id', dtype = 'A', size = '22',
+                                     name_long = '!![it]Esercizio',
+                                     validate_notnull = True
+                                     )
+        esercizio__id.relation('pn.sogesercizi.id', mode = 'foreignkey',
+                                relation_name = 'registrazioni_esercizio', 
+                                onDelete = 'raise')
+
+        # foreign key to rcgrp - gruppo di registrazione di questa rilevazione
+        rcgrp__id = tbl.column('rcgrp__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]Gruppo registrazioni',
+                                    validate_notnull = True,
                                     )
-        rcgrpcls__cod.relation('pn.rcgrpcls.cod', mode = 'foreignkey',
-                                relation_name = 'classi_gruppi_registrazione', 
+        rcgrp__id.relation('pn.rcgrp.id', mode = 'foreignkey',
+                                relation_name = 'registrazioni_gruppo', 
                                 onDelete = 'raise')
 
         # foreign key to ivaregistro - eventuale registro iva
@@ -142,7 +151,45 @@ class Table(object):
         tbl.formulaColumn('caption', "$rc_data||' - '||$rc_rif",
                           name_long='!![it]data-num')
 
+
     def defaultValues(self):
         '''Valore di default per nuovi inserimenti in partizione attiva'''
 
-        return dict(sog__cod=self.db.currentEnv.get('current_sog__cod'))
+        return dict(sog__cod = self.db.currentEnv.get('current_sog__cod'),
+                    rc_data  = self.db.workdate,
+                    )
+    
+
+    def counter_rc_rif(self, record=None):
+        '''contatore progressivo RC'''
+        
+        return dict(format='$K-$NNNNNNN', #format='$K$YYYY$MM$DD/$NNNNNNN',
+                    code=record['sog__cod'],
+                    date_field='rc_data',
+                    showOnLoad=True,
+                    recycle=False
+                    )
+
+    
+    # def protect_validate(self, record):
+    #     '''Simula la protezione da chiave composta duplicata'''
+
+    #     #
+    #     # pk composta di questa tabella:
+    #     # sog__cod
+    #     # rc_rif
+    #     #
+    #     print('sog__cod', record['sog__cod'])
+    #     print('rc_rif', record['rc_rif'])
+
+    #     t = self.db.table('pn.rc')
+    #     q = t.query(#columns='$sog__cod, $rc_rif',
+    #                 where='$sog__cod=:soggetto,$rc_rif=:riferimento',
+    #                 soggetto=record['sog__cod'],
+    #                 riferimento='RC20241208/0000001' #record['rc_rif']
+    #                 )
+    #     f = q.fetch()
+
+    #     if f:
+    #         raise self.exception('protect_update', record=record,
+    #                              msg='Chiave duplicata in rc')

@@ -95,6 +95,13 @@ class Table(object):
 
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
+        
+        tbl.aliasColumn('classe_desc', 
+                        relation_path='@rcgrpcls__cod.desc',
+                        name_long='!![it]Classe registrazione',
+                        name_short='!![it]Class.reg.',
+                        )
+
 
     def defaultValues(self):
         '''Valore di default per nuovi inserimenti in partizione attiva'''

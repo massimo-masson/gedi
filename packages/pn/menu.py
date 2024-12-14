@@ -51,8 +51,8 @@ def config(root,application=None):
     conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
 
 
-    # menu CONFIGURAZIONE - PDC / PDV
-    conf_pdc = conf.branch('!![it]PDC - PDV')
+    # menu CONFIGURAZIONE - PDC / PDV / CDA
+    conf_pdc = conf.branch('!![it]Piani: PDC - PDV - CDA')
 
     conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
 
@@ -60,6 +60,7 @@ def config(root,application=None):
     #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcconto')
 
     conf_pdc.thpage('!![it]Piani delle voci', table = 'pn.pdvcod')
+    conf_pdc.thpage('!![it]Piani dei centri', table = 'pn.cdacod')
 
 
     # menu CONFIGURAZIONE - IVA

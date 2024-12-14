@@ -45,6 +45,7 @@ class View(BaseComponent):
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
         r.fieldcell('pdvcod__cod')
+        r.fieldcell('cdacod__cod')
         #r.fieldcell('note')
 
     def th_order(self):
@@ -84,7 +85,7 @@ class Form(BaseComponent):
 
         fb.field('pdccod__cod', hasDownArrow=True)
         fb.field('pdvcod__cod', hasDownArrow=True)
-        fb.div()
+        fb.field('cdacod__cod', hasDownArrow=True)
 
 
     def SOGBody(self, pane):

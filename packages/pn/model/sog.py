@@ -66,18 +66,33 @@ class Table(object):
         tbl_pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
                                 relation_name = 'pdccod', 
                                 one_one=True,
-                                onDelete = 'raise')
+                                onDelete = 'raise'
+                                )
 
-        # pdvcod__id: foreign key to pdvcod
+        # pdvcod__cod: foreign key to pdvcod
         tbl_pdvcod__cod = tbl.column('pdvcod__cod', dtype = 'A', size = ':32',
                                     name_long = '!![it]PDV',
                                     #unmodifiable=True,
-                                    validate_notnull = False,
+                                    validate_notnull = False
                                     )
         tbl_pdvcod__cod.relation('pn.pdvcod.cod', mode = 'foreignkey',
                                 relation_name = 'pdvcod', 
                                 one_one=True,
-                                onDelete = 'raise')
+                                onDelete = 'raise'
+                                )
+
+        # cdacod__cod: foreign key to cdacod
+        tbl_cdacod__cod = tbl.column('cdacod__cod', dtype = 'A', size = ':32',
+                                    name_long = '!![it]CDA',
+                                    #unmodifiable=True,
+                                    validate_notnull = False
+                                    )
+        tbl_cdacod__cod.relation('pn.cdacod.cod', mode = 'foreignkey',
+                                relation_name = 'cdacod', 
+                                one_one=True,
+                                onDelete = 'raise'
+                                )
+
 
 
     def partitioning_pkeys(self):

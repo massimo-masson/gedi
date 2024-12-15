@@ -108,6 +108,16 @@ class Table(object):
                    #validate_notnull=True,
                    )
 
+        tbl.column('competenza_da', dtype='D',
+                   name_long='!![it]Competenza da',
+                   name_short='!![it]Comp.da'
+                   )
+
+        tbl.column('competenza_a', dtype='D',
+                   name_long='!![it]Competenza a',
+                   name_short='!![it]Comp.a'
+                   )
+
         # foreign key to divisione: default quella della testata registrazione
         divisione__id = tbl.column('divisione__id', dtype = 'A', size = '22',
                                    name_long = '!![it]Divisione', 

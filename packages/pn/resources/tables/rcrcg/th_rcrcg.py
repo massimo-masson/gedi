@@ -75,29 +75,33 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        fb = pane.formbuilder(cols=5, border_spacing='4px')
+
         fb.field('rc__id')
         fb.field('riga_numero')
-        #
-        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
-        fb.field('pdcconto__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 condition = '$pdccod__cod = :pdc',
-                 #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
-                 condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
-                 )
-        #
-        fb.field('dare_udc')
-        fb.field('avere_udc')
-        #
         fb.field('divisione__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  condition = '$sog__cod = :sog',
                  condition_sog = '=.@rc__id.sog__cod',                 
                  )
         fb.field('divisione_rc', readOnly=True)
-        #
-        fb.field('desc', colspan=2, width='100%')
+        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
+
+        fb.field('pdcconto__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$pdccod__cod = :pdc',
+                 #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
+                 condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
+                 )
+        fb.field('dare_udc')
+        fb.field('avere_udc')
+        fb.field('desc', colspan=2, width='100%', name_long='!![it]Descriz:')
+
+        fb.field('competenza_da')
+        fb.field('competenza_a')
+        fb.div('')
+        fb.div('')
+        fb.div('')
 
 
     def th_options(self):

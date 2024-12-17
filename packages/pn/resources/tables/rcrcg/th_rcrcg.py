@@ -67,6 +67,7 @@ class ViewFromRC(View):
         r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc', totalize=True)
         r.fieldcell('avere_udc', totalize=True)
+        r.fieldcell('saldo_udc', totalize=True)
         r.fieldcell('divisione__id')
         r.fieldcell('divisione_rc')
 
@@ -74,7 +75,14 @@ class ViewFromRC(View):
 class Form(BaseComponent):
 
     def th_form(self, form):
-        pane = form.record
+        #pane = form.record
+
+        bc = form.center.BorderContainer()
+        self.FRMHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FRMBody(bc.contentPane(region = 'center'))
+
+
+    def FRMHeader(self, pane):
         fb = pane.formbuilder(cols=5, border_spacing='4px')
 
         fb.field('rc__id')
@@ -95,13 +103,40 @@ class Form(BaseComponent):
                  )
         fb.field('dare_udc')
         fb.field('avere_udc')
-        fb.field('desc', colspan=2, width='100%', name_long='!![it]Descriz:')
+        fb.field('saldo_udc')
+        fb.div('')
+        
+        fb.field('desc', colspan=4, width='100%', name_long='!![it]Descrizione')
+        fb.div('')
 
         fb.field('competenza_da')
         fb.field('competenza_a')
         fb.div('')
         fb.div('')
         fb.div('')
+
+
+    def FRMBody(self, pane):
+        tc = pane.tabContainer()
+
+        # tab CDA
+        tab_rcrcg = tc.contentPane(title = "!![it]CDA (Centri Di Analisi)")
+        tab_rcrcg.dialogTableHandler(relation = '@cda_rcg',
+                 pbl_classes = True,
+                 viewResource = 'ViewFromRCRCG',
+                 #  formResource = 'FormFromCategory',
+                 grid_selfDragRows = True,
+                 margin = '2px',
+                 searchOn = False,
+                 )
+
+        # tab commesse
+        tab_commesse = tc.contentPane(title = '!![it]Commesse')
+        tab_commesse.H1('... to do ....')
+
+        # tab note
+        tab_note = tc.contentPane(title = '!![it]Note')
+
 
 
     def th_options(self):

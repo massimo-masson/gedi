@@ -79,34 +79,38 @@ class Table(object):
 
         # foreign key to pdccod - piano dei conti di riferimento
         pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]PDC',
-                                    defaultFrom='@rc__id.@sog__cod.pdccod__cod',
-                                    #unmodifiable=True,
-                                    validate_notnull = True
-                                    )
+                                 defaultFrom='@rc__id.@sog__cod.pdccod__cod',
+                                 name_long = '!![it]PDC',
+                                 #unmodifiable=True,
+                                 validate_notnull = True
+                                 )
         pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
-                                relation_name = 'pdc_registrazione', 
-                                onDelete = 'raise')
+                             relation_name = 'pdc_registrazione', 
+                             onDelete = 'raise')
         
         # foreign key to pdcconto - conto
         pdcconto__id = tbl.column('pdcconto__id', dtype = 'A', size = '22',
-                                    name_long = '!![it]Conto',
-                                    #unmodifiable=True,
-                                    validate_notnull = True
-                                    )
+                                  name_long = '!![it]Conto',
+                                  #unmodifiable=True,
+                                  validate_notnull = True
+                                  )
         pdcconto__id.relation('pn.pdcconto.id', mode = 'foreignkey',
-                                relation_name = 'conto_registrazione', 
-                                onDelete = 'raise')
+                              relation_name = 'conto_registrazione', 
+                              onDelete = 'raise')
 
         tbl.column('dare_udc', dtype='N', size='12,2',
-                   name_long='!![it]Dare',
+                   name_long='!![it]Dare', name_short='!![it]D',
                    #validate_notnull=True,
                    )
 
         tbl.column('avere_udc', dtype='N', size='12,2',
-                   name_long='!![it]Avere',
+                   name_long='!![it]Avere', name_short='!![it]A',
                    #validate_notnull=True,
                    )
+
+        tbl.formulaColumn('saldo_udc', 'COALESCE($dare_udc, 0) - COALESCE($avere_udc, 0)',
+                          dtype='N', size='12,2',
+                          name_long='!![it]Saldo', name_short='!![it]S')
 
         tbl.column('competenza_da', dtype='D',
                    name_long='!![it]Competenza da',
@@ -134,7 +138,12 @@ class Table(object):
                         name_long='!![it]Divisione testata reg.',
                         name_short='!![it]Div.tes.',
                         )
-        
+
+        # tbl.aliasColumn('sog_cdacod',
+        #                 relation_path='@rc__id.@sog__cod.cdacod__cod',
+        #                 name_long='!![it]Piano CDA soggetto'
+        #                 )
+
         tbl.formulaColumn('caption', "$riga_numero",
                           name_long='!![it]Rif. reg.')
 

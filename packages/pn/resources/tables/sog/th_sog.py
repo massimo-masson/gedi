@@ -135,6 +135,17 @@ class Form(BaseComponent):
                                             searchOn = True
                                             )
 
+        # tab commesse
+        tab_commesse = tc.contentPane(title = "!![it]Divisioni")
+        tab_commesse.dialogTableHandler(relation = '@commesse',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
         # tab NOTE
         tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
                                   width='100%', height='100%',

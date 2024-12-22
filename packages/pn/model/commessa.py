@@ -36,7 +36,7 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''cmmss: Commesse per soggetto'''
+        '''commessa: Commessa per soggetto'''
 
         tbl = pkg.table('commessa', pkey='id',
                         pkey_columns='sog__cod,cod',

@@ -128,20 +128,30 @@ class Form(BaseComponent):
         # tab CDA
         tab_rcrcg = tc.contentPane(title = "!![it]CDA (Centri Di Analisi)")
         tab_rcrcg.dialogTableHandler(relation = '@cda_rcg',
-                 pbl_classes = True,
-                 viewResource = 'ViewFromRCRCG',
-                 #  formResource = 'FormFromCategory',
-                 grid_selfDragRows = True,
-                 margin = '2px',
-                 searchOn = False,
-                 )
+                                     title = '!![it]Dettaglio centri per analitica',
+                                     pbl_classes = True,
+                                     viewResource = 'ViewFromRCRCG',
+                                     #  formResource = 'FormFromCategory',
+                                     grid_selfDragRows = True,
+                                     margin = '2px',
+                                     searchOn = False,
+                                     )
 
         # tab commesse
         tab_commesse = tc.contentPane(title = '!![it]Commesse')
-        tab_commesse.H1('... to do ....')
+        tab_commesse.dialogTableHandler(relation = '@commesse_rcg',
+                                        title = '!![it]Dettaglio commesse per analitica',
+                                        pbl_classes = True,
+                                        viewResource = 'ViewFromRCRCG',
+                                        #  formResource = 'FormFromCategory',
+                                        grid_selfDragRows = True,
+                                        margin = '2px',
+                                        searchOn = False,
+                                        )
 
         # tab note
         tab_note = tc.contentPane(title = '!![it]Note')
+        tab_note.H1('si la sol')
 
 
 

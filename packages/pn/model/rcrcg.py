@@ -141,12 +141,12 @@ class Table(object):
 
         # foreign key to commessa: default quella della testata registrazione
         commessa__id = tbl.column('commessa__id', dtype = 'A', size = '22',
-                                   name_long = '!![it]Commessa', 
-                                   name_short='!![it]Comm',
-                                   defaultFrom='@rc__id.commessa__id',
-                                   #unmodifiable=True,
-                                   validate_notnull = False
-                                   )
+                                  name_long = '!![it]Commessa', 
+                                  name_short='!![it]Comm',
+                                  defaultFrom='@rc__id.commessa__id',
+                                  #unmodifiable=True,
+                                  validate_notnull = False
+                                  )
         commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
                                relation_name = 'commessa_riga', 
                                onDelete = 'raise')

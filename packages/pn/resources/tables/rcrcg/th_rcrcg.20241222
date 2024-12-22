@@ -89,9 +89,9 @@ class Form(BaseComponent):
 
         fb.field('rc__id')
         fb.field('riga_numero')
-        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('commessa_rc', readOnly=True)
         fb.field('divisione_rc', readOnly=True)
+        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
 
         fb.field('pdcconto__id', hasDownArrow=True,
                  columns='$cod,$desc',
@@ -125,14 +125,10 @@ class Form(BaseComponent):
     def FRMBody(self, pane):
         tc = pane.tabContainer()
 
-        # tab ANALITICA
-        analitica = tc.contentPane(title = "!![it]Analitica")
-        aa = analitica.tabContainer(tabPosition='top') # bottom right-h, left-h
-
         # tab CDA
-        tab_rcrcg = aa.contentPane(title = "!![it]CDA")
+        tab_rcrcg = tc.contentPane(title = "!![it]CDA (Centri Di Analisi)")
         tab_rcrcg.dialogTableHandler(relation = '@cda_rcg',
-                                     title = '!![it]Dettaglio centri di analisi (analitica)',
+                                     title = '!![it]Dettaglio centri per analitica',
                                      pbl_classes = True,
                                      viewResource = 'ViewFromRCRCG',
                                      #  formResource = 'FormFromCategory',
@@ -142,9 +138,9 @@ class Form(BaseComponent):
                                      )
 
         # tab COMMESSE
-        tab_commesse = aa.contentPane(title = '!![it]COM')
+        tab_commesse = tc.contentPane(title = '!![it]Commesse')
         tab_commesse.dialogTableHandler(relation = '@commesse_rcg',
-                                        title = '!![it]Dettaglio commesse (analitica)',
+                                        title = '!![it]Dettaglio commesse per analitica',
                                         pbl_classes = True,
                                         viewResource = 'ViewFromRCRCG',
                                         #  formResource = 'FormFromCategory',
@@ -165,14 +161,10 @@ class Form(BaseComponent):
                                         searchOn = False,
                                         )
 
-        # # tab note
-        # tab_note = tc.contentPane(title = "!![it]Note", datapath = '.record',
-        #                           width='100%', height='100%',
-        #                           minwidth='90%', minheight='90%',
-        #                           )
-        # tab_note.field('note', width='100%', height='10em', 
-        #          tag='simpleTextArea', editor=True,
-        #          )
+        # tab note
+        tab_note = tc.contentPane(title = '!![it]Note')
+        tab_note.H1('si la sol')
+
 
 
     def th_options(self):

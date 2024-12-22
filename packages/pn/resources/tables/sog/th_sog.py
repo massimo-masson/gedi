@@ -136,7 +136,7 @@ class Form(BaseComponent):
                                             )
 
         # tab commesse
-        tab_commesse = tc.contentPane(title = "!![it]Divisioni")
+        tab_commesse = tc.contentPane(title = "!![it]Commesse")
         tab_commesse.dialogTableHandler(relation = '@commesse',
                                             pbl_classes = True,
                                             viewResource = 'ViewFromSOG',

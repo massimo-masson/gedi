@@ -107,6 +107,15 @@ class Table(object):
                                 relation_name = 'registrazioni_divisione', 
                                 onDelete = 'raise')
 
+        # foreign key to commessa - eventuale commessa di testata
+        commessa__id = tbl.column('commessa__id', dtype = 'A', size = '22',
+                                     name_long = '!![it]Commessa',
+                                     #validate_notnull = True
+                                     )
+        commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
+                                relation_name = 'registrazioni_commesse', 
+                                onDelete = 'raise')
+
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione rilevazione', 
                    #validate_notnull=True

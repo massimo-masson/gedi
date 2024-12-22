@@ -51,6 +51,7 @@ class View(BaseComponent):
         r.fieldcell('rc_docnum')
         r.fieldcell('ivaregistro__id')
         r.fieldcell('divisione__id')
+        r.fieldcell('commessa__id')
         r.fieldcell('rcgrp__id')
 
     def th_order(self):
@@ -114,7 +115,12 @@ class Form(BaseComponent):
                  #condition_sog='=#FORM.record.sog__cod', # anche questa funziona
                  condition_sog='=.sog__cod',
                  )
-        fb.div('')
+        fb.field('commessa__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:sog',
+                 condition_sog='=.sog__cod',
+                 )
 
         fb.field('ivaregistro__id', hasDownArrow=True,
                  columns='$cod,$desc',

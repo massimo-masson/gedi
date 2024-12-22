@@ -50,6 +50,7 @@ class View(BaseComponent):
         r.fieldcell('avere_udc')
         r.fieldcell('divisione__id')
         r.fieldcell('divisione_rc')
+        r.fieldcell('commessa__id')
 
     def th_order(self):
         return 'rc__id, riga_numero'
@@ -68,6 +69,7 @@ class ViewFromRC(View):
         r.fieldcell('dare_udc', totalize=True)
         r.fieldcell('avere_udc', totalize=True)
         r.fieldcell('saldo_udc', totalize=True)
+        r.fieldcell('commessa__id')
         r.fieldcell('divisione__id')
         r.fieldcell('divisione_rc')
 
@@ -87,11 +89,7 @@ class Form(BaseComponent):
 
         fb.field('rc__id')
         fb.field('riga_numero')
-        fb.field('divisione__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 condition = '$sog__cod = :sog',
-                 condition_sog = '=.@rc__id.sog__cod',                 
-                 )
+        fb.field('commessa_rc', readOnly=True)
         fb.field('divisione_rc', readOnly=True)
         fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
 
@@ -111,8 +109,16 @@ class Form(BaseComponent):
 
         fb.field('competenza_da')
         fb.field('competenza_a')
-        fb.div('')
-        fb.div('')
+        fb.field('commessa__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$sog__cod = :sog',
+                 condition_sog = '=.@rc__id.sog__cod',                 
+                 )
+        fb.field('divisione__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$sog__cod = :sog',
+                 condition_sog = '=.@rc__id.sog__cod',                 
+                 )
         fb.div('')
 
 

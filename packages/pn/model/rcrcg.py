@@ -139,10 +139,22 @@ class Table(object):
                         name_short='!![it]Div.tes.',
                         )
 
-        # tbl.aliasColumn('sog_cdacod',
-        #                 relation_path='@rc__id.@sog__cod.cdacod__cod',
-        #                 name_long='!![it]Piano CDA soggetto'
-        #                 )
+        # foreign key to commessa: default quella della testata registrazione
+        commessa__id = tbl.column('commessa__id', dtype = 'A', size = '22',
+                                   name_long = '!![it]Commessa', 
+                                   name_short='!![it]Comm',
+                                   defaultFrom='@rc__id.commessa__id',
+                                   #unmodifiable=True,
+                                   validate_notnull = False
+                                   )
+        commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
+                               relation_name = 'commessa_riga', 
+                               onDelete = 'raise')
+
+        tbl.aliasColumn('commessa_rc', '@rc__id.commessa__id',
+                        name_long='!![it]Commessa testata reg.',
+                        name_short='!![it]Comm.tes.',
+                        )
 
         tbl.formulaColumn('caption', "$riga_numero",
                           name_long='!![it]Rif. reg.')

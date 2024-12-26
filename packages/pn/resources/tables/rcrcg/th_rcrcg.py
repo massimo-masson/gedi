@@ -42,7 +42,8 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('rc__id')
-        r.fieldcell('riga_numero')
+        r.fieldcell('_row_count', counter=True, hidden=False)
+        #r.fieldcell('riga_numero') # cancellare con counter del 20241226
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
         r.fieldcell('pdcconto__id')
@@ -53,16 +54,20 @@ class View(BaseComponent):
         r.fieldcell('commessa__id')
 
     def th_order(self):
-        return 'rc__id, riga_numero'
+        return '_row_count'
 
     def th_query(self):
         return dict(column='rc__id', op='contains', val='')
+    
+    def th_options(self):
+        return dict(grid_selfDragRows=True)
 
 class ViewFromRC(View):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('riga_numero')
+        r.fieldcell('_row_count', counter=True, hidden=False)
+        #r.fieldcell('riga_numero') # cancellare con counter del 20241226
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
         r.fieldcell('pdcconto__id')
@@ -88,7 +93,8 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=5, border_spacing='4px')
 
         fb.field('rc__id')
-        fb.field('riga_numero')
+        fb.field('_row_count', readOnly=True)
+        #fb.field('riga_numero') # cancellare con counter del 20241226
         fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('commessa_rc', readOnly=True)
         fb.field('divisione_rc', readOnly=True)
@@ -120,6 +126,12 @@ class Form(BaseComponent):
                  condition_sog = '=.@rc__id.sog__cod',                 
                  )
         fb.div('')
+
+        # 20241226 Esperimento: progressivo riga numero da dataRpc
+        # fb.dataRpc('.riga_numero', self.getProssimoNumeroRiga, 
+        #            pk='^.rc__id',
+        #            _onStart=True)
+        # 20241226 END Esperimento
 
 
     def FRMBody(self, pane):
@@ -178,3 +190,29 @@ class Form(BaseComponent):
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')
         return dict(dialog_parentRatio=0.8)
+
+    # 20241226 Esperimento: metodo per contatore con dataRpc
+    # @public_method
+    # def getProssimoNumeroRiga(self, pk):
+    #     '''Restituisce il numero progressivo successivo per la riga'''
+    #
+    #     if not pk:
+    #         return
+    #   
+    #     qry = self.db.table('pn.rcrcg').query(
+    #         columns="MAX($riga_numero) AS ultima_riga",
+    #         limit=1,
+    #         #columns="""COALESCE(MAX($riga_numero), 0) AS ultima_riga""",
+    #         where="$rc__id=:registrazione",
+    #         registrazione=pk
+    #         ).fetch()
+    #
+    #     # print("ultima_riga =", ultima_riga)
+    #     # ultima_riga = [[ultima_riga=2,pkey=KcWbs1O4PxGDpjTCOfg_HQ_2]]
+    #     # ultima_riga[0][0] ultima_riga valore 2
+    #     # ultima_riga[0][1] pkey valore ...
+    #     ultima_riga = qry[0][0] or 0    # if Null start form 0
+    #     prossima_riga = ultima_riga + 1
+    #
+    #     return  prossima_riga
+    # 20241226 END Esperimento

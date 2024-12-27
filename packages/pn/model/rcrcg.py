@@ -161,4 +161,4 @@ class Table(object):
                         )
 
         tbl.formulaColumn('caption', "$_row_count",
-                          name_long='!![it]Riga reg.')
+                          name_long='!![it]Riga')

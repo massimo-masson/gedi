@@ -42,7 +42,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('rc__id')
-        r.fieldcell('riga_numero')
+        r.fieldcell('_row_count', counter=True, hidden=False,
+                    name='!![it]Riga',
+                    )
         r.fieldcell('desc')
         r.fieldcell('ivacod__id')
         r.fieldcell('iva_aliquota')
@@ -53,7 +55,7 @@ class View(BaseComponent):
         r.fieldcell('totale_riga')
 
     def th_order(self):
-        return 'rc__id, riga_numero'
+        return '_row_count'
 
     def th_query(self):
         return dict(column='rc__id', op='contains', val='')
@@ -72,8 +74,12 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=4, border_spacing='4px')
         #
         fb.field('rc__id')
-        fb.field('riga_numero')
-        fb.field('desc', colspan=2, width='100%')
+        fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
+        #fb.field('riga_numero') # cancellare con counter del 20241227
+        fb.div()
+        fb.div()
+
+        fb.field('desc', colspan=4, width='100%')
         #
         fb.field('ivacod__id', hasDownArrow=True)
         fb.field('iva_aliquota', readOnly=True, width='5em')

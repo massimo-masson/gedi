@@ -42,6 +42,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         #r.fieldcell('rcrcg__id')
+        r.fieldcell('_row_count', counter=True, hidden=False,
+                    name='!![it]Riga',
+                    )
         r.fieldcell('data_scadenza')
         r.fieldcell('data_operazione')
         r.fieldcell('data_valuta')
@@ -69,6 +72,12 @@ class Form(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=5, border_spacing='4px')
+
+        fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
+        fb.div('')
+        fb.div('')
+        fb.div('')
+        fb.div('')
 
         fb.field('data_scadenza')
         fb.field('data_operazione')

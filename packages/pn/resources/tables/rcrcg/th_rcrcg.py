@@ -42,7 +42,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('rc__id')
-        r.fieldcell('_row_count', counter=True, hidden=False)
+        r.fieldcell('_row_count', counter=True, hidden=False,
+                    name='!![it]Riga',
+                    )
         #r.fieldcell('riga_numero') # cancellare con counter del 20241226
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
@@ -66,7 +68,9 @@ class ViewFromRC(View):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('_row_count', counter=True, hidden=False)
+        r.fieldcell('_row_count', counter=True, hidden=False,
+                    name='!![it]Riga',
+                    )
         #r.fieldcell('riga_numero') # cancellare con counter del 20241226
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
@@ -93,7 +97,7 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=5, border_spacing='4px')
 
         fb.field('rc__id')
-        fb.field('_row_count', readOnly=True)
+        fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
         #fb.field('riga_numero') # cancellare con counter del 20241226
         fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('commessa_rc', readOnly=True)
@@ -189,7 +193,7 @@ class Form(BaseComponent):
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.8)
+        return dict(dialog_parentRatio=0.95)
 
     # 20241226 Esperimento: metodo per contatore con dataRpc
     # @public_method

@@ -42,6 +42,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         #r.fieldcell('rcrcg__id')
+        r.fieldcell('_row_count', counter=True, hidden=False,
+                    name='!![it]Riga',
+                    )
         r.fieldcell('commessa__id', hasDownArrow=True)
         r.fieldcell('dare_udc', totalize=True)
         r.fieldcell('avere_udc', totalize=True)
@@ -49,7 +52,8 @@ class View(BaseComponent):
         r.fieldcell('desc')
 
     def th_order(self):
-        return '@commessa__id.cod'
+        #return '@commessa__id.cod'
+        return '_row_count'
 
     def th_query(self):
         return dict(column='rcrcg__id', op='contains', val='')
@@ -72,7 +76,10 @@ class Form(BaseComponent):
                  condition='$sog__cod = :SOG',
                  condition_SOG='=.@rcrcg__id.@rc__id.sog__cod',
                  )
-        fb.field('desc', colspan=2, width='100%')
+        fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
+        fb.div('')
+
+        fb.field('desc', colspan=3, width='100%')
         
         fb.field('dare_udc')
         fb.field('avere_udc')

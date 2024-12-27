@@ -47,7 +47,7 @@ class Table(object):
                         name_long="!![it]Flusso finanziario",
                         caption_field='caption')
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, counter='rcrcg__id')
 
         # foreign key to rcrcg - riga di riferimento
         rcrcg__id = tbl.column('rcrcg__id', dtype = 'A', size = '22',

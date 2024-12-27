@@ -42,19 +42,19 @@ class Table(object):
         '''
 
         tbl = pkg.table('rcriva', pkey='id', 
-                        pkey_columns='rc__id,riga_numero',
+                        # pkey_columns='rc__id,riga_numero', # 20241227 CANCELLARE
+                        pkey_columns='rc__id',
                         name_long="!![it]Riga movimento IVA",
                         name_plural="!![it]Righe movimenti IVA",
                         caption_field='caption')
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, counter='rc__id')
 
         #
         # TO DO: PK COMPOSITA
         #
         # La PK corretta di questa tabella e':
         # rc__id
-        # riga_numero
         #
 
         # foreign key to rc - testata registrazione
@@ -67,11 +67,15 @@ class Table(object):
                                 relation_name = 'righe_iva_registrazione', 
                                 onDelete = 'cascade')
         
-        tbl.column('riga_numero', dtype='N',
-                   unmodifiable=True,
-                   name_long='!![it]Progressivo riga',
-                   validate_notnull=True
-                   )
+        # 20241227 CANCELLA: il campo 'riga_numero' e' diventato ridondante 
+        # dopo aver utilizzato il counter='rc__id'. Si puo' cancellare
+        #
+        # tbl.column('riga_numero', dtype='N',
+        #            unmodifiable=True,
+        #            name_long='!![it]Progressivo riga',
+        #            validate_notnull=True
+        #            )
+        # 20241226 END CANCELLA
 
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione movimento IVA', 
@@ -122,5 +126,5 @@ class Table(object):
                           name_short='!![it]Tot.r.',
                           )
 
-        tbl.formulaColumn('caption', "$riga_numero",
-                          name_long='!![it]Rif. reg.')
+        tbl.formulaColumn('caption', "$_row_count",
+                          name_long='!![it]Riga')

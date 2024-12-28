@@ -56,28 +56,40 @@ class View(BaseComponent):
                     runOnStart=True)
 
 
+class ViewOperaPNC(View):
+    pass 
+
 
 class Form(BaseComponent):
 
     def th_form(self, form):
-        # pane = form.record
-        # fb = pane.formbuilder(cols=2, border_spacing='4px')
+        pane = form.record
+        fb = pane.formbuilder(cols=2, border_spacing='4px')
         
-        # fb.field('cod')
-        # fb.div('---')
+        fb.field('cod')
+        fb.div('---')
 
-        # fb.field('desc', colspan=2, width='100%')
+        fb.field('desc', colspan=2, width='100%')
 
-        # fb.field('note', colspan=2, width='100%',
-        #          height='5em',
-        #          tag='simpleTextArea', editor=True
-        #          )
+        fb.field('note', colspan=2, width='100%',
+                 height='5em',
+                 tag='simpleTextArea', editor=True
+                 )
+
+    def th_options(self):
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.8)
+
+
+class FormCFG(Form):
+
+    def th_form(self, form):
 
         bc = form.center.BorderContainer()
-        self.SOGHeader(bc.contentPane(region = 'top', datapath = '.record'))
-        self.SOGBody(bc.contentPane(region = 'center'))
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
 
-    def SOGHeader(self, pane):
+    def FHeader(self, pane):
         fb = pane.formbuilder(cols=3, border_spacing='4px')
         
         fb.field('cod')
@@ -88,19 +100,19 @@ class Form(BaseComponent):
         fb.field('cdacod__cod', hasDownArrow=True)
 
 
-    def SOGBody(self, pane):
+    def FBody(self, pane):
         tc = pane.tabContainer()
 
         # tab esercizi
         tab_esercizi = tc.contentPane(title = "!![it]Esercizi")
         tab_esercizi.dialogTableHandler(relation = '@esercizi',
-                                            pbl_classes = True,
-                                            viewResource = 'ViewFromSOG',
-                                            #formResource = 'FormFromSOG',
-                                            grid_selfDragRows = True,
-                                            margin = '2px',
-                                            searchOn = True
-                                            )
+                                        pbl_classes = True,
+                                        viewResource = 'ViewFromSOG',
+                                        #formResource = 'FormFromSOG',
+                                        grid_selfDragRows = True,
+                                        margin = '2px',
+                                        searchOn = True
+                                        )
 
         # tab attivita IVA
         tab_iva_attivita = tc.contentPane(title = "!![it]Attività IVA")
@@ -138,13 +150,13 @@ class Form(BaseComponent):
         # tab commesse
         tab_commesse = tc.contentPane(title = "!![it]Commesse")
         tab_commesse.dialogTableHandler(relation = '@commesse',
-                                            pbl_classes = True,
-                                            viewResource = 'ViewFromSOG',
-                                            #formResource = 'FormFromSOG',
-                                            grid_selfDragRows = True,
-                                            margin = '2px',
-                                            searchOn = True
-                                            )
+                                        pbl_classes = True,
+                                        viewResource = 'ViewFromSOG',
+                                        #formResource = 'FormFromSOG',
+                                        grid_selfDragRows = True,
+                                        margin = '2px',
+                                        searchOn = True
+                                        )
 
         # tab NOTE
         tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
@@ -155,11 +167,72 @@ class Form(BaseComponent):
                                   )
         #fb = tab_note.formbuilder(cols=1, border_spacing='4px')    
         tab_note.field('note', width='100%', height='10em', 
-                 #td_width='100%', td_height='100%',
-                 #minwidth='90%', minheight='90%',
-                 tag='simpleTextArea', editor=True
-                 )
+                       #td_width='100%', td_height='100%',
+                       # #minwidth='90%', minheight='90%',
+                       tag='simpleTextArea', editor=True
+                       )
+
+
+class FormOperaPNC(Form):
+
+    def th_form(self, form):
+        bc = form.center.BorderContainer()
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
+
+    def FHeader(self, pane):
+        fb = pane.formbuilder(cols=3, border_spacing='4px')
+        
+        fb.field('cod')
+        fb.field('desc', colspan=2, width='100%')
+
+    def FBody(self, pane):
+        tc = pane.tabContainer()
+
+        # tab rilevazioni
+        tab_rilevazioni = tc.contentPane(title = "!![it]Rilevazioni")
+        tab_rilevazioni.dialogTableHandler(relation = '@rilevazioni_contabili',
+                                           pbl_classes = True,
+                                           viewResource = 'ViewFromSOG',
+                                           #formResource = 'FormFromSOG',
+                                           grid_selfDragRows = True,
+                                           margin = '2px',
+                                           searchOn = True
+                                           )
+
+        # tab gruppi registrazione
+        tab_gruppiregist = tc.contentPane(title = "!![it]Gruppi di registrazione")
+        tab_gruppiregist.dialogTableHandler(relation = '@gruppi_registrazione',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
+        # tab commesse
+        tab_commesse = tc.contentPane(title = "!![it]Commesse")
+        tab_commesse.dialogTableHandler(relation = '@commesse',
+                                        pbl_classes = True,
+                                        viewResource = 'ViewFromSOG',
+                                        #formResource = 'FormFromSOG',
+                                        grid_selfDragRows = True,
+                                        margin = '2px',
+                                        searchOn = True
+                                        )
+
+        # tab NOTE
+        tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
+                                  width='100%', height='100%',
+                                  #td_width='100%', td_height='100%'
+                                  #colswidth='100%',
+                                  minwidth='90%', minheight='90%',
+                                  )
+        #fb = tab_note.formbuilder(cols=1, border_spacing='4px')    
+        tab_note.field('note', width='100%', height='10em', 
+                       tag='simpleTextArea', editor=True
+                       )
 
     def th_options(self):
-        #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.8)
+        return dict(dialog_parentRatio=0.95)

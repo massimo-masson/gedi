@@ -58,6 +58,10 @@ class View(BaseComponent):
         return dict(partitioned=True)
 
 
+class ViewFromSOG(View):
+    pass 
+
+
 
 class Form(BaseComponent):
 
@@ -82,4 +86,9 @@ class Form(BaseComponent):
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.9)
+
+
+class FormFromSOG(Form):
+    pass

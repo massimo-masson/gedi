@@ -64,6 +64,12 @@ class View(BaseComponent):
         return dict(partitioned=True)
 
 
+
+class ViewFromSOG(View):
+    pass 
+
+
+
 class Form(BaseComponent):
 
     def th_form(self, form):

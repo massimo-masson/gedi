@@ -40,13 +40,29 @@ def config(root,application=None):
     # menu CONTABILE
     contab = gedi.branch('!![it]CONTABILE')
 
-    contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
-    contab.thpage('!![it]Rilevazioni contabili', table = 'pn.rc')
+    contab.thpage('!![it]Operazioni per soggetto', 
+                  table = 'pn.sog',
+                  viewResource = 'ViewOperaPNC',
+                  formResource = 'FormOperaPNC'
+                  )
+    
+    # i due seguenti menu' sono utili per vedere le registrazioni
+    # senza il soggetto di riferimento della relazione, utilizzando
+    # in parte le funzioni di partizionamento tabella, potendo scegliere
+    # e filtrare quale soggetto vedere.
+    # La funzionalita' piu' comoda resta quella collegata alla relazione
+    # con il soggetto.
+    # contab.thpage('!![it]Gruppi di registrazione', table = 'pn.rcgrp')
+    # contab.thpage('!![it]Rilevazioni contabili', table = 'pn.rc')
 
     # menu CONFIGURAZIONE
     conf = gedi.branch('!![it]CONFIGURAZIONE')
 
-    conf.thpage('!![it]Soggetti operativi', table = 'pn.sog')
+    conf.thpage('!![it]Configurazione soggetto', 
+                table = 'pn.sog',
+                #viewResource = 'View',
+                formResource = 'FormCFG'
+                )
 
     conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
 

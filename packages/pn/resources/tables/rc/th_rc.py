@@ -84,10 +84,10 @@ class Form(BaseComponent):
         # fb.field('rc_docnum')
 
         bc = form.center.BorderContainer()
-        self.PDCHeader(bc.contentPane(region = 'top', datapath = '.record'))
-        self.PDCBody(bc.contentPane(region = 'center'))
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
 
-    def PDCHeader(self, pane):
+    def FHeader(self, pane):
         fb = pane.formbuilder(cols = 4, border_spacing = '4px')
 
         fb.field('sog__cod', readOnly=True)
@@ -140,7 +140,7 @@ class Form(BaseComponent):
         fb.div('')
 
 
-    def PDCBody(self, pane):
+    def FBody(self, pane):
         tc = pane.tabContainer()
 
         # tab rcrcg righe contabilita' generale
@@ -165,13 +165,27 @@ class Form(BaseComponent):
                  searchOn = True
                  )
 
+        # tab movimenti analitica
+        tab_movana = tc.contentPane(title = '!![it]Movimenti analitica')
+        tab_movana.dialogTableHandler(relation = '@righe_rccoacam',
+                 pbl_classes = True,
+                 viewResource = 'ViewFromRC',
+                 # formResource = 'FormFromCategory',
+                 grid_selfDragRows = True,
+                 margin = '2px',
+                 searchOn = True
+                 )
+
+        # tab riepilogo rilevazione
+        tab_riepil = tc.contentPane(title = '!![it]Riepilogo rilevazione')
+
         # tab allegati
-        tab_allegati = tc.contentPane(title = '!![it]Allegati')
+        #tab_allegati = tc.contentPane(title = '!![it]Allegati')
 
         # tab note
-        tab_note = tc.contentPane(title = '!![it]Note')
+        #tab_note = tc.contentPane(title = '!![it]Note')
 
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.8)
+        return dict(dialog_parentRatio=0.95)

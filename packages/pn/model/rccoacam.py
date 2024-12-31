@@ -36,26 +36,19 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''rcrcg: rilevazione contabile - riga contabilita' generale
+        '''rccoacam: rilevazione contabile - riga contabilita' analitica
 
-        Righe rilevazioni contabili        
+        Sviluppo righe rilevazione contabile dati "coa" contabilita' analitica
+        dettaglio competenze "cam" competenza anno mese
         '''
 
-        tbl = pkg.table('rcrcg', pkey='id', 
-                        #pkey_columns='rc__id,riga_numero', # 20241226 CANCELLARE
+        tbl = pkg.table('rccoacam', pkey='id', 
                         pkey_columns='rc__id',
-                        name_long="!![it]Riga contabilita' generale",
-                        name_plural="!![it]Righe contabilita' generale",
+                        name_long="!![it]Riga contabilita' analitica",
+                        name_plural="!![it]Righe contabilita' analitica",
                         caption_field='caption')
 
         self.sysFields(tbl, counter='rc__id')
-
-        #
-        # TO DO: PK COMPOSITA
-        #
-        # La PK corretta di questa tabella e':
-        # rc__id
-        #
 
         # foreign key to rc - testata registrazione
         rc__id = tbl.column('rc__id', dtype = 'A', size = '22',
@@ -64,7 +57,7 @@ class Table(object):
                             validate_notnull = True
                             )
         rc__id.relation('pn.rc.id', mode = 'foreignkey',
-                        relation_name = 'righe_registrazione', 
+                        relation_name = 'righe_rccoacam', 
                         onDelete = 'cascade')
         
         tbl.column('desc', dtype='A', size=':256', 
@@ -79,7 +72,7 @@ class Table(object):
                                  validate_notnull = True
                                  )
         pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
-                             relation_name = 'pdc_registrazione', 
+                             relation_name = 'pdccod_rccoacam', 
                              onDelete = 'raise')
         
         # foreign key to pdcconto - conto
@@ -89,8 +82,56 @@ class Table(object):
                                   validate_notnull = True
                                   )
         pdcconto__id.relation('pn.pdcconto.id', mode = 'foreignkey',
-                              relation_name = 'conto_registrazione', 
+                              relation_name = 'pdcconto_rccoacam', 
                               onDelete = 'raise')
+
+        # foreing key to cdacod - codice piano centri di analisi
+        cdacod__cod = tbl.column('cdacod__cod', dtype='A', size=':32',
+                                 defaultFrom='@rc__id.@sog__cod.cdacod__cod',
+                                 name_long = '!![it]CDA cod.',
+                                 #unmodifiable=False,
+                                 validate_notnull=True,
+                                 )
+        cdacod__cod.relation('pn.cdacod.cod', mode='foreignkey',
+                             relation_name='cdacod_rccoacam',
+                             onDelete='raise'
+                             )
+
+        # foreing key to cdacentro - il centro di analisi
+        cdacentro__id = tbl.column('cdacentro__id', dtype='A', size='22',
+                                   name_long = '!![it]CDA',
+                                   #unmodifiable=False,
+                                   validate_notnull=True,
+                                   )
+        cdacentro__id.relation('pn.cdacentro.id', mode='foreignkey',
+                               relation_name='cdacentro_rccoacam',
+                               #one_one=True,
+                               onDelete='raise'
+                               )
+
+        # foreing key to pdvcod - codice piano delle voci
+        pdvcod__cod = tbl.column('pdvcod__cod', dtype='A', size=':32',
+                                 defaultFrom='@rc__id.@sog__cod.pdvcod__cod',
+                                 name_long = '!![it]PDV cod.',
+                                 #unmodifiable=False,
+                                 validate_notnull=True,
+                                 )
+        pdvcod__cod.relation('pn.pdvcod.cod', mode='foreignkey',
+                             relation_name='pdvcod_rccoacam',
+                             onDelete='raise'
+                             )
+
+        # foreing key to pdvvoce - la voce di analisi
+        pdvvoce__id = tbl.column('pdvvoce__id', dtype='A', size='22',
+                                 name_long = '!![it]Voce',
+                                 #unmodifiable=False,
+                                 # validate_notnull=True,
+                                 )
+        pdvvoce__id.relation('pn.pdvvoce.id', mode='foreignkey',
+                               relation_name='pdvvoce_rccoacam',
+                               #one_one=True,
+                               onDelete='raise'
+                               )
 
         tbl.column('dare_udc', dtype='N', size='12,2',
                    name_long='!![it]Dare', name_short='!![it]D',
@@ -106,16 +147,12 @@ class Table(object):
                           dtype='N', size='12,2',
                           name_long='!![it]Saldo', name_short='!![it]S')
 
-        tbl.column('competenza_da', dtype='D',
-                   name_long='!![it]Competenza da',
-                   name_short='!![it]Comp.da'
+        # competenza nella forma anno/mese: AAAAMM
+        tbl.column('competenza_am', dtype='A', size = '6',
+                   name_long='!![it]Competenza',
+                   name_short='!![it]Comp.'
                    )
-
-        tbl.column('competenza_a', dtype='D',
-                   name_long='!![it]Competenza a',
-                   name_short='!![it]Comp.a'
-                   )
-
+        
         # foreign key to divisione: default quella della testata registrazione
         divisione__id = tbl.column('divisione__id', dtype = 'A', size = '22',
                                    name_long = '!![it]Divisione', 
@@ -125,7 +162,7 @@ class Table(object):
                                    validate_notnull = False
                                    )
         divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
-                               relation_name = 'divisione_riga', 
+                               relation_name = 'divisione_rccoacam', 
                                onDelete = 'raise')
         
         tbl.aliasColumn('divisione_rc', '@rc__id.divisione__id',
@@ -142,7 +179,7 @@ class Table(object):
                                   validate_notnull = False
                                   )
         commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
-                               relation_name = 'commessa_riga', 
+                               relation_name = 'commessa_rccoacam', 
                                onDelete = 'raise')
 
         tbl.aliasColumn('commessa_rc', '@rc__id.commessa__id',
@@ -150,5 +187,5 @@ class Table(object):
                         name_short='!![it]Comm.tes.',
                         )
 
-        tbl.formulaColumn('caption', "$_row_count",
+        tbl.formulaColumn('caption', "'rccoacam riga: '||$_row_count",
                           name_long='!![it]Riga')

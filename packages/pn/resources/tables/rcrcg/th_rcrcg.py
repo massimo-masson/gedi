@@ -51,6 +51,8 @@ class View(BaseComponent):
         r.fieldcell('pdcconto__id')
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
+        r.fieldcell('pdvcod__cod')
+        r.fieldcell('pdvvoce__id')
         r.fieldcell('divisione__id')
         r.fieldcell('divisione_rc')
         r.fieldcell('commessa__id')
@@ -78,6 +80,8 @@ class ViewFromRC(View):
         r.fieldcell('dare_udc', totalize=True)
         r.fieldcell('avere_udc', totalize=True)
         r.fieldcell('saldo_udc', totalize=True)
+        r.fieldcell('pdvcod__cod', readOnly=True)
+        r.fieldcell('pdvvoce__id', hasDownArrow=True)
         r.fieldcell('commessa__id')
         r.fieldcell('divisione__id')
         r.fieldcell('divisione_rc')
@@ -89,17 +93,16 @@ class Form(BaseComponent):
         #pane = form.record
 
         bc = form.center.BorderContainer()
-        self.FRMHeader(bc.contentPane(region = 'top', datapath = '.record'))
-        self.FRMBody(bc.contentPane(region = 'center'))
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
 
 
-    def FRMHeader(self, pane):
-        fb = pane.formbuilder(cols=5, border_spacing='4px')
+    def FHeader(self, pane):
+        fb = pane.formbuilder(cols=3, border_spacing='4px')
 
-        fb.field('rc__id')
+        #fb.field('rc__id')
         fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
         #fb.field('riga_numero') # cancellare con counter del 20241226
-        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('commessa_rc', readOnly=True)
         fb.field('divisione_rc', readOnly=True)
 
@@ -108,37 +111,42 @@ class Form(BaseComponent):
                  condition = '$pdccod__cod = :pdc',
                  #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
                  condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
+                 colspan=2, width='100%',
                  )
+        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
+
         fb.field('dare_udc')
         fb.field('avere_udc')
         fb.field('saldo_udc')
-        fb.div('')
         
-        fb.field('desc', colspan=4, width='100%', name_long='!![it]Descrizione')
-        fb.div('')
+        fb.field('desc', colspan=3, width='100%', name_long='!![it]Descrizione')
 
         fb.field('competenza_da')
         fb.field('competenza_a')
+        fb.div('')
+
+        fb.field('pdvvoce__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$pdvcod__cod = :pdv',
+                 condition_pdv = '=.@rc__id.@sog__cod.pdvcod__cod',
+                 colspan=2, width='100%',
+                 )
+        fb.field('pdvcod__cod', readOnly=True)
+
         fb.field('commessa__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  condition = '$sog__cod = :sog',
-                 condition_sog = '=.@rc__id.sog__cod',                 
+                 condition_sog = '=.@rc__id.sog__cod',
                  )
         fb.field('divisione__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  condition = '$sog__cod = :sog',
-                 condition_sog = '=.@rc__id.sog__cod',                 
+                 condition_sog = '=.@rc__id.sog__cod',
                  )
         fb.div('')
 
-        # 20241226 Esperimento: progressivo riga numero da dataRpc
-        # fb.dataRpc('.riga_numero', self.getProssimoNumeroRiga, 
-        #            pk='^.rc__id',
-        #            _onStart=True)
-        # 20241226 END Esperimento
 
-
-    def FRMBody(self, pane):
+    def FBody(self, pane):
         tc = pane.tabContainer()
 
         # tab ANALITICA
@@ -146,7 +154,7 @@ class Form(BaseComponent):
         aa = analitica.tabContainer(tabPosition='top') # bottom right-h, left-h
 
         # tab CDA
-        tab_rcrcg = aa.contentPane(title = "!![it]CDA")
+        tab_rcrcg = aa.contentPane(title = "!![it]Centri")
         tab_rcrcg.dialogTableHandler(relation = '@cda_rcg',
                                      title = '!![it]Dettaglio centri di analisi (analitica)',
                                      pbl_classes = True,
@@ -158,7 +166,7 @@ class Form(BaseComponent):
                                      )
 
         # tab COMMESSE
-        tab_commesse = aa.contentPane(title = '!![it]COM')
+        tab_commesse = aa.contentPane(title = '!![it]Commesse')
         tab_commesse.dialogTableHandler(relation = '@commesse_rcg',
                                         title = '!![it]Dettaglio commesse (analitica)',
                                         pbl_classes = True,
@@ -190,10 +198,16 @@ class Form(BaseComponent):
         #          tag='simpleTextArea', editor=True,
         #          )
 
+        # 20241226 Esperimento: progressivo riga numero da dataRpc
+        # fb.dataRpc('.riga_numero', self.getProssimoNumeroRiga, 
+        #            pk='^.rc__id',
+        #            _onStart=True)
+        # 20241226 END Esperimento
+
 
     def th_options(self):
         #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.95)
+        return dict(dialog_parentRatio=0.9)
 
     # 20241226 Esperimento: metodo per contatore con dataRpc
     # @public_method

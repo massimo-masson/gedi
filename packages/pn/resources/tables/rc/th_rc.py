@@ -88,11 +88,17 @@ class Form(BaseComponent):
         self.FBody(bc.contentPane(region = 'center'))
 
     def FHeader(self, pane):
-        fb = pane.formbuilder(cols = 4, border_spacing = '4px')
+        fb = pane.formbuilder(cols = 3, border_spacing = '4px')
 
-        fb.field('sog__cod', readOnly=True)
+        #fb.field('sog__cod', readOnly=True)
+        
+        fb.field('rcgrp__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 #auxColumns='$cod,$desc',
+                 condition='$sog__cod=:sog',
+                 condition_sog='=.sog__cod',
+                 )
         fb.field('@rcgrp__id.classe_desc', readOnly=True)
-        fb.div('')
         fb.div('')
 
         fb.field('esercizio__id', hasDownArrow=True,
@@ -103,17 +109,19 @@ class Form(BaseComponent):
                  )
         fb.field('rc_data')
         fb.field('rc_rif')
-        fb.field('rcgrp__id', hasDownArrow=True,
+
+        fb.field('desc', colspan=3, width='90%')
+
+        fb.field('rc_docdata')
+        fb.field('rc_docnum')
+        fb.div('')
+
+        fb.field('commessa__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:sog',
                  condition_sog='=.sog__cod',
                  )
-
-        fb.field('desc', colspan=4, width='90%')
-
-        fb.field('rc_docdata')
-        fb.field('rc_docnum')
         fb.field('divisione__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
@@ -121,12 +129,7 @@ class Form(BaseComponent):
                  #condition_sog='=#FORM.record.sog__cod', # anche questa funziona
                  condition_sog='=.sog__cod',
                  )
-        fb.field('commessa__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 #auxColumns='$cod,$desc',
-                 condition='$sog__cod=:sog',
-                 condition_sog='=.sog__cod',
-                 )
+        fb.div('')
 
         fb.field('ivaregistro__id', hasDownArrow=True,
                  columns='$cod,$desc',
@@ -137,7 +140,6 @@ class Form(BaseComponent):
                  )
         fb.field('iva_protocollo')
         fb.field('iva_protocollo_appendice')
-        fb.div('')
 
 
     def FBody(self, pane):
@@ -178,12 +180,6 @@ class Form(BaseComponent):
 
         # tab riepilogo rilevazione
         tab_riepil = tc.contentPane(title = '!![it]Riepilogo rilevazione')
-
-        # tab allegati
-        #tab_allegati = tc.contentPane(title = '!![it]Allegati')
-
-        # tab note
-        #tab_note = tc.contentPane(title = '!![it]Note')
 
 
     def th_options(self):

@@ -57,7 +57,11 @@ class Form(BaseComponent):
                  condition_CDACOD='=.cdacod__cod',
                  )
         fb.field('pdvcod__cod', readOnly=True)
-        fb.field('pdvvoce__id', hasDownArrow=True)
+        fb.field('pdvvoce__id', hasDownArrow=True,
+                 columns='$cod,$desc',
+                 condition = '$pdvcod__cod = :pdv',
+                 condition_pdv = '=.@rc__id.@sog__cod.pdvcod__cod',
+                 )
         fb.field('dare_udc')
         fb.field('avere_udc')
         fb.field('competenza_am')

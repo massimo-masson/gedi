@@ -116,6 +116,30 @@ class Table(object):
                    name_short='!![it]Comp.a'
                    )
 
+        # foreing key to pdvcod - codice piano delle voci
+        pdvcod__cod = tbl.column('pdvcod__cod', dtype='A', size=':32',
+                                 defaultFrom='@rc__id.@sog__cod.pdvcod__cod',
+                                 name_long = '!![it]PDV cod.',
+                                 #unmodifiable=False,
+                                 validate_notnull=True,
+                                 )
+        pdvcod__cod.relation('pn.pdvcod.cod', mode='foreignkey',
+                             relation_name='pdvcod_rcrcg',
+                             onDelete='raise'
+                             )
+
+        # foreing key to pdvvoce - la voce di analisi
+        pdvvoce__id = tbl.column('pdvvoce__id', dtype='A', size='22',
+                                 name_long = '!![it]Voce',
+                                 #unmodifiable=False,
+                                 # validate_notnull=True,
+                                 )
+        pdvvoce__id.relation('pn.pdvvoce.id', mode='foreignkey',
+                               relation_name='pdvvoce_rcrcg',
+                               #one_one=True,
+                               onDelete='raise'
+                               )
+
         # foreign key to divisione: default quella della testata registrazione
         divisione__id = tbl.column('divisione__id', dtype = 'A', size = '22',
                                    name_long = '!![it]Divisione', 

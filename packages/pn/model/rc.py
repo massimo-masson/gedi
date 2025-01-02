@@ -159,6 +159,103 @@ class Table(object):
 
         tbl.formulaColumn('caption', "$rc_data||' - '||$rc_rif",
                           name_long='!![it]data-num')
+        
+        # formule riepilogo COGE
+        tbl.formulaColumn('tot_dare_udc', dtype='N', 
+                          name_long='!![it]Totale Dare',
+                          select=dict(table='pn.rcrcg',
+                                      columns='SUM($dare_udc)',
+                                      where='$rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('tot_avere_udc', dtype='N', 
+                          name_long='!![it]Totale Avere',
+                          select=dict(table='pn.rcrcg',
+                                      columns='SUM($avere_udc)',
+                                      where='$rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('numero_righe_coge', dtype='N', 
+                          name_long='!![it]Numero righe',
+                          select=dict(table='pn.rcrcg',
+                                      columns='COUNT($rc__id)',
+                                      where='$rc__id=#THIS.id'
+                                      )
+                          )
+
+        # formule riepilogo CDA
+        tbl.formulaColumn('tot_cda_dare_udc', dtype='N', 
+                          name_long='!![it]Totale Dare CDA',
+                          select=dict(table='pn.rcrcgcda',
+                                      columns='SUM($dare_udc)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('tot_cda_avere_udc', dtype='N', 
+                          name_long='!![it]Totale Avere CDA',
+                          select=dict(table='pn.rcrcgcda',
+                                      columns='SUM($avere_udc)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('numero_cda_movimentati', dtype='N', 
+                          name_long='!![it]Numero CDA movimentati',
+                          select=dict(table='pn.rcrcgcda',
+                                      columns='COUNT(DISTINCT $cdacentro__id)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+        
+        tbl.formulaColumn('diff_coge_cda_dare', '$tot_dare_udc - $tot_cda_dare_udc',
+                          dtype='N',
+                          name_long='!![it]Squadratura centri Dare'
+                          )
+
+        tbl.formulaColumn('diff_coge_cda_avere', '$tot_avere_udc - $tot_cda_avere_udc',
+                          dtype='N',
+                          name_long='!![it]Squadratura centri Avere'
+                          )
+
+        # formule riepilogo commesse
+        tbl.formulaColumn('tot_com_dare_udc', dtype='N', 
+                          name_long='!![it]Totale Dare commesse',
+                          select=dict(table='pn.rcrcgcom',
+                                      columns='SUM($dare_udc)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('tot_com_avere_udc', dtype='N', 
+                          name_long='!![it]Totale Avere commesse',
+                          select=dict(table='pn.rcrcgcom',
+                                      columns='SUM($avere_udc)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+
+        tbl.formulaColumn('numero_com_movimentate', dtype='N', 
+                          name_long='!![it]Numero commesse movimentate',
+                          select=dict(table='pn.rcrcgcom',
+                                      columns='COUNT(DISTINCT $commessa__id)',
+                                      where='@rcrcg__id.rc__id=#THIS.id'
+                                      )
+                          )
+        
+        tbl.formulaColumn('diff_coge_com_dare', '$tot_dare_udc - $tot_com_dare_udc',
+                          dtype='N',
+                          name_long='!![it]Squadratura Commesse Dare'
+                          )
+
+        tbl.formulaColumn('diff_coge_com_avere', '$tot_avere_udc - $tot_com_avere_udc',
+                          dtype='N',
+                          name_long='!![it]Squadratura Commesse Avere'
+                          )
+
+
 
 
     def defaultValues(self):

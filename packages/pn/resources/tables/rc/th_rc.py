@@ -179,7 +179,54 @@ class Form(BaseComponent):
                  )
 
         # tab riepilogo rilevazione
-        tab_riepil = tc.contentPane(title = '!![it]Riepilogo rilevazione')
+        tab_riepil = tc.contentPane(title = '!![it]Riepilogo rilevazione',
+                                    datapath = '.record'
+                                    )
+
+        # riepilogo coge
+        tab_riepil.h3('!![it]Contabilità generale:')
+        boxcoge = tab_riepil.div('', 
+                                 border='1px solid black',
+                                 border_radius='10px',
+                                 padding='20px',
+                                 )
+        fbcoge = boxcoge.formbuilder(cols = 3, border_spacing = '4px')
+        fbcoge.field('tot_dare_udc')
+        fbcoge.field('tot_avere_udc')
+        fbcoge.field('numero_righe_coge')
+
+        # riepilogo CDA
+        tab_riepil.h3('!![it]Centri di analisi:')
+        box_cda = tab_riepil.div('', 
+                                 border='1px solid black',
+                                 border_radius='10px',
+                                 padding='20px',
+                                 )
+        fbcda = box_cda.formbuilder(cols = 3, border_spacing = '4px')
+        fbcda.field('tot_cda_dare_udc')
+        fbcda.field('tot_cda_avere_udc')
+        fbcda.field('numero_cda_movimentati')
+
+        fbcda.field('diff_coge_cda_dare')
+        fbcda.field('diff_coge_cda_avere')
+        fbcda.div('')
+
+        # riepilogo commesse
+        tab_riepil.h3('!![it]Commesse:')
+        box_com = tab_riepil.div('', 
+                                 border='1px solid black',
+                                 border_radius='10px',
+                                 padding='20px',
+                                 )
+        fbcom = box_com.formbuilder(cols = 3, border_spacing = '4px')
+        fbcom.field('tot_com_dare_udc')
+        fbcom.field('tot_com_avere_udc')
+        fbcom.field('numero_com_movimentate')
+
+        fbcom.field('diff_coge_com_dare')
+        fbcom.field('diff_coge_com_avere')
+        fbcom.div('')
+
 
 
     def th_options(self):

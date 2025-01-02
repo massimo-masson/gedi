@@ -189,7 +189,7 @@ class Table(object):
         tbl.formulaColumn('tot_cda_dare_udc', dtype='N', 
                           name_long='!![it]Totale Dare CDA',
                           select=dict(table='pn.rcrcgcda',
-                                      columns='SUM($dare_udc)',
+                                      columns='COALESCE(SUM($dare_udc), 0)',
                                       where='@rcrcg__id.rc__id=#THIS.id'
                                       )
                           )
@@ -197,7 +197,7 @@ class Table(object):
         tbl.formulaColumn('tot_cda_avere_udc', dtype='N', 
                           name_long='!![it]Totale Avere CDA',
                           select=dict(table='pn.rcrcgcda',
-                                      columns='SUM($avere_udc)',
+                                      columns='COALESCE(SUM($avere_udc), 0)',
                                       where='@rcrcg__id.rc__id=#THIS.id'
                                       )
                           )
@@ -224,7 +224,7 @@ class Table(object):
         tbl.formulaColumn('tot_com_dare_udc', dtype='N', 
                           name_long='!![it]Totale Dare commesse',
                           select=dict(table='pn.rcrcgcom',
-                                      columns='SUM($dare_udc)',
+                                      columns='COALESCE(SUM($dare_udc), 0)',
                                       where='@rcrcg__id.rc__id=#THIS.id'
                                       )
                           )
@@ -232,7 +232,7 @@ class Table(object):
         tbl.formulaColumn('tot_com_avere_udc', dtype='N', 
                           name_long='!![it]Totale Avere commesse',
                           select=dict(table='pn.rcrcgcom',
-                                      columns='SUM($avere_udc)',
+                                      columns='COALESCE(SUM($avere_udc), 0)',
                                       where='@rcrcg__id.rc__id=#THIS.id'
                                       )
                           )
@@ -254,8 +254,6 @@ class Table(object):
                           dtype='N',
                           name_long='!![it]Squadratura Commesse Avere'
                           )
-
-
 
 
     def defaultValues(self):

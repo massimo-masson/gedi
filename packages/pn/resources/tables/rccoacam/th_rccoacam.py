@@ -12,18 +12,18 @@ class View(BaseComponent):
                     name='!![it]Riga',
                     )
         #r.fieldcell('rc__id', readOnly=True, lbl='!![it]Riga')
-        r.fieldcell('desc')
-        r.fieldcell('pdccod__cod', readOnly=True)
-        r.fieldcell('pdcconto__id', hasDownArrow=True)
-        r.fieldcell('cdacod__cod', readOnly=True)
-        r.fieldcell('cdacentro__id', hasDownArrow=True)
-        r.fieldcell('pdvcod__cod', readOnly=True)
-        r.fieldcell('pdvvoce__id', hasDownArrow=True)
-        r.fieldcell('dare_udc')
-        r.fieldcell('avere_udc')
         r.fieldcell('competenza_am')
+        r.fieldcell('dare_udc', format='#,###.00')
+        r.fieldcell('avere_udc', format='#,###.00')
+        r.fieldcell('cdacentro__id', hasDownArrow=True)
+        r.fieldcell('desc')
+        r.fieldcell('pdvvoce__id', hasDownArrow=True)
+        r.fieldcell('pdcconto__id', hasDownArrow=True)
         r.fieldcell('divisione__id')
         r.fieldcell('commessa__id')
+        r.fieldcell('cdacod__cod', readOnly=True)
+        r.fieldcell('pdvcod__cod', readOnly=True)
+        r.fieldcell('pdccod__cod', readOnly=True)
 
     def th_order(self):
         return '_row_count'

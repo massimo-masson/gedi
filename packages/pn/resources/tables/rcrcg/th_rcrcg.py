@@ -151,7 +151,7 @@ class Form(BaseComponent):
 
         # tab ANALITICA
         analitica = tc.contentPane(title = "!![it]Analitica")
-        aa = analitica.tabContainer(tabPosition='top') # bottom right-h, left-h
+        aa = analitica.tabContainer(tabPosition='bottom') # top bottom right-h, left-h
 
         # tab CDA
         tab_rcrcg = aa.contentPane(title = "!![it]Centri")

@@ -101,4 +101,5 @@ def competenza_AAAAMM(data_da, data_a, importo_dare, importo_avere, includi_gior
         # prossimo mese
         data_corrente = fine_mese + timedelta(days=1)
 
+    #print(risultati)
     return risultati

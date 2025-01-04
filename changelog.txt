@@ -1,3 +1,5 @@
+
+
 20250103
 implementato metodo protect_validate in rc.py
 errore se totale dare diverso da totale avere
@@ -6,3 +8,5 @@ implementati trigger insert/update/delete in rcrcgcda
 per generare ed aggiornare automaticamente le righe
 analitiche in rccoacam.
 Aggiornata struttura rccoacam.
+
+aggiunta lib nel package pn per funzionalita' condivise

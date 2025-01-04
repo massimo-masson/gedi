@@ -180,11 +180,36 @@ class Table(object):
         # prendo il record della riga contabile rcrcg per ottenere
         # l'id della testata registrazione rc, nel campo rcrcg__id
         rcrcg_record = self.db.table('pn.rcrcg').record(
-            record['rcrcg__id']).output('record')
+            record['rcrcg__id']
+            ).output('record')
+        
+        # se non c'e' competenza iniziale assumo data documento
+        # in subordine data registrazione
+        if rcrcg_record['competenza_da']:
+            competenza_da = str(rcrcg_record['competenza_da'])
+        else:
+            # recupero il record di testata
+            rc_record = self.db.table('pn.rc').record(
+                rcrcg_record['rc__id']
+                ).output('record')
+            # se c'e' la data documento prendo quella,
+            # altrimenti prendo la data registrazione
+            if rc_record['rc_docdata']:
+                competenza_da = str(rc_record['rc_docdata'])
+            else:
+                competenza_da = str(rc_record['rc_data'])
+        
+        # se non c'e' competenza finale assumo uguale a iniziale
+        if rcrcg_record['competenza_a']:
+            competenza_a = str(rcrcg_record['competenza_a'])
+        else:
+            competenza_a = competenza_da
 
+        #print(f"da: {competenza_da} a: {competenza_a}; D={record['dare_udc']} A={record['avere_udc']}")
+        
         periodi_cam = competenza_AAAAMM(
-            str(rcrcg_record['competenza_da']),
-            str(rcrcg_record['competenza_a']),
+            competenza_da,
+            competenza_a,
             record['dare_udc'],
             record['avere_udc']
             )
@@ -206,7 +231,7 @@ class Table(object):
                 pdvcod__cod = rcrcg_record['pdvcod__cod'],
                 pdvvoce__id = rcrcg_record['pdvvoce__id'],
                 dare_udc = periodo[1], # record['dare_udc'],
-                avere_udc = periodo[1], # record['avere_udc'],
+                avere_udc = periodo[2], # record['avere_udc'],
                 competenza_am = periodo[0],
                 divisione__id = rcrcg_record['divisione__id'],
                 commessa__id = rcrcg_record['commessa__id'],

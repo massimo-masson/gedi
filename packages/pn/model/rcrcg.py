@@ -43,19 +43,12 @@ class Table(object):
 
         tbl = pkg.table('rcrcg', pkey='id', 
                         #pkey_columns='rc__id,riga_numero', # 20241226 CANCELLARE
-                        pkey_columns='rc__id',
+                        #pkey_columns='rc__id', # 20250102 CANCELLARE
                         name_long="!![it]Riga contabilita' generale",
                         name_plural="!![it]Righe contabilita' generale",
                         caption_field='caption')
 
         self.sysFields(tbl, counter='rc__id')
-
-        #
-        # TO DO: PK COMPOSITA
-        #
-        # La PK corretta di questa tabella e':
-        # rc__id
-        #
 
         # foreign key to rc - testata registrazione
         rc__id = tbl.column('rc__id', dtype = 'A', size = '22',

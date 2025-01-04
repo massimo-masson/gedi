@@ -43,6 +43,7 @@ class Form(BaseComponent):
         fb = pane.formbuilder(cols=1, border_spacing='4px')
         fb.field('_row_count', readOnly=True, lbl='!![it]Riga')
         #fb.field('rc__id')
+        fb.field('origine')
         fb.field('desc')
         fb.field('pdccod__cod', readOnly=True)
         fb.field('pdcconto__id', hasDownArrow=True,

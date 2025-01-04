@@ -264,6 +264,25 @@ class Table(object):
                     )
     
 
+    def protect_validate(self, record, old_record, **kwargs):
+        '''Validazione salvataggio registrazione contabile
+        
+        1) controllo totale DARE = totale AVERE
+        '''
+
+        query = self.db.table('pn.rcrcg').query(
+            columns='COALESCE(SUM($dare_udc), 0) AS DARE, COALESCE(SUM($avere_udc), 0) AS AVERE',
+            where='$rc__id = :id_corrente',
+            id_corrente = record['id']
+            ).fetch()
+        #print(query)
+
+        if not (query[0]['DARE'] == query[0]['AVERE']):
+            raise self.exception('protect_update', record=record,
+                msg='!![it]totali DARE e AVERE diversi!'
+                )
+
+
     def counter_rc_rif(self, record=None):
         '''contatore progressivo RC'''
         

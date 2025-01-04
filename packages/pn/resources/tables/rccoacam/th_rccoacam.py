@@ -7,15 +7,38 @@ from gnr.core.gnrdecorator import public_method
 class View(BaseComponent):
 
     def th_struct(self,struct):
+        colore_automatico = 'blue'
+        colore_automatico_sfondo = 'Khaki'
+
         r = struct.view().rows()
         r.fieldcell('_row_count', counter=True, hidden=False,
                     name='!![it]Riga',
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo
                     )
         #r.fieldcell('rc__id', readOnly=True, lbl='!![it]Riga')
-        r.fieldcell('competenza_am')
-        r.fieldcell('dare_udc', format='#,###.00')
-        r.fieldcell('avere_udc', format='#,###.00')
-        r.fieldcell('cdacentro__id', hasDownArrow=True)
+        r.fieldcell('origine_auto', hidden=True)
+        r.fieldcell('competenza_am',
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo
+                    )
+        r.fieldcell('dare_udc', format='#,###.00',
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo
+                    )
+        r.fieldcell('avere_udc', format='#,###.00',
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo
+                    )
+        r.fieldcell('cdacentro__id', hasDownArrow=True,
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo
+                    )
         r.fieldcell('desc')
         r.fieldcell('pdvvoce__id', hasDownArrow=True)
         r.fieldcell('pdcconto__id', hasDownArrow=True)

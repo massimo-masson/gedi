@@ -264,7 +264,7 @@ class Table(object):
                     )
     
 
-    def protect_validate(self, record, old_record, **kwargs):
+    def protect_validate(self, record, **kwargs):
         '''Validazione salvataggio registrazione contabile
         
         1) controllo totale DARE = totale AVERE

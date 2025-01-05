@@ -7,18 +7,18 @@ from gnr.core.gnrdecorator import public_method
 class View(BaseComponent):
 
     def th_struct(self,struct):
-        colore_automatico = 'blue'
+        colore_automatico = 'DarkSlateGray'
         colore_automatico_sfondo = 'Khaki'
 
         r = struct.view().rows()
+        r.fieldcell('origine_auto', hidden=True)
         r.fieldcell('_row_count', counter=True, hidden=False,
                     name='!![it]Riga',
                     range_autogen="origine_auto>''",
                     range_autogen_color = colore_automatico,
-                    range_autogen_background_color = colore_automatico_sfondo
+                    range_autogen_background_color = colore_automatico_sfondo,
                     )
         #r.fieldcell('rc__id', readOnly=True, lbl='!![it]Riga')
-        r.fieldcell('origine_auto', hidden=True)
         r.fieldcell('competenza_am',
                     range_autogen="origine_auto>''",
                     range_autogen_color = colore_automatico,
@@ -37,13 +37,21 @@ class View(BaseComponent):
         r.fieldcell('cdacentro__id', hasDownArrow=True,
                     range_autogen="origine_auto>''",
                     range_autogen_color = colore_automatico,
-                    range_autogen_background_color = colore_automatico_sfondo
+                    range_autogen_background_color = colore_automatico_sfondo,
+                    range_autogencda="origine_auto=='pn.rcrcgcda'",
+                    range_autogencda_color = 'DarkBlue',
+                    )
+        r.fieldcell('commessa__id', hasDownArrow=True,
+                    range_autogen="origine_auto>''",
+                    range_autogen_color = colore_automatico,
+                    range_autogen_background_color = colore_automatico_sfondo,
+                    range_autogencom="origine_auto=='pn.rcrcgcom'",
+                    range_autogencom_color = 'DarkGreen',
                     )
         r.fieldcell('desc')
         r.fieldcell('pdvvoce__id', hasDownArrow=True)
         r.fieldcell('pdcconto__id', hasDownArrow=True)
         r.fieldcell('divisione__id')
-        r.fieldcell('commessa__id')
         r.fieldcell('cdacod__cod', readOnly=True)
         r.fieldcell('pdvcod__cod', readOnly=True)
         r.fieldcell('pdccod__cod', readOnly=True)

@@ -1,4 +1,5 @@
-
+20250104
+formattazione per evidenziare righe automatiche in th_rccoacam
 
 20250103
 implementato metodo protect_validate in rc.py

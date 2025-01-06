@@ -243,13 +243,13 @@ class Table(object):
             self.db.commit()
 
 
-    def get_lista_cda(self, record):
-        '''Restituisce la lista dei cda della riga contabile'''
-        
-        query = self.db.table('pn.rcrcgcda').query(
-            columns='*',
-            where='$rcrcg__id = :id_rcrcg',
-            id_rcrcg = record['rcrcg__id']
-            ).fetch()
-        
-        return(query)
+    # def get_lista_cda(self, record):
+    #     '''Restituisce la lista dei cda della riga contabile'''
+    #
+    #     query = self.db.table('pn.rcrcgcda').query(
+    #         columns='*',
+    #         where='$rcrcg__id = :id_rcrcg',
+    #         id_rcrcg = record['rcrcg__id']
+    #         ).fetch()
+    #
+    #     return(query)

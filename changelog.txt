@@ -1,4 +1,10 @@
-20250104
+20250106
+aggiunta rielaborazione automatica centri e commesse da riga
+rilevazione contabile (rcrcg) al cambiamento di valore di
+campi riga che impattano sulle righe di analitica rccoacam
+
+20250105
+aggiunga gestione automatica righe analitica da analitica-commesse
 formattazione per evidenziare righe automatiche in th_rccoacam
 
 20250103

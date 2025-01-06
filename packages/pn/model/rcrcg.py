@@ -169,3 +169,80 @@ class Table(object):
 
         tbl.formulaColumn('caption', "$_row_count",
                           name_long='!![it]Riga')
+
+
+    def coa_update_da_rielaborare(self, record=None, old_record=None):
+        '''Restituisce true se la modifica implica ricalcolo'''
+        
+        modificare = False
+        
+        #if record[''] != old_record['']: modificare = True
+        if record['pdccod__cod'] != old_record['pdccod__cod']: modificare = True
+        if record['pdcconto__id'] != old_record['pdcconto__id']: modificare = True
+        if record['competenza_da'] != old_record['competenza_da']: modificare = True
+        if record['competenza_a'] != old_record['competenza_a']: modificare = True
+        if record['pdvcod__cod'] != old_record['pdvcod__cod']: modificare = True
+        if record['pdvvoce__id'] != old_record['pdvvoce__id']: modificare = True
+        if record['divisione__id'] != old_record['divisione__id']: modificare = True
+        if record['commessa__id'] != old_record['commessa__id']: modificare = True
+
+        #if modificare: print("ricalcola analitica:", record)
+        
+        return modificare
+    
+
+    def trigger_onUpdated(self, record=None, old_record=None):
+        '''Ad aggiornamento riga, modifica movimenti di analitica
+        
+        Se la modifica riguarda elementi che impattano sul
+        calcolo delle competenze, rigenera le righe analitiche 
+        dei cda e comesse
+        '''
+
+        if self.coa_update_da_rielaborare(record, old_record):
+            self.rielabora_lista_cda(record)
+            self.rielabora_lista_com(record)
+
+
+    def get_lista_cda(self, record):
+        '''Restituisce la lista cda della riga contabile'''
+        
+        query = self.db.table('pn.rcrcgcda').query(
+            columns='*',
+            where='$rcrcg__id = :id_rcrcg',
+            id_rcrcg = record['id']
+            ).fetch()
+        
+        return(query)
+
+
+    def get_lista_com(self, record):
+        '''Restituisce la lista commesse della riga contabile'''
+        
+        query = self.db.table('pn.rcrcgcom').query(
+            columns='*',
+            where='$rcrcg__id = :id_rcrcg',
+            id_rcrcg = record['id']
+            ).fetch()
+        
+        return(query)
+    
+
+    def rielabora_lista_cda(self, record):
+        '''Rielabora la lista cda del record rcrcg'''
+
+        lista_cda = self.get_lista_cda(record)
+
+        for cda in lista_cda:
+            tbl = self.db.table('pn.rcrcgcda')
+            tbl.rccoacam_allinea(cda)
+
+
+    def rielabora_lista_com(self, record):
+        '''Rielabora la lista commesse del record rcrcg'''
+
+        lista_com = self.get_lista_com(record)
+
+        for com in lista_com:
+            tbl = self.db.table('pn.rcrcgcom')
+            tbl.rccoacam_allinea(com)

@@ -1,3 +1,9 @@
+20250108
+aggiunta aliasColumn in tabella movimenti analitica per gruppo registrazione
+aggiunta tabelal rcgrpcfg: gestione dei gruppi di registraizone
+come "configurazione contabile"
+per istanza sqlite adottato tema "mimi"
+
 20250106
 aggiunta rielaborazione automatica centri e commesse da riga
 rilevazione contabile (rcrcg) al cambiamento di valore di

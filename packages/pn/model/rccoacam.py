@@ -208,5 +208,10 @@ class Table(object):
                         name_short='!![it]Comm.tes.',
                         )
         
+        tbl.aliasColumn('rcgrp__id', '@rc__id.rcgrp__id',
+                        name_long = '!![it]Gruppo reg.',
+                        name_short = '!![it]Gr.reg.',
+                        )
+        
         tbl.formulaColumn('caption', "'rccoacam riga: '||$_row_count",
                           name_long='!![it]Riga')

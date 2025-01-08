@@ -211,6 +211,17 @@ class FormOperaPNC(Form):
                                             searchOn = True
                                             )
 
+        # tab configurazioni contabili
+        tab_gruppiregist = tc.contentPane(title = "!![it]Configurazioni contabili")
+        tab_gruppiregist.dialogTableHandler(relation = '@rcgrpcfg_sog',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
         # tab commesse
         tab_commesse = tc.contentPane(title = "!![it]Commesse")
         tab_commesse.dialogTableHandler(relation = '@commesse',

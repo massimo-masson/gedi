@@ -55,6 +55,7 @@ class View(BaseComponent):
         r.fieldcell('cdacod__cod', readOnly=True)
         r.fieldcell('pdvcod__cod', readOnly=True)
         r.fieldcell('pdccod__cod', readOnly=True)
+        r.fieldcell('rcgrp__id')
 
     def th_order(self):
         return '_row_count'
@@ -107,6 +108,7 @@ class Form(BaseComponent):
                  condition = '$sog__cod = :sog',
                  condition_sog = '=.@rc__id.sog__cod',                 
                  )
+        fb.field('rcgrp__id')
 
 
     def th_options(self):

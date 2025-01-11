@@ -102,8 +102,9 @@ class Table(object):
                         name_short='!![it]Class.reg.',
                         )
 
-
-    def defaultValues(self):
-        '''Valore di default per nuovi inserimenti in partizione attiva'''
-
-        return dict(sog__cod=self.db.currentEnv.get('current_sog__cod'))
+    # CANCELLARE 20250111
+    # def defaultValues(self):
+    #     '''Valore di default per nuovi inserimenti in partizione attiva'''
+    #
+    #     return dict(sog__cod=self.db.currentEnv.get('current_sog__cod'))
+    # FINE 20250111

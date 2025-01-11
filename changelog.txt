@@ -1,3 +1,7 @@
+20250111
+Aggiunta tabella rcgrpnncfg: tabella di appoggio per rielaborazione
+n:n tra rcgrp e rcgrpcfg.
+
 20250108
 aggiunta aliasColumn in tabella movimenti analitica per gruppo registrazione
 aggiunta tabelal rcgrpcfg: gestione dei gruppi di registraizone

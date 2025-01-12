@@ -65,19 +65,38 @@ class ViewFromSOG(View):
 
 class Form(BaseComponent):
 
+    # def th_form(self, form):
+    #     pane = form.record
+    #     fb = pane.formbuilder(cols=2, border_spacing='4px')
+    #     #fb.field('codkey')
+    #
+    #     fb.field('cod')
+    #     fb.field('sog__cod', hasDownArrow=True)
+    #     #fb.field('@sog__cod.desc', readOnly=True)
+    #
+    #     fb.field('desc', colspan=2, width='100%')
+    #
+    #     fb.field('rcgrpcls__cod', hasDownArrow=True)
+    #     fb.div()
+    #
+    #     fb.field('note', colspan=2, width='100%',
+    #              height='5em',
+    #              tag='simpleTextArea', editor=True
+    #              )
+
     def th_form(self, form):
-        pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
-        #fb.field('codkey')
+        bc = form.center.BorderContainer()
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
+
+
+    def FHeader(self, pane):
+        fb = pane.formbuilder(cols=1, border_spacing='4px')
 
         fb.field('cod')
         fb.field('sog__cod', hasDownArrow=True)
-        #fb.field('@sog__cod.desc', readOnly=True)
 
         fb.field('desc', colspan=2, width='100%')
-
-        fb.field('rcgrpcls__cod', hasDownArrow=True)
-        fb.div()
 
         fb.field('note', colspan=2, width='100%',
                  height='5em',
@@ -85,10 +104,21 @@ class Form(BaseComponent):
                  )
 
 
+    def FBody(self, pane):
+        tc = pane.tabContainer()
+
+        # tab gruppi registrazione
+        cfg = tc.contentPane(title = "!![it]Configurazioni")
+        cfg.dialogTableHandler(relation = '@configurazioni_rcgrpcfg',
+                                title = '!![it]Configurazioni contabili',
+                                pbl_classes = True,
+                                viewResource = 'ViewFromGRP',
+                                #  formResource = 'FormFromCategory',
+                                grid_selfDragRows = True,
+                                margin = '2px',
+                                searchOn = False,
+                                )
+
+
     def th_options(self):
-        #return dict(dialog_height='400px', dialog_width='600px')
-        return dict(dialog_parentRatio=0.9)
-
-
-class FormFromSOG(Form):
-    pass
+        return dict(dialog_parentRatio=0.8)

@@ -73,18 +73,3 @@ class Table(object):
                               onDelete = 'cascade',
                               )
         
-        #
-        # Questo campo per avere il riferimento del soggetto in fase di
-        # inserimento, cosi' da poterlo poi filtrare in selzione gruppi
-        # per la configurazione.
-        #
-        sog__cod = tbl.column('__ins_sog__cod', dtype = 'A', size = ':32',
-                              name_long = '!![it]Sog. rif. inserimento',
-                              defaultFrom='@rcgrpcfg__id.sog__cod',
-                              unmodifiable=True,
-                              validate_notnull = True
-                              )
-        sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
-                          relation_name = 'rcgrpnncfg__ins_sog__cod',
-                          onDelete = 'raise')
-        

@@ -136,6 +136,17 @@ class FormCFG(Form):
                                             searchOn = True
                                             )
 
+        # tab configurazioni contabili
+        tab_gruppiregist = tc.contentPane(title = "!![it]Configurazioni contabili")
+        tab_gruppiregist.dialogTableHandler(relation = '@rcgrpcfg_sog',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
         # tab divisioni
         tab_iva_registri = tc.contentPane(title = "!![it]Divisioni")
         tab_iva_registri.dialogTableHandler(relation = '@divisioni',
@@ -203,17 +214,6 @@ class FormOperaPNC(Form):
         # tab gruppi registrazione
         tab_gruppiregist = tc.contentPane(title = "!![it]Gruppi di registrazione")
         tab_gruppiregist.dialogTableHandler(relation = '@gruppi_registrazione',
-                                            pbl_classes = True,
-                                            viewResource = 'ViewFromSOG',
-                                            #formResource = 'FormFromSOG',
-                                            grid_selfDragRows = True,
-                                            margin = '2px',
-                                            searchOn = True
-                                            )
-
-        # tab configurazioni contabili
-        tab_gruppiregist = tc.contentPane(title = "!![it]Configurazioni contabili")
-        tab_gruppiregist.dialogTableHandler(relation = '@rcgrpcfg_sog',
                                             pbl_classes = True,
                                             viewResource = 'ViewFromSOG',
                                             #formResource = 'FormFromSOG',

@@ -1,3 +1,13 @@
+20250112
+Spostata configurazione contabile in form configurazione soggetto
+(da form operativo soggetto).
+Aggiunta gestione configurazioni contabili rcgrpcfg dalla
+gestione gruppi di registrazione rcgrp
+Cambiata struttura tabella tcgrpnncfg, tolto campo __ins_sog__cod
+in quanto la selezione filtrata dei gruppi reg. e configurazioni
+ora dipende dall'interfaccia utente (punto di inserimento). 
+Piu' corretto ed in grado di gestire entrambi i lati della relazione.
+
 20250111
 Aggiunta tabella rcgrpnncfg: tabella di appoggio per rielaborazione
 n:n tra rcgrp e rcgrpcfg.

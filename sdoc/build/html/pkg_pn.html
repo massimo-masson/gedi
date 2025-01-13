@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="it" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Package pn: «prima nota» &#8212; Documentazione GeDi 0.1 </title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=41f723b1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=45930005"></script>
+    <link rel="index" title="Indice" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Manuale per l’utente" href="manuale_utente.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="package-pn-prima-nota">
+<h1>Package pn: «prima nota»<a class="headerlink" href="#package-pn-prima-nota" title="Link to this heading">¶</a></h1>
+<section id="funzioni-e-struttura">
+<h2>Funzioni e struttura<a class="headerlink" href="#funzioni-e-struttura" title="Link to this heading">¶</a></h2>
+<p>Il package pn e” il package principale.</p>
+<p>Ha il compito di gestire le rilevazioni contabili e le configurazioni
+di valori contabili degli scenari di simulazione.</p>
+</section>
+<section id="il-concetto-di-simulazione-contabile">
+<h2>Il concetto di simulazione contabile<a class="headerlink" href="#il-concetto-di-simulazione-contabile" title="Link to this heading">¶</a></h2>
+<p>La simulazione contabile e” basata sul fatto che le righe di rilevazione
+contabile sono caratterizzate da un codice di gruppo specifico, definibile
+dall’utente.</p>
+<p>Significa che l’utente puo” arbitrariamente creare un «gruppo di registrazioni»
+che saranno successivamente visibili insieme ad altri gruppi, o singolarmente.</p>
+<p>La possibilita” di aggregare piu” gruppi di registrazione viene definita
+«configurazione contabile».
+Una configurazione contabile quindi ha lo scopo di visualizzare piu” gruppi di
+registrazione.</p>
+<p>In questo modo si possono gestire piu” righe contabili, caratterizzate da
+diversi gruppi di registrazione, ciascuno dei quali puo” rappresentare un diverso
+scenario.</p>
+<p>Esempio:
+si sta predisponendo un budget, le cui rilevazioni potrebbero essere nel gruppo «bdg»
+(esempio totalmente arbitrario).</p>
+<p>Si vuole poi fare una ipotesi tipo what-if sull’impatto di un certo investimento, che
+viene definito in termini di rilevazione contabile con delle registrazioni appartenenti
+al gruppo «bdg-inv01».</p>
+<p>Una configurazione di valore con le sole rilevazioni «bdg» consentira” di ottenere i dati
+del budget.
+Una configurazione di valore con le rilevazioni «bdg» e le rilevazioni «bdg-inv01» invece
+consentira” di ottenere i dati di budget con l’impatto contabile dello scenario con
+l’investimento 01.
+Ovviamente, qualora ci fosse un investimento ulteriore, ad esempio «bdg-inv02», si potrebbero
+predisporre diverse configurazioni contabili per tenere in considerazione uno solo o
+entrambi gli investimenti.</p>
+<p>L’analisi comparativa di diversi scenari consentira” di sviluppare analisi WHAT-IF.</p>
+<p>Suggerimento: le rilevazioni per i diversi scenari potrebbero essere singole (o poche)
+rilevazioni «complesse», sviluppate su piu” righe.</p>
+<p>Suggerimento: la classica contabilita” generale, consuntiva, metodo reddituale, non e” altro
+che un caso particolare di uno scenario con un gruppo di rilevazioni singolo riferito al
+consuntivo.</p>
+</section>
+<section id="funzioni-contabili">
+<h2>Funzioni contabili<a class="headerlink" href="#funzioni-contabili" title="Link to this heading">¶</a></h2>
+<p>Il sistema gestisce rilevazioni contabili con il metodo della partita doppia, sistema del reddito.
+In verita” non ci sono specifici vingoli sul sistema del reddito.</p>
+<p>La registrazione ha delle informazioni di «testata», cui si possono correlare:</p>
+<ul class="simple">
+<li><p>righe di contabilita” (dare avere), basate sul piano dei conti;</p></li>
+<li><p>informazioni su divisione e commessa. Queste possono poi essere specificate nei</p></li>
+</ul>
+<p>dettagli di riga in modo piu” puntuale
+- informazioni IVA (registri e codici)
+- informazioni di contabilita” analitica:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>per natura, con un dettaglio specifico di «voce». Questa correlazione e” di tipo 1:1 tra conto e voce</p></li>
+<li><p>per destinazione, con un dettaglio specifico di «centro» e di «commessa». Questa relazione e”</p></li>
+</ul>
+<p>di tipo 1:n tra conto e centro/commessa</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>informazioni sulle scadenze finanziarie</p></li>
+<li><p>indicazione del gruppo di registrazione (simulatore)</p></li>
+</ul>
+</section>
+<section id="struttura-delle-tabelle">
+<h2>Struttura delle tabelle<a class="headerlink" href="#struttura-delle-tabelle" title="Link to this heading">¶</a></h2>
+<p>Le tabelle sono organizzate per sigle, quelle che iniziano con la stessa radice si riferiscono
+ad entita” correlate.</p>
+<p>Ci sono tabelle di «impostazione e configurazione», ci sono tabelle «operative».</p>
+<p><strong>rc</strong>
+La radice delle tabelle operative per le rilevazioni contabili e” <em>rc</em>,
+che sta per <em>rilevazione contabile</em>.
+Questa tabella e” la testata di una serie di relazioni in cascata, tutte con prefisso rc</p>
+<p><strong>rcrcg</strong>
+La prima relazione, di tipo 1:n, con la rilevazione contabile consiste nelle righe che
+compongono la registrazione. rc <strong>rcg</strong> sta per <strong>r</strong> iga <strong>c</strong> ontabilita” <strong>g</strong> enerale.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">GeDi</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Vai" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigazione</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="manuale_utente.html">Manuale per l’utente</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package pn: «prima nota»</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#funzioni-e-struttura">Funzioni e struttura</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#il-concetto-di-simulazione-contabile">Il concetto di simulazione contabile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funzioni-contabili">Funzioni contabili</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#struttura-delle-tabelle">Struttura delle tabelle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="manuale_utente.html" title="capitolo precedente">Manuale per l’utente</a></li>
+      <li>Next: <a href="api.html" title="capitolo successivo">API</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Massimo Masson.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/pkg_pn.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

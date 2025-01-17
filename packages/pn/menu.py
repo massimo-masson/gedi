@@ -37,6 +37,13 @@
 def config(root,application=None):
     gedi = root.branch('GeDi')
 
+    # menu ANAGRAFICHE
+    contab = gedi.branch('!![it]ANAGRAFICHE')
+
+    contab.thpage('!![it]Clienti', 
+                  table = 'anag.cli',
+                  )
+
     # menu CONTABILE
     contab = gedi.branch('!![it]CONTABILE')
 

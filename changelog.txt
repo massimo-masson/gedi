@@ -1,3 +1,8 @@
+20250117
+creato package anag per gestione anagrafiche
+creata tabella anag.cli, solo struttura di base per gestire
+le relazioni.
+
 20250112
 Spostata configurazione contabile in form configurazione soggetto
 (da form operativo soggetto).

@@ -9,9 +9,9 @@
 # aggiunta 20250113 per risolvere il path di gedi
 import os
 import sys
-from pathlib import Path
+#from pathlib import Path
 #sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('..'))
 # end 20250113
 
 project = 'GeDi'
@@ -23,6 +23,7 @@ release = '0.1'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    'sphinx.ext.viewcode',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
 ]

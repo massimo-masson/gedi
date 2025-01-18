@@ -34,41 +34,45 @@
 # for a dedicated propietary license.
 # 
 
+class Table(object):
+    def config_db(self, pkg):
+        '''for: anagrafica fornitori
+        
+        '''
 
-from gnr.web.gnrbaseclasses import BaseComponent
-from gnr.core.gnrdecorator import public_method
+        tbl = pkg.table('for', pkey='id', 
+                        name_long='!![it]Fornitore',
+                        name_plural='!![it]Fornitori',
+                        caption_field='caption')
 
-class View(BaseComponent):
+        self.sysFields(tbl)
 
-    def th_struct(self,struct):
-        r = struct.view().rows()
-        r.fieldcell('denominazione')
-        r.fieldcell('cod')
-        r.fieldcell('codicefiscale')
-        r.fieldcell('partitaiva')
-        r.fieldcell('codesterno')
-        r.fieldcell('note')
+        tbl.column('cod', dtype='A', size=':32',
+                   name_long='!![it]Codice',
+                   )
 
-    def th_order(self):
-        return 'cod'
+        tbl.column('codesterno', dtype='A', size=':32', 
+                   name_long='!![it]Codice esterno',
+                   )
 
-    def th_query(self):
-        return dict(column='cod', op='contains', val='', runOnStart=True)
+        tbl.column('denominazione', dtype='A', size=':256', 
+                   name_long='!![it]denominazione', 
+                   )
 
+        tbl.column('codicefiscale', dtype='A', size=':16', 
+                   name_long='!![it]Codice Fiscale',
+                   name_short='!![it]CF',
+                   #validate_notnull=True,
+                   )
 
+        tbl.column('partitaiva', dtype='A', size=':13', 
+                   name_long='!![it]Partita IVA',
+                   name_short='!![it]PIVA',
+                   #validate_notnull=True,
+                   )
 
-class Form(BaseComponent):
+        tbl.column('note', dtype='A', size=':1024', 
+                   name_long='!![it]Note')
 
-    def th_form(self, form):
-        pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
-        fb.field('cod')
-        fb.field('codesterno')
-        fb.field('denominazione')
-        fb.field('codicefiscale')
-        fb.field('partitaiva')
-        fb.field('note')
-
-
-    def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        tbl.formulaColumn('caption', "$cod||' - '||$denominazione",
+                          name_long='!![it]Titolo')

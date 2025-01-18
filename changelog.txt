@@ -1,7 +1,10 @@
 20250117
 creato package anag per gestione anagrafiche
-creata tabella anag.cli, solo struttura di base per gestire
-le relazioni.
+creata tabella anag.cli, solo struttura di base per gestire le relazioni
+Creato tipo sottoconto in rcrcg.
+creata tabella anag.for, solo struttura di base per gestire le relazioni
+creati campi relazione sottoconto su clienti e fornitori
+creato modulo sottoconto per restituire i tipi sotticonto
 
 20250112
 Spostata configurazione contabile in form configurazione soggetto

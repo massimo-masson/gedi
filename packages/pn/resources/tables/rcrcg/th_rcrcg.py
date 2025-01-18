@@ -49,6 +49,8 @@ class View(BaseComponent):
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
         r.fieldcell('pdcconto__id')
+        r.fieldcell('sottoconto_tipo')
+        r.fieldcell('anagcli__id', hasDownArrow=True)
         r.fieldcell('dare_udc')
         r.fieldcell('avere_udc')
         r.fieldcell('pdvcod__cod')
@@ -77,6 +79,8 @@ class ViewFromRC(View):
         r.fieldcell('desc')
         r.fieldcell('pdccod__cod')
         r.fieldcell('pdcconto__id')
+        r.fieldcell('sottoconto_tipo')
+        r.fieldcell('anagcli__id', hasDownArrow=True)
         r.fieldcell('dare_udc', totalize=True)
         r.fieldcell('avere_udc', totalize=True)
         r.fieldcell('saldo_udc', totalize=True)
@@ -114,6 +118,21 @@ class Form(BaseComponent):
                  colspan=2, width='100%',
                  )
         fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
+
+        fb.field('sottoconto_tipo')
+        # campi da relazione polimorfica, uno solo e' vero e visualizzato
+        fbanag = fb.formbuilder(cols=1, border_spacing='4px')
+        fbanag.field('anagcli__id', 
+                 hasDownArrow=True,
+                 disabled='^.sottoconto_tipo?=#v!="cli"',
+                 #hidden='^.sottoconto_tipo?=#v!="cli"',
+                 )
+        fbanag.field('anagfor__id', 
+                 hasDownArrow=True,
+                 disabled='^.sottoconto_tipo?=#v!="for"',
+                 )
+
+        fb.div('')
 
         fb.field('dare_udc')
         fb.field('avere_udc')

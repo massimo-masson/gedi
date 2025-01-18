@@ -34,6 +34,10 @@
 # for a dedicated propietary license.
 # 
 
+
+from sottoconto import tipi_sottoconto
+
+
 class Table(object):
     def config_db(self, pkg):
         '''rcrcg: rilevazione contabile - riga contabilita' generale
@@ -85,6 +89,30 @@ class Table(object):
                               relation_name = 'conto_registrazione', 
                               onDelete = 'raise')
 
+        # sottoconto, tipo e specifiche relazioni
+        tbl.column('sottoconto_tipo', dtype='A', size=':32',
+                   values = tipi_sottoconto(),
+                   name_long = '!![it]Tipo sottoconto',
+                   name_short = '!![it]Tipo s.c.',
+                   )
+
+        # polimorfico: relazione con anag.cli.id, caso sottoconto_tipo=cli
+        sottoconto_cli = tbl.column('anagcli__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]Cliente',
+                                    )
+        sottoconto_cli.relation('anag.cli.id', mode = 'foreignkey',
+                                relation_name = 'sottoconti_cli_rcrcg', 
+                                onDelete = 'raise')
+
+        # polimorfico: relazione con anag.for.id, caso sottoconto_tipo=for
+        sottoconto_for = tbl.column('anagfor__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]Fornitore',
+                                    )
+        sottoconto_for.relation('anag.for.id', mode = 'foreignkey',
+                                relation_name = 'sottoconti_for_rcrcg', 
+                                onDelete = 'raise')
+
+        # sezione importi
         tbl.column('dare_udc', dtype='N', size='12,2',
                    name_long='!![it]Dare', name_short='!![it]D',
                    #validate_notnull=True,

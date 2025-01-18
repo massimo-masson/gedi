@@ -111,7 +111,7 @@ class Form(BaseComponent):
         fb.field('divisione_rc', readOnly=True)
 
         fb.field('pdcconto__id', hasDownArrow=True,
-                 columns='$cod,$desc',
+                 columns = '$cod,$desc',
                  condition = '$pdccod__cod = :pdc',
                  #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
                  condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
@@ -124,12 +124,14 @@ class Form(BaseComponent):
         fbanag = fb.formbuilder(cols=1, border_spacing='4px')
         fbanag.field('anagcli__id', 
                  hasDownArrow=True,
-                 disabled='^.sottoconto_tipo?=#v!="cli"',
-                 #hidden='^.sottoconto_tipo?=#v!="cli"',
+                 disabled = '^.sottoconto_tipo?=#v!="cli"',
+                 #hidden = '^.sottoconto_tipo?=#v!="cli"', # NON VA!!
+                 condition = '$sog__cod = :SOG',
+                 condition_SOG = '=.@rc__id.sog__cod',
                  )
         fbanag.field('anagfor__id', 
                  hasDownArrow=True,
-                 disabled='^.sottoconto_tipo?=#v!="for"',
+                 disabled = '^.sottoconto_tipo?=#v!="for"',
                  )
 
         fb.div('')

@@ -56,19 +56,29 @@ class View(BaseComponent):
         return dict(column='cod', op='contains', val='', runOnStart=True)
 
 
+class ViewFromSOG(View):
+    pass
+
 
 class Form(BaseComponent):
 
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
+
+        #fb.field('sog__cod', hasDownArrow=True)
+
         fb.field('cod')
         fb.field('codesterno')
-        fb.field('denominazione')
+
+        fb.field('denominazione', colspan=2, width='100%')
+
         fb.field('codicefiscale')
         fb.field('partitaiva')
-        fb.field('note')
+        
+        fb.field('note', colspan=2, width='100%', height='5em')
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.8)

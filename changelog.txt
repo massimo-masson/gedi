@@ -1,3 +1,8 @@
+20250118
+Aggiunta relazione con SOG in anag.cli
+creato nuovo form anagrafiche per soggetto
+gestione pk progressivo auto su sog+cod per cli
+
 20250117
 creato package anag per gestione anagrafiche
 creata tabella anag.cli, solo struttura di base per gestire le relazioni

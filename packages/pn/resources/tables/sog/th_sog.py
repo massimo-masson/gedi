@@ -57,7 +57,17 @@ class View(BaseComponent):
 
 
 class ViewOperaPNC(View):
+    '''Form per gestire le Operazioni di Prima Nota Contabile
+    
+    '''
     pass 
+
+
+class ViewAnagSOG(View):
+    '''Form per la visualizzazione delle anagrafiche soggetto
+    
+    '''
+    pass
 
 
 class Form(BaseComponent):
@@ -82,6 +92,9 @@ class Form(BaseComponent):
 
 
 class FormCFG(Form):
+    '''Form per gestire gli elementi di configurazione dei soggetti
+    
+    '''
 
     def th_form(self, form):
 
@@ -185,6 +198,9 @@ class FormCFG(Form):
 
 
 class FormOperaPNC(Form):
+    '''Form per gestire le Operazioni di Prima Nota Contabile
+    
+    '''
 
     def th_form(self, form):
         bc = form.center.BorderContainer()
@@ -241,6 +257,77 @@ class FormOperaPNC(Form):
                                   minwidth='90%', minheight='90%',
                                   )
         #fb = tab_note.formbuilder(cols=1, border_spacing='4px')    
+        tab_note.field('note', width='100%', height='10em', 
+                       tag='simpleTextArea', editor=True
+                       )
+
+class FormAnagSOG(Form):
+    '''Form per la visualizzazione delle anagrafiche soggetto
+    
+    '''
+
+    def th_form(self, form):
+        bc = form.center.BorderContainer()
+        self.FHeader(bc.contentPane(region = 'top', datapath = '.record'))
+        self.FBody(bc.contentPane(region = 'center'))
+
+    def FHeader(self, pane):
+        fb = pane.formbuilder(cols=3, border_spacing='4px')
+        
+        fb.field('cod')
+        fb.field('desc', colspan=2, width='100%')
+
+    def FBody(self, pane):
+        tc = pane.tabContainer()
+
+        # tab clienti
+        tab_clienti = tc.contentPane(title = "!![it]Clienti")
+        tab_clienti.dialogTableHandler(relation = '@clienti_cli',
+                                       pbl_classes = True,
+                                       viewResource = 'ViewFromSOG',
+                                       #formResource = 'FormFromSOG',
+                                       grid_selfDragRows = True,
+                                       margin = '2px',
+                                       searchOn = True
+                                       )
+
+        # tab fornitori
+        tab_fornitori = tc.contentPane(title = "!![it]Fornitori")
+        tab_fornitori.h1('Fornitori: TO DO')
+
+        # tab banche
+        tab_banche = tc.contentPane(title = "!![it]Banche")
+        tab_banche.h1('banche: TO DO')
+
+        # tab gruppi registrazione
+        tab_gruppiregist = tc.contentPane(title = "!![it]Gruppi di registrazione")
+        tab_gruppiregist.dialogTableHandler(relation = '@gruppi_registrazione',
+                                            pbl_classes = True,
+                                            viewResource = 'ViewFromSOG',
+                                            #formResource = 'FormFromSOG',
+                                            grid_selfDragRows = True,
+                                            margin = '2px',
+                                            searchOn = True
+                                            )
+
+        # tab commesse
+        tab_commesse = tc.contentPane(title = "!![it]Commesse")
+        tab_commesse.dialogTableHandler(relation = '@commesse',
+                                        pbl_classes = True,
+                                        viewResource = 'ViewFromSOG',
+                                        #formResource = 'FormFromSOG',
+                                        grid_selfDragRows = True,
+                                        margin = '2px',
+                                        searchOn = True
+                                        )
+
+        # tab NOTE
+        tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
+                                  width='100%', height='100%',
+                                  #td_width='100%', td_height='100%'
+                                  #colswidth='100%',
+                                  minwidth='90%', minheight='90%',
+                                  )
         tab_note.field('note', width='100%', height='10em', 
                        tag='simpleTextArea', editor=True
                        )

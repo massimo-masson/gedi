@@ -37,17 +37,16 @@
 def config(root,application=None):
     gedi = root.branch('GeDi')
 
-    # menu ANAGRAFICHE
-    contab = gedi.branch('!![it]ANAGRAFICHE')
-
-    contab.thpage('!![it]Clienti', 
-                  table = 'anag.cli',
-                  )
-
     # menu CONTABILE
     contab = gedi.branch('!![it]CONTABILE')
 
-    contab.thpage('!![it]Operazioni per soggetto', 
+    contab.thpage('!![it]Anagrafiche', 
+                  table = 'pn.sog',
+                  viewResource = 'ViewAnagSOG',
+                  formResource = 'FormAnagSOG'
+                  )
+
+    contab.thpage('!![it]Operazioni', 
                   table = 'pn.sog',
                   viewResource = 'ViewOperaPNC',
                   formResource = 'FormOperaPNC'

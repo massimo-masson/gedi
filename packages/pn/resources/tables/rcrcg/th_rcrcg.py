@@ -123,16 +123,18 @@ class Form(BaseComponent):
         # campi da relazione polimorfica, uno solo e' vero e visualizzato
         fbanag = fb.formbuilder(cols=1, border_spacing='4px')
         fbanag.field('anagcli__id', 
-                 hasDownArrow=True,
-                 disabled = '^.sottoconto_tipo?=#v!="cli"',
-                 #hidden = '^.sottoconto_tipo?=#v!="cli"', # NON VA!!
-                 condition = '$sog__cod = :SOG',
-                 condition_SOG = '=.@rc__id.sog__cod',
-                 )
+                     hasDownArrow=True,
+                     disabled = '^.sottoconto_tipo?=#v!="cli"',
+                     #hidden = '^.sottoconto_tipo?=#v!="cli"', # NON VA!!
+                     condition = '$sog__cod = :SOG',
+                     condition_SOG = '=.@rc__id.sog__cod',
+                     )
         fbanag.field('anagfor__id', 
-                 hasDownArrow=True,
-                 disabled = '^.sottoconto_tipo?=#v!="for"',
-                 )
+                     hasDownArrow=True,
+                     disabled = '^.sottoconto_tipo?=#v!="for"',
+                     condition = '$sog__cod = :SOG',
+                     condition_SOG = '=.@rc__id.sog__cod',
+                     )
 
         fb.div('')
 

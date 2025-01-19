@@ -34,6 +34,8 @@
 # for a dedicated propietary license.
 # 
 
+import math
+
 class Table(object):
     def config_db(self, pkg):
         '''for: anagrafica fornitori
@@ -41,14 +43,43 @@ class Table(object):
         '''
 
         tbl = pkg.table('for', pkey='id', 
+                        pkey_columns='sog__cod,cod',
                         name_long='!![it]Fornitore',
                         name_plural='!![it]Fornitori',
                         caption_field='caption')
 
         self.sysFields(tbl)
 
+        #
+        # TO DO: PK COMPOSITA
+        #
+        # La PK corretta di questa tabella e':
+        # sog__cod
+        # cod
+        #
+
+        # foreign key to sog.cod - soggetto cui questo gruppo di riferimento appartiene
+        sog__cod = tbl.column('sog__cod', dtype = 'A', size = ':32',
+                              name_long = '!![it]Soggetto di riferimento',
+                              unmodifiable=True,
+                              validate_notnull = True,
+                              )
+        sog__cod.relation('pn.sog.cod', mode = 'foreignkey',
+                          relation_name = 'fornitori_for', 
+                          onDelete = 'raise')
+        
+        #
+        # se utente inserisce un codice, usa quello
+        # in combinazione con sog__cod.
+        # Altrimenti calcola un progressivo.
+        # unmodifiable=True: e' PK, non si puo' cambiare poi
+        # validate_notnull=False: a mano puo' restare vuoto
+        #
         tbl.column('cod', dtype='A', size=':32',
                    name_long='!![it]Codice',
+                   unmodifiable=True, #unique=True, 
+                   #validate_notnull=True,
+                   #indexed=True,
                    )
 
         tbl.column('codesterno', dtype='A', size=':32', 
@@ -74,5 +105,45 @@ class Table(object):
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
 
-        tbl.formulaColumn('caption', "$cod||' - '||$denominazione",
+        tbl.formulaColumn('caption', "'F-'||$cod||' - '||$denominazione",
                           name_long='!![it]Titolo')
+
+
+    def pkeyValue(self, record):
+        '''Restituisce la pk "composta": sog__cod + cod
+        
+        Il valore di sog__cod viene preso dalla relazione, non modificato.
+        Il valore di cod viene:
+            - se e' stato inserito dall'utente, MANTENUTO
+            - se vuoto, viene calcolato il progressivo successivo
+              guardando i campi di tipo numerico.
+
+        ### TODO ###
+        da rivedere al passaggio a chiavi composte
+        '''
+
+        # se non viene indicato un codice esplicito, progressivo + 1
+        if not record['cod']:
+            q = self.db.table('anag.for').query(
+                # conversone in numero
+                columns = 'MAX(CAST($cod AS REAL)) AS cod',
+                # delle righe che contengono solo numeri (regex)
+                where = "($sog__cod=:SOG) AND ($cod NOT LIKE '%[^0-9.]%')",
+                SOG = record['sog__cod']
+                )
+            f = q.fetch()
+
+            try:
+                # arrotonda per eccesso
+                progr = math.ceil(float(f[0]['cod']))
+            except (ValueError, TypeError):
+                # o parti da 0
+                progr = 0
+            # componente cod della pk e' il numero successivo
+            record['cod'] = str(progr + 1)
+
+            #print(f"record cod aggiornato a {record['cod']}")
+        #print(record)
+
+        # restituzione PK formata da sog__cod + cod
+        return(record['sog__cod'] + record['cod'])

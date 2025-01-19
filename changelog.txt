@@ -1,4 +1,10 @@
 20250118
+Allineamento tabella e th anag.for come anag.cli
+correzioni minori gestione cli for (codice libero auto
+compilato, ma libero in inserimento).
+Revisione tab soggetti tra configurazione, anagrafiche, operazioni.
+
+20250118
 Aggiunta relazione con SOG in anag.cli
 creato nuovo form anagrafiche per soggetto
 gestione pk progressivo auto su sog+cod per cli

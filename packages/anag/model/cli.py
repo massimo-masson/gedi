@@ -66,11 +66,18 @@ class Table(object):
                           relation_name = 'clienti_cli', 
                           onDelete = 'raise')
         
+        #
+        # se utente inserisce un codice, usa quello
+        # in combinazione con sog__cod.
+        # Altrimenti calcola un progressivo.
+        # unmodifiable=True: e' PK, non si puo' cambiare poi
+        # validate_notnull=False: a mano puo' restare vuoto
+        #
         tbl.column('cod', dtype='A', size=':32', 
                    name_long='!![it]Codice',
-                #    unmodifiable=True, #unique=True, 
-                #    validate_notnull=True,
-                #    indexed=True,
+                   unmodifiable=True, #unique=True, 
+                   #validate_notnull=True,
+                   #indexed=True,
                    )
 
         tbl.column('codesterno', dtype='A', size=':32', 
@@ -96,9 +103,8 @@ class Table(object):
         tbl.column('note', dtype='A', size=':1024', 
                    name_long='!![it]Note')
 
-        tbl.formulaColumn('caption', "$cod||' - '||$denominazione",
+        tbl.formulaColumn('caption', "'C-'||$cod||' - '||$denominazione",
                           name_long='!![it]Titolo')
-
 
 
     def pkeyValue(self, record):

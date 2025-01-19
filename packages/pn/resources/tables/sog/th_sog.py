@@ -171,16 +171,18 @@ class FormCFG(Form):
                                             searchOn = True
                                             )
 
+        # 20250118: CANCELLA - le commesse sono nelle anagrafiche
         # tab commesse
-        tab_commesse = tc.contentPane(title = "!![it]Commesse")
-        tab_commesse.dialogTableHandler(relation = '@commesse',
-                                        pbl_classes = True,
-                                        viewResource = 'ViewFromSOG',
-                                        #formResource = 'FormFromSOG',
-                                        grid_selfDragRows = True,
-                                        margin = '2px',
-                                        searchOn = True
-                                        )
+        # tab_commesse = tc.contentPane(title = "!![it]Commesse")
+        # tab_commesse.dialogTableHandler(relation = '@commesse',
+        #                                 pbl_classes = True,
+        #                                 viewResource = 'ViewFromSOG',
+        #                                 #formResource = 'FormFromSOG',
+        #                                 grid_selfDragRows = True,
+        #                                 margin = '2px',
+        #                                 searchOn = True
+        #                                 )
+        # 20250118: FINE CANCELLA
 
         # tab NOTE
         tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
@@ -238,16 +240,18 @@ class FormOperaPNC(Form):
                                             searchOn = True
                                             )
 
+        # 20250118: CANCELLA. Le commesse sono tra le anagrafiche
         # tab commesse
-        tab_commesse = tc.contentPane(title = "!![it]Commesse")
-        tab_commesse.dialogTableHandler(relation = '@commesse',
-                                        pbl_classes = True,
-                                        viewResource = 'ViewFromSOG',
-                                        #formResource = 'FormFromSOG',
-                                        grid_selfDragRows = True,
-                                        margin = '2px',
-                                        searchOn = True
-                                        )
+        # tab_commesse = tc.contentPane(title = "!![it]Commesse")
+        # tab_commesse.dialogTableHandler(relation = '@commesse',
+        #                                 pbl_classes = True,
+        #                                 viewResource = 'ViewFromSOG',
+        #                                 #formResource = 'FormFromSOG',
+        #                                 grid_selfDragRows = True,
+        #                                 margin = '2px',
+        #                                 searchOn = True
+        #                                 )
+        # 20250118: FINE CANCELLA
 
         # tab NOTE
         tab_note = tc.contentPane(title = "!![it]NOTE", datapath = '.record',
@@ -293,22 +297,18 @@ class FormAnagSOG(Form):
 
         # tab fornitori
         tab_fornitori = tc.contentPane(title = "!![it]Fornitori")
-        tab_fornitori.h1('Fornitori: TO DO')
+        tab_fornitori.dialogTableHandler(relation = '@fornitori_for',
+                                       pbl_classes = True,
+                                       viewResource = 'ViewFromSOG',
+                                       #formResource = 'FormFromSOG',
+                                       grid_selfDragRows = True,
+                                       margin = '2px',
+                                       searchOn = True
+                                       )
 
         # tab banche
         tab_banche = tc.contentPane(title = "!![it]Banche")
         tab_banche.h1('banche: TO DO')
-
-        # tab gruppi registrazione
-        tab_gruppiregist = tc.contentPane(title = "!![it]Gruppi di registrazione")
-        tab_gruppiregist.dialogTableHandler(relation = '@gruppi_registrazione',
-                                            pbl_classes = True,
-                                            viewResource = 'ViewFromSOG',
-                                            #formResource = 'FormFromSOG',
-                                            grid_selfDragRows = True,
-                                            margin = '2px',
-                                            searchOn = True
-                                            )
 
         # tab commesse
         tab_commesse = tc.contentPane(title = "!![it]Commesse")

@@ -32,19 +32,50 @@
 # If you do not agree with any of the statements in option 1, then
 # a proprietary license applies. In this case, contact the author
 # for a dedicated propietary license.
+# 
 
-def tipi_sottoconto():
-    '''Restituisce i possibili tipi di sottoconto
-    
-    Utilizza il formato values da specificare in tbl.column()
 
-    Quindi: 'cod1:etichetta1,cod2:etichetta2'
-    '''
+from gnr.web.gnrbaseclasses import BaseComponent
+from gnr.core.gnrdecorator import public_method
 
-    v = ''
-    v += 'cli:Clienti,'
-    v += 'for:Fornitori,'
-    v += 'banche:Banche,'
-    v += 'alt:Altro'
+class View(BaseComponent):
 
-    return(v)
+    def th_struct(self,struct):
+        r = struct.view().rows()
+        r.fieldcell('cod')
+        r.fieldcell('desc')
+        r.fieldcell('iban')
+
+    def th_order(self):
+        return 'cod'
+
+    def th_query(self):
+        return dict(column='cod', op='contains', val='', runOnStart=True)
+
+
+class ViewFromSOG(View):
+    pass
+
+
+class Form(BaseComponent):
+
+    def th_form(self, form):
+        pane = form.record
+        fb = pane.formbuilder(cols=2, border_spacing='4px')
+
+        #fb.field('sog__cod', hasDownArrow=True)
+
+        fb.field('cod')
+        fb.field('codesterno')
+
+        fb.field('desc', colspan=2, width='100%')
+
+        fb.field('iban')
+        fb.div('')
+        
+        fb.field('note', colspan=2, width='100%', height='5em')
+
+
+    def th_options(self):
+        #return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_parentRatio=0.8)

@@ -308,7 +308,14 @@ class FormAnagSOG(Form):
 
         # tab banche
         tab_banche = tc.contentPane(title = "!![it]Banche")
-        tab_banche.h1('banche: TO DO')
+        tab_banche.dialogTableHandler(relation = '@banche_banche',
+                                      pbl_classes = True,
+                                      viewResource = 'ViewFromSOG',
+                                      #formResource = 'FormFromSOG',
+                                      grid_selfDragRows = True,
+                                      margin = '2px',
+                                      searchOn = True
+                                      )
 
         # tab commesse
         tab_commesse = tc.contentPane(title = "!![it]Commesse")

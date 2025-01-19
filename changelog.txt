@@ -1,4 +1,8 @@
 20250118
+Creata struttura tabella anag.banche come anag.cli
+aggiunta relazione in rcrcg e gestione sottoconto in th_rcrcg
+
+20250118
 Allineamento tabella e th anag.for come anag.cli
 correzioni minori gestione cli for (codice libero auto
 compilato, ma libero in inserimento).

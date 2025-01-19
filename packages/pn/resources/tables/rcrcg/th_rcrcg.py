@@ -117,11 +117,19 @@ class Form(BaseComponent):
                  condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
                  colspan=2, width='100%',
                  )
-        fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
-
+        #fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('sottoconto_tipo')
+
+        fb.div('')
+        fb.h3('Gestione sottoconto')
         # campi da relazione polimorfica, uno solo e' vero e visualizzato
-        fbanag = fb.formbuilder(cols=1, border_spacing='4px')
+        fbanag = fb.formbuilder(cols=1, border_spacing='4px',
+                                border='1px dashed #C9C9C9',
+                                border_radius='3px',
+                                box_sizing='border-box',
+                                #colspan=2, width='100%'
+                                )
+        # nota: formbuilder annidato (per ora)
         fbanag.field('anagcli__id', 
                      hasDownArrow=True,
                      disabled = '^.sottoconto_tipo?=#v!="cli"',
@@ -135,8 +143,13 @@ class Form(BaseComponent):
                      condition = '$sog__cod = :SOG',
                      condition_SOG = '=.@rc__id.sog__cod',
                      )
-
-        fb.div('')
+        fbanag.field('anagbanche__id',
+                     hasDownArrow=True,
+                     disabled = '^.sottoconto_tipo?=#v!="banche"',
+                     condition = '$sog__cod = :SOG',
+                     condition_SOG = '=.@rc__id.sog__cod',
+                     )
+        # end of nested formbuilder 
 
         fb.field('dare_udc')
         fb.field('avere_udc')

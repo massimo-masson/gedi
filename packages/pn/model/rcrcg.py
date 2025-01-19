@@ -112,6 +112,14 @@ class Table(object):
                                 relation_name = 'sottoconti_for_rcrcg', 
                                 onDelete = 'raise')
 
+        # polimorfico: relazione con anag.banche.id, caso sottoconto_tipo=banche
+        sottoconto_for = tbl.column('anagbanche__id', dtype = 'A', size = '22',
+                                    name_long = '!![it]Banche',
+                                    )
+        sottoconto_for.relation('anag.banche.id', mode = 'foreignkey',
+                                relation_name = 'sottoconti_banche_rcrcg', 
+                                onDelete = 'raise')
+
         # sezione importi
         tbl.column('dare_udc', dtype='N', size='12,2',
                    name_long='!![it]Dare', name_short='!![it]D',

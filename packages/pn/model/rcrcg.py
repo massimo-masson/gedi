@@ -95,6 +95,9 @@ class Table(object):
                    name_long = '!![it]Tipo sottoconto',
                    name_short = '!![it]Tipo s.c.',
                    )
+        # tbl.aliasColumn('sottoconto_tipo', relation_path='@pdcconto__id.sottoconto_tipo',
+        #             name_long = '!![it]Tipo sottoconto',
+        #             )
 
         # polimorfico: relazione con anag.cli.id, caso sottoconto_tipo=cli
         sottoconto_cli = tbl.column('anagcli__id', dtype = 'A', size = '22',

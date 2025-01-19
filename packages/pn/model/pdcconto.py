@@ -34,6 +34,10 @@
 # for a dedicated propietary license.
 # 
 
+
+from sottoconto import tipi_sottoconto
+
+
 class Table(object):
     def config_db(self, pkg):
         '''pdcconto: conto di uno dei piani dei conti
@@ -89,6 +93,11 @@ class Table(object):
                                 relation_name = 'conti_pdc', 
                                 onDelete = 'raise')
 
+        tbl.column('sottoconto_tipo', dtype='A', size=':32',
+                   values = tipi_sottoconto(),
+                   name_long = '!![it]Gestione sottoconto',
+                   )
+        
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione conto', 
                    validate_notnull=True)

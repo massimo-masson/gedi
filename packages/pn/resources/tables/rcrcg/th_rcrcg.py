@@ -115,19 +115,25 @@ class Form(BaseComponent):
                  condition = '$pdccod__cod = :pdc',
                  #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
                  condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
+                 selected_sottoconto_tipo = '.sottoconto_tipo',
+                 #selected_BLANK = '.anagcli__id',
+                 #selected_BLANK = '.anagfor__id',
+                 #selected_BLANK = '.anagbanche__id',
                  colspan=2, width='100%',
                  )
         #fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
-        fb.field('sottoconto_tipo')
+        fb.field('sottoconto_tipo', hasDownArrow=False,
+                 enabled=False, 
+                 readOnly=True, 
+                 )
 
-        fb.div('')
-        fb.h3('Gestione sottoconto')
+#        fb.h3('Gestione sottoconto')
         # campi da relazione polimorfica, uno solo e' vero e visualizzato
         fbanag = fb.formbuilder(cols=1, border_spacing='4px',
                                 border='1px dashed #C9C9C9',
                                 border_radius='3px',
                                 box_sizing='border-box',
-                                #colspan=2, width='100%'
+                                colspan=2, width='100%',
                                 )
         # nota: formbuilder annidato (per ora)
         fbanag.field('anagcli__id', 
@@ -136,20 +142,24 @@ class Form(BaseComponent):
                      #hidden = '^.sottoconto_tipo?=#v!="cli"', # NON VA!!
                      condition = '$sog__cod = :SOG',
                      condition_SOG = '=.@rc__id.sog__cod',
+                     width='90%', border='0px',
                      )
         fbanag.field('anagfor__id', 
                      hasDownArrow=True,
                      disabled = '^.sottoconto_tipo?=#v!="for"',
                      condition = '$sog__cod = :SOG',
                      condition_SOG = '=.@rc__id.sog__cod',
+                     width='90%',
                      )
         fbanag.field('anagbanche__id',
                      hasDownArrow=True,
                      disabled = '^.sottoconto_tipo?=#v!="banche"',
                      condition = '$sog__cod = :SOG',
                      condition_SOG = '=.@rc__id.sog__cod',
+                     width='90%',
                      )
-        # end of nested formbuilder 
+        # end of nested formbuilder
+        fb.div('')
 
         fb.field('dare_udc')
         fb.field('avere_udc')

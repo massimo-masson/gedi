@@ -42,6 +42,7 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('cod')
+        r.fieldcell('sottoconto_tipo')
         r.fieldcell('desc')
         r.fieldcell('note')
         r.fieldcell('cod_epilogo')
@@ -61,6 +62,7 @@ class ViewFromPDCCOD(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('cod')
+        r.fieldcell('sottoconto_tipo')
         r.fieldcell('desc', edit=True)
         r.fieldcell('cod_epilogo')
         r.fieldcell('note', edit=True)
@@ -89,8 +91,12 @@ class Form(BaseComponent):
         # fb.field('pdccod__cod')
 
         fb = pane.formbuilder(cols=3, border_spacing='4px')
+        
         fb.field('cod')
-        fb.field('desc', colspan=2, width='100%')
+        fb.field('sottoconto_tipo')
+        fb.div('')
+
+        fb.field('desc', colspan=3, width='100%')
 
         fb.field('cod_epilogo')
         fb.field('pdcnaturaconti__id', hasDownArrow=True,

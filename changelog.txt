@@ -1,4 +1,9 @@
 20250118
+Aggiunto campo a pdcconto per gestione sottoconto_tipo collegata
+al conto contabile. Tolta da rcrcg la gestione manuale del tipo
+sottoconto e derivata dalla scelta del conto.
+
+20250118
 Creata struttura tabella anag.banche come anag.cli
 aggiunta relazione in rcrcg e gestione sottoconto in th_rcrcg
 

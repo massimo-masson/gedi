@@ -116,11 +116,23 @@ class Form(BaseComponent):
                  #condition_pdc = '=#FORM.record.pdccod__cod', # funziona
                  condition_pdc = '=.@rc__id.@sog__cod.pdccod__cod',
                  selected_sottoconto_tipo = '.sottoconto_tipo',
-                 #selected_BLANK = '.anagcli__id',
-                 #selected_BLANK = '.anagfor__id',
-                 #selected_BLANK = '.anagbanche__id',
                  colspan=2, width='100%',
                  )
+        #
+        # alla selezione del conto, viene riportato il sottoconto_tipo
+        # quando questo varia, cancello i valori precedenti nei riferimenti
+        # del tipo sottoconto, l'utente dova' scegliere quello giusto.
+        #
+        fb.dataController(
+            '''
+            SET .anagcli__id=''
+            SET .anagfor__id=''
+            SET .anagbanche__id=''
+            ''',
+            sottoconto_tipo = '^.sottoconto_tipo',
+            _onStart = False,
+            _userChanges = True,    # solo se intervento utente
+            )
         #fb.field('pdccod__cod', readOnly=True, hasDownArrow=False)
         fb.field('sottoconto_tipo', hasDownArrow=False,
                  enabled=False, 
@@ -135,11 +147,11 @@ class Form(BaseComponent):
                                 box_sizing='border-box',
                                 colspan=2, width='100%',
                                 )
+        fbanag.data('')
         # nota: formbuilder annidato (per ora)
         fbanag.field('anagcli__id', 
                      hasDownArrow=True,
                      disabled = '^.sottoconto_tipo?=#v!="cli"',
-                     #hidden = '^.sottoconto_tipo?=#v!="cli"', # NON VA!!
                      condition = '$sog__cod = :SOG',
                      condition_SOG = '=.@rc__id.sog__cod',
                      width='90%', border='0px',

@@ -1,4 +1,9 @@
-20250118
+20250120
+dataController in th_rcrcg che al cambio conto cancella i valori
+precedentemente impostati in sottoconto.
+aggiustamenti estetici in th_rcrcg
+
+20250119
 Aggiunto campo a pdcconto per gestione sottoconto_tipo collegata
 al conto contabile. Tolta da rcrcg la gestione manuale del tipo
 sottoconto e derivata dalla scelta del conto.

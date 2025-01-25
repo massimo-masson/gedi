@@ -35,10 +35,66 @@
             
   <section id="gedi-il-gestionale-direzionale">
 <h1>GeDi - il Gestionale Direzionale<a class="headerlink" href="#gedi-il-gestionale-direzionale" title="Link to this heading">¶</a></h1>
-<p>La funzione primaria di GeDi e” la «simulazione contabile».</p>
-<p>Il «cuore principale» e” un sistema di gestione contabile, con la possibilita”
-di gestire diverse «configurazioni contabili», raggruppabili per tipologia
-definibile dall’utente.</p>
+<p>Ha lo scopo di supportare ed agevolare la consulenza
+direzionale ed il controllo di gestione aziendale.</p>
+<p>La funzione primaria e” la gestione di un sistema contabile con la
+possibilita di gestire configurazioni contabili.</p>
+<p>Le configurazioni contabili sono degli insiemi di registrazioni
+contabili che, raggruppate in certi modi, offrono visioni dei risultati
+e degli aggregati contabili differenti, ed eventualmente comparabili.</p>
+<p>Ad esempio, un <em>gruppo di registrazioni</em> potrebbe rappresentare la
+contabilita” consuntiva.
+Un ulteriore <em>gruppo di registrazioni</em> potrebbe rappresentare i movimenti
+di forecast previsionale a fine anno.
+Una <strong>configurazione contabile</strong> potrebbe consistere nel consuntivo effettivo
+ad una certa data, sommato alle previsioni di forecast.</p>
+<p>Uno scenario diverso potrebbe essere quello in cui al <em>gruppo di regisrazioni</em>
+della contabilita” consuntiva viene sommato un primo «scenario», dato
+dalle risultanze dell’impatto di una <em>simulazione di investimento</em> (gruppo
+di registrazione), o eventualmente di piu” simulazioni di investimenti,
+magari appoggiati su piu” <em>gruppi di registrazione</em>.
+Le diverse <strong>configurazioni contabili</strong> consentono di ottenere diverse
+risultanze, successivamente utilizzabili ai fini di analisi.</p>
+<p>In modo «minimalista», uno scenario contabile potrebbe essere la
+tradizionale contabilita” generale consuntiva.</p>
+<p>Il programma puo” avere senso utilizzato in autonomia, per la gestione
+contabile, così come puo” avere senso in simbiosi con altro erp
+o software contabile, da cui viene alimentato periodicamente con appositi
+<strong>connettori</strong> (da sviluppare specificamente per l’esigenza) per i
+movimenti consuntivi effettivi, ed a cui vengono poi effettuate operazioni
+quali:</p>
+<ul class="simple">
+<li><p>fast closing di periodo</p></li>
+<li><p>previsioni di forecast</p></li>
+<li><p>eventuali scenari</p></li>
+<li><p>budget e rolling budget</p></li>
+<li><p>[…]</p></li>
+</ul>
+<section id="sottosistemi-contabili">
+<h2>Sottosistemi contabili<a class="headerlink" href="#sottosistemi-contabili" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Contabilita” generale in partita doppia</dt><dd><ul>
+<li><p>metodo reddituale</p></li>
+<li><p>gestione IVA</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Contabilita” analitica</dt><dd><ul>
+<li><p>per natura (conti / voci)</p></li>
+<li><p>per destinazione (centri di analisi / commesse)</p></li>
+<li><p>su tutte le tipologie di conto (economici / patrimoniali)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="indice">
+<h1>INDICE<a class="headerlink" href="#indice" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contenuti:</span></p>
 <ul>
@@ -53,7 +109,6 @@ definibile dall’utente.</p>
 <li class="toctree-l2"><a class="reference internal" href="pkg_pn.html#struttura-delle-tabelle">Struttura delle tabelle</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </div>
 </section>
@@ -88,7 +143,6 @@ definibile dall’utente.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="manuale_utente.html">Manuale per l’utente</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pkg_pn.html">Package pn: «prima nota»</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 
 <div class="relations">

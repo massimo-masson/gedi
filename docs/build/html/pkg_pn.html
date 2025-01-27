@@ -15,7 +15,7 @@
     <script src="_static/translations.js?v=45930005"></script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="API" href="api.html" />
+    <link rel="next" title="Package anag: «anagrafiche»" href="pkg_anag.html" />
     <link rel="prev" title="Manuale per l’utente" href="manuale_utente.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -82,21 +82,18 @@ consuntivo.</p>
 <p>Il sistema gestisce rilevazioni contabili con il metodo della partita doppia, sistema del reddito.
 In verita” non ci sono specifici vingoli sul sistema del reddito.</p>
 <p>La registrazione ha delle informazioni di «testata», cui si possono correlare:</p>
-<ul class="simple">
+<ul>
 <li><p>righe di contabilita” (dare avere), basate sul piano dei conti;</p></li>
-<li><p>informazioni su divisione e commessa. Queste possono poi essere specificate nei</p></li>
-</ul>
-<p>dettagli di riga in modo piu” puntuale
-- informazioni IVA (registri e codici)
-- informazioni di contabilita” analitica:</p>
+<li><p>informazioni su divisione e commessa. Queste possono poi essere specificate nei dettagli di riga in modo piu” puntuale</p></li>
+<li><p>informazioni IVA (registri e codici)</p></li>
+<li><p>informazioni di contabilita” analitica:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>per natura, con un dettaglio specifico di «voce». Questa correlazione e” di tipo 1:1 tra conto e voce</p></li>
-<li><p>per destinazione, con un dettaglio specifico di «centro» e di «commessa». Questa relazione e”</p></li>
+<li><p>per destinazione, con un dettaglio specifico di «centro» e di «commessa». Questa relazione e” di tipo 1:n tra conto e centro/commessa</p></li>
 </ul>
-<p>di tipo 1:n tra conto e centro/commessa</p>
 </div></blockquote>
-<ul class="simple">
+</li>
 <li><p>informazioni sulle scadenze finanziarie</p></li>
 <li><p>indicazione del gruppo di registrazione (simulatore)</p></li>
 </ul>
@@ -106,13 +103,168 @@ In verita” non ci sono specifici vingoli sul sistema del reddito.</p>
 <p>Le tabelle sono organizzate per sigle, quelle che iniziano con la stessa radice si riferiscono
 ad entita” correlate.</p>
 <p>Ci sono tabelle di «impostazione e configurazione», ci sono tabelle «operative».</p>
-<p><strong>rc</strong>
-La radice delle tabelle operative per le rilevazioni contabili e” <em>rc</em>,
+</section>
+<section id="tabelle-gestione-soggetti-operativi">
+<h2>Tabelle gestione soggetti operativi<a class="headerlink" href="#tabelle-gestione-soggetti-operativi" title="Link to this heading">¶</a></h2>
+<p>Le rilevazioni e le configurazioni fanno capo ad uno specifico soggetto «<strong>SOG</strong>».
+La lista e la configurazione dei soggetti e” demandata a queste tabelle di configurazione.</p>
+<section id="tabella-sog">
+<h3>Tabella: sog<a class="headerlink" href="#tabella-sog" title="Link to this heading">¶</a></h3>
+<p>Elenco soggetti operativi</p>
+</section>
+<section id="tabella-sogesercizi">
+<h3>Tabella: sogesercizi<a class="headerlink" href="#tabella-sogesercizi" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa gli esercizi contabili riferiti ad un soggetto <strong>SOG</strong></p>
+</section>
+</section>
+<section id="tabelle-configurazioni-contabili">
+<h2>Tabelle configurazioni contabili<a class="headerlink" href="#tabelle-configurazioni-contabili" title="Link to this heading">¶</a></h2>
+<p>Le tabelle relative alle configurazioni contabili consentono di gestire i gruppi di
+registrazione e le relative aggregazioni per ottenere diverse risultanze contabili
+(configurazioni)</p>
+<section id="tabella-rcgrp">
+<h3>Tabella: rcgrp<a class="headerlink" href="#tabella-rcgrp" title="Link to this heading">¶</a></h3>
+<p>Codici dei gruppi di registrazione contabile per soggetto</p>
+</section>
+<section id="tabella-rcgrpcfg">
+<h3>Tabella: rcgrpcfg<a class="headerlink" href="#tabella-rcgrpcfg" title="Link to this heading">¶</a></h3>
+<p>Codici dei raggruppamenti di registrazione contabile, per soggetto, che definisce
+una specifica configurazione.</p>
+</section>
+<section id="tabella-rcgrpcls">
+<h3>Tabella: rcgrpcls<a class="headerlink" href="#tabella-rcgrpcls" title="Link to this heading">¶</a></h3>
+<p>Classi in cui possono essere categorizzati i gruppi di registrazione contabile.</p>
+</section>
+<section id="tabella-rcgrpnncfg">
+<h3>Tabella rcgrpnncfg<a class="headerlink" href="#tabella-rcgrpnncfg" title="Link to this heading">¶</a></h3>
+<p>Tabella di supporto per gestire la relazione di tipo n:n tra i gruppi di registrazione
+e le configurazioni contabili.
+La relazione e” di tipo n:n in quanto</p>
+<ul class="simple">
+<li><p>un gruppo di registrazione <em>rcgrp</em> puo” essere presente in piu” configurazioni;</p></li>
+<li><p>una configurazione contabile <em>rcgrpcfg</em> puo” avere piu” gruppi di registrazione.</p></li>
+</ul>
+</section>
+</section>
+<section id="tabelle-configurazione-centri-di-analisi">
+<h2>Tabelle configurazione centri di analisi<a class="headerlink" href="#tabelle-configurazione-centri-di-analisi" title="Link to this heading">¶</a></h2>
+<section id="tabella-cdacod">
+<h3>Tabella: cdacod<a class="headerlink" href="#tabella-cdacod" title="Link to this heading">¶</a></h3>
+<p>Codici dei piani dei centri di analisi disponibili</p>
+</section>
+<section id="tabella-cdacentro">
+<h3>Tabella: cdacentro<a class="headerlink" href="#tabella-cdacentro" title="Link to this heading">¶</a></h3>
+<p>Sviluppo dei codici dei centri di analisi afferenti un determinato centro</p>
+</section>
+</section>
+<section id="tabelle-configurazione-commesse">
+<h2>Tabelle configurazione commesse<a class="headerlink" href="#tabelle-configurazione-commesse" title="Link to this heading">¶</a></h2>
+<section id="tabella-commessa">
+<h3>Tabella: commessa<a class="headerlink" href="#tabella-commessa" title="Link to this heading">¶</a></h3>
+<p>Tabella anagrafica di commessa</p>
+</section>
+</section>
+<section id="tabelle-configurazione-divisioni">
+<h2>Tabelle configurazione divisioni<a class="headerlink" href="#tabelle-configurazione-divisioni" title="Link to this heading">¶</a></h2>
+<section id="tabella-divisione">
+<h3>Tabella: divisione<a class="headerlink" href="#tabella-divisione" title="Link to this heading">¶</a></h3>
+<p>Tabella anagrafica divisioni contabili</p>
+</section>
+</section>
+<section id="tabelle-configurazione-iva">
+<h2>Tabelle configurazione IVA<a class="headerlink" href="#tabelle-configurazione-iva" title="Link to this heading">¶</a></h2>
+<section id="tabella-ivaattivita">
+<h3>Tabella: ivaattivita<a class="headerlink" href="#tabella-ivaattivita" title="Link to this heading">¶</a></h3>
+<p>Codici attivita” IVA</p>
+</section>
+<section id="tabella-ivacod">
+<h3>Tabella: ivacod<a class="headerlink" href="#tabella-ivacod" title="Link to this heading">¶</a></h3>
+<p>Tabella codici IVA
+Condivisa tra tutti i SOG</p>
+</section>
+<section id="tabella-ivaregistro">
+<h3>Tabella: ivaregistro<a class="headerlink" href="#tabella-ivaregistro" title="Link to this heading">¶</a></h3>
+<p>Tabella dei registri iva afferenti uno specifico SOG</p>
+</section>
+</section>
+<section id="tabelle-configurazione-piano-dei-conti">
+<h2>Tabelle configurazione piano dei conti<a class="headerlink" href="#tabelle-configurazione-piano-dei-conti" title="Link to this heading">¶</a></h2>
+<section id="tabella-pdccod">
+<h3>Tabella: pdccod<a class="headerlink" href="#tabella-pdccod" title="Link to this heading">¶</a></h3>
+<p>Tabella dei codici dei piani dei conti disponibili.
+Indipendente da SOG, uno di questi codici viene associato a un SOG.</p>
+</section>
+<section id="tabella-pdcconto">
+<h3>Tabella: pdcconto<a class="headerlink" href="#tabella-pdcconto" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa i conti di uno specifico piano dei conti «cod»</p>
+</section>
+<section id="tabella-pdcnaturaconti">
+<h3>Tabella: pdcnaturaconti<a class="headerlink" href="#tabella-pdcnaturaconti" title="Link to this heading">¶</a></h3>
+<p>Struttura della tassonomia dei conti.
+Una natura va associata a ciascun conto della tabella pdcconto</p>
+</section>
+</section>
+<section id="tabelle-configurazione-piano-delle-voci-analitica">
+<h2>Tabelle configurazione piano delle voci (analitica)<a class="headerlink" href="#tabelle-configurazione-piano-delle-voci-analitica" title="Link to this heading">¶</a></h2>
+<section id="tabella-pdvcod">
+<h3>Tabella: pdvcod<a class="headerlink" href="#tabella-pdvcod" title="Link to this heading">¶</a></h3>
+<p>Tabella dei codici dei piani delle voci disponibili.
+Indipendente da SOG, uno di questi codici viene associato ad un SOG.
+Stessa logica di funzionamento del piano delle voci, consente la rilevazione
+per natura delle operazioni contabili. Non obbligatorio.</p>
+</section>
+<section id="tabella-pdvvoce">
+<h3>Tabella: pdvvoce<a class="headerlink" href="#tabella-pdvvoce" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa le singole voci dei piani delle voci.</p>
+</section>
+</section>
+<section id="tabelle-rilevazioni-contabili">
+<h2>Tabelle rilevazioni contabili<a class="headerlink" href="#tabelle-rilevazioni-contabili" title="Link to this heading">¶</a></h2>
+<section id="tabella-rc">
+<h3>Tabella: rc<a class="headerlink" href="#tabella-rc" title="Link to this heading">¶</a></h3>
+<p><strong>rc</strong> = <em>rilevazione contabile</em></p>
+<p>La radice delle tabelle operative per le rilevazioni contabili e” <em>rc</em>,
 che sta per <em>rilevazione contabile</em>.
 Questa tabella e” la testata di una serie di relazioni in cascata, tutte con prefisso rc</p>
-<p><strong>rcrcg</strong>
-La prima relazione, di tipo 1:n, con la rilevazione contabile consiste nelle righe che
-compongono la registrazione. rc <strong>rcg</strong> sta per <strong>r</strong> iga <strong>c</strong> ontabilita” <strong>g</strong> enerale.</p>
+</section>
+<section id="tabella-rcrcg">
+<h3>Tabella: rcrcg<a class="headerlink" href="#tabella-rcrcg" title="Link to this heading">¶</a></h3>
+<p><strong>rcrcg</strong> = <em>rilevazione contabile, riga contabilita” generale</em></p>
+<p>La prima relazione, di tipo 1:n, con la rilevazione contabile consiste nelle righe che
+compongono la registrazione.</p>
+</section>
+<section id="tabella-rcrcgflf">
+<h3>Tabella: rcrcgflf<a class="headerlink" href="#tabella-rcrcgflf" title="Link to this heading">¶</a></h3>
+<p>Tabella di registrazione dello sviluppo dei flussi finanziaricollegati ad una rilevazoine
+contabile</p>
+</section>
+<section id="tabella-rcrcgcda">
+<h3>Tabella: rcrcgcda<a class="headerlink" href="#tabella-rcrcgcda" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa i dettagli dei centri di analisi di una riga contabile <strong>rcrcg</strong></p>
+</section>
+<section id="tabella-rcrcgcom">
+<h3>Tabella: rcrcgcom<a class="headerlink" href="#tabella-rcrcgcom" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa i dettagli delle commesse di una riga contabile <strong>rcrcg</strong></p>
+</section>
+<section id="tabella-rciva">
+<h3>Tabella: rciva<a class="headerlink" href="#tabella-rciva" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa i movimenti IVA di una testata rilevazione contabile <strong>rc</strong></p>
+</section>
+</section>
+<section id="tabelle-movimenti-analitica">
+<h2>Tabelle movimenti analitica<a class="headerlink" href="#tabelle-movimenti-analitica" title="Link to this heading">¶</a></h2>
+<section id="tabella-rccoacam">
+<h3>Tabella: rccoacam<a class="headerlink" href="#tabella-rccoacam" title="Link to this heading">¶</a></h3>
+<p>Tabella che sviluppa i movimenti <strong>rc</strong> analitici <strong>coa</strong> con logica di competenza
+anno/mese <strong>cam</strong> = competenza anno mese.</p>
+</section>
+</section>
+<section id="tabelle-varie">
+<h2>Tabelle varie<a class="headerlink" href="#tabelle-varie" title="Link to this heading">¶</a></h2>
+<section id="tabella-atecocodice">
+<h3>Tabella: atecocodice<a class="headerlink" href="#tabella-atecocodice" title="Link to this heading">¶</a></h3>
+<p>Contiene i codici ATECO per SOG</p>
+</section>
 </section>
 </section>
 
@@ -150,9 +302,21 @@ compongono la registrazione. rc <strong>rcg</strong> sta per <strong>r</strong> 
 <li class="toctree-l2"><a class="reference internal" href="#il-concetto-di-simulazione-contabile">Il concetto di simulazione contabile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#funzioni-contabili">Funzioni contabili</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#struttura-delle-tabelle">Struttura delle tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-gestione-soggetti-operativi">Tabelle gestione soggetti operativi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazioni-contabili">Tabelle configurazioni contabili</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-centri-di-analisi">Tabelle configurazione centri di analisi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-commesse">Tabelle configurazione commesse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-divisioni">Tabelle configurazione divisioni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-iva">Tabelle configurazione IVA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-piano-dei-conti">Tabelle configurazione piano dei conti</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-configurazione-piano-delle-voci-analitica">Tabelle configurazione piano delle voci (analitica)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-rilevazioni-contabili">Tabelle rilevazioni contabili</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-movimenti-analitica">Tabelle movimenti analitica</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tabelle-varie">Tabelle varie</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkg_anag.html">Package anag: «anagrafiche»</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pkg_ftel.html">Package ftel: «fattura elettronica»</a></li>
 </ul>
 
 <div class="relations">
@@ -160,7 +324,7 @@ compongono la registrazione. rc <strong>rcg</strong> sta per <strong>r</strong> 
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="manuale_utente.html" title="capitolo precedente">Manuale per l’utente</a></li>
-      <li>Next: <a href="api.html" title="capitolo successivo">API</a></li>
+      <li>Next: <a href="pkg_anag.html" title="capitolo successivo">Package anag: «anagrafiche»</a></li>
   </ul></li>
 </ul>
 </div>

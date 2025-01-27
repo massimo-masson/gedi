@@ -67,3 +67,5 @@ INDICE
 
    manuale_utente
    pkg_pn
+   pkg_anag
+   pkg_ftel

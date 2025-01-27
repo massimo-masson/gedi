@@ -63,13 +63,13 @@ In verita' non ci sono specifici vingoli sul sistema del reddito.
 La registrazione ha delle informazioni di "testata", cui si possono correlare:
 
 - righe di contabilita' (dare avere), basate sul piano dei conti;
-- informazioni su divisione e commessa. Queste possono poi essere specificate nei
-dettagli di riga in modo piu' puntuale
+- informazioni su divisione e commessa. Queste possono poi essere specificate nei dettagli di riga in modo piu' puntuale
 - informazioni IVA (registri e codici)
 - informazioni di contabilita' analitica:
+
     - per natura, con un dettaglio specifico di "voce". Questa correlazione e' di tipo 1:1 tra conto e voce
-    - per destinazione, con un dettaglio specifico di "centro" e di "commessa". Questa relazione e'
-    di tipo 1:n tra conto e centro/commessa
+    - per destinazione, con un dettaglio specifico di "centro" e di "commessa". Questa relazione e' di tipo 1:n tra conto e centro/commessa
+
 - informazioni sulle scadenze finanziarie
 - indicazione del gruppo di registrazione (simulatore)
 
@@ -82,11 +82,194 @@ ad entita' correlate.
 
 Ci sono tabelle di "impostazione e configurazione", ci sono tabelle "operative".
 
-**rc**
+Tabelle gestione soggetti operativi
+-----------------------------------
+
+Le rilevazioni e le configurazioni fanno capo ad uno specifico soggetto "**SOG**".
+La lista e la configurazione dei soggetti e' demandata a queste tabelle di configurazione.
+
+Tabella: sog
+************
+
+Elenco soggetti operativi
+
+Tabella: sogesercizi
+********************
+
+Tabella che sviluppa gli esercizi contabili riferiti ad un soggetto **SOG**
+
+Tabelle configurazioni contabili
+--------------------------------
+
+Le tabelle relative alle configurazioni contabili consentono di gestire i gruppi di
+registrazione e le relative aggregazioni per ottenere diverse risultanze contabili
+(configurazioni)
+
+Tabella: rcgrp
+**************
+
+Codici dei gruppi di registrazione contabile per soggetto
+
+Tabella: rcgrpcfg
+*****************
+
+Codici dei raggruppamenti di registrazione contabile, per soggetto, che definisce
+una specifica configurazione.
+
+Tabella: rcgrpcls
+*****************
+
+Classi in cui possono essere categorizzati i gruppi di registrazione contabile.
+
+Tabella rcgrpnncfg
+******************
+
+Tabella di supporto per gestire la relazione di tipo n:n tra i gruppi di registrazione
+e le configurazioni contabili.
+La relazione e' di tipo n:n in quanto
+
+- un gruppo di registrazione *rcgrp* puo' essere presente in piu' configurazioni;
+- una configurazione contabile *rcgrpcfg* puo' avere piu' gruppi di registrazione.
+ 
+
+Tabelle configurazione centri di analisi
+----------------------------------------
+
+Tabella: cdacod
+***************
+
+Codici dei piani dei centri di analisi disponibili
+
+Tabella: cdacentro
+******************
+
+Sviluppo dei codici dei centri di analisi afferenti un determinato centro
+
+Tabelle configurazione commesse
+-------------------------------
+
+Tabella: commessa
+*****************
+
+Tabella anagrafica di commessa
+
+Tabelle configurazione divisioni
+--------------------------------
+
+Tabella: divisione
+******************
+
+Tabella anagrafica divisioni contabili
+
+Tabelle configurazione IVA
+--------------------------
+
+Tabella: ivaattivita
+********************
+
+Codici attivita' IVA
+
+Tabella: ivacod
+***************
+
+Tabella codici IVA
+Condivisa tra tutti i SOG
+
+Tabella: ivaregistro
+********************
+
+Tabella dei registri iva afferenti uno specifico SOG
+
+Tabelle configurazione piano dei conti
+--------------------------------------
+
+Tabella: pdccod
+***************
+
+Tabella dei codici dei piani dei conti disponibili. 
+Indipendente da SOG, uno di questi codici viene associato a un SOG.
+
+Tabella: pdcconto
+*****************
+
+Tabella che sviluppa i conti di uno specifico piano dei conti "cod"
+
+Tabella: pdcnaturaconti
+***********************
+
+Struttura della tassonomia dei conti.
+Una natura va associata a ciascun conto della tabella pdcconto
+
+Tabelle configurazione piano delle voci (analitica)
+---------------------------------------------------
+
+Tabella: pdvcod
+***************
+
+Tabella dei codici dei piani delle voci disponibili.
+Indipendente da SOG, uno di questi codici viene associato ad un SOG.
+Stessa logica di funzionamento del piano delle voci, consente la rilevazione
+per natura delle operazioni contabili. Non obbligatorio.
+
+Tabella: pdvvoce
+****************
+
+Tabella che sviluppa le singole voci dei piani delle voci.
+
+Tabelle rilevazioni contabili
+-----------------------------
+
+Tabella: rc
+***********
+
+**rc** = *rilevazione contabile*
+
 La radice delle tabelle operative per le rilevazioni contabili e' *rc*, 
 che sta per *rilevazione contabile*.
 Questa tabella e' la testata di una serie di relazioni in cascata, tutte con prefisso rc
 
-**rcrcg**
+Tabella: rcrcg
+**************
+
+**rcrcg** = *rilevazione contabile, riga contabilita' generale*
+
 La prima relazione, di tipo 1:n, con la rilevazione contabile consiste nelle righe che
-compongono la registrazione. rc **rcg** sta per **r** iga **c** ontabilita' **g** enerale.
+compongono la registrazione.
+
+Tabella: rcrcgflf
+*****************
+
+Tabella di registrazione dello sviluppo dei flussi finanziaricollegati ad una rilevazoine
+contabile
+
+Tabella: rcrcgcda
+*****************
+
+Tabella che sviluppa i dettagli dei centri di analisi di una riga contabile **rcrcg**
+
+Tabella: rcrcgcom
+*****************
+
+Tabella che sviluppa i dettagli delle commesse di una riga contabile **rcrcg**
+
+Tabella: rciva
+**************
+
+Tabella che sviluppa i movimenti IVA di una testata rilevazione contabile **rc**
+
+Tabelle movimenti analitica
+---------------------------
+
+Tabella: rccoacam
+*****************
+
+Tabella che sviluppa i movimenti **rc** analitici **coa** con logica di competenza
+anno/mese **cam** = competenza anno mese.
+
+Tabelle varie
+-------------
+
+Tabella: atecocodice
+********************
+
+Contiene i codici ATECO per SOG

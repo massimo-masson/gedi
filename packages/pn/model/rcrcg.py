@@ -197,9 +197,9 @@ class Table(object):
                                   #unmodifiable=True,
                                   validate_notnull = False
                                   )
-        commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
-                               relation_name = 'commessa_riga', 
-                               onDelete = 'raise')
+        commessa__id.relation('anag.commessa.id', mode = 'foreignkey',
+                              relation_name = 'commessa_riga', 
+                              onDelete = 'raise')
 
         tbl.aliasColumn('commessa_rc', '@rc__id.commessa__id',
                         name_long='!![it]Commessa testata reg.',

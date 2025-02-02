@@ -199,7 +199,7 @@ class Table(object):
                                   #unmodifiable=True,
                                   validate_notnull = False
                                   )
-        commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
+        commessa__id.relation('anag.commessa.id', mode = 'foreignkey',
                                relation_name = 'commessa_rccoacam', 
                                onDelete = 'raise')
 

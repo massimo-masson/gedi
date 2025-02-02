@@ -75,7 +75,7 @@ class Table(object):
                                   #unmodifiable=False,
                                   validate_notnull=True,
                                   )
-        commessa__id.relation('pn.commessa.id', mode='foreignkey',
+        commessa__id.relation('anag.commessa.id', mode='foreignkey',
                                relation_name='commesse_riga',
                                #one_one=True,
                                onDelete='raise',

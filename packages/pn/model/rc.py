@@ -112,9 +112,9 @@ class Table(object):
                                      name_long = '!![it]Commessa',
                                      #validate_notnull = True
                                      )
-        commessa__id.relation('pn.commessa.id', mode = 'foreignkey',
-                                relation_name = 'registrazioni_commesse', 
-                                onDelete = 'raise')
+        commessa__id.relation('anag.commessa.id', mode = 'foreignkey',
+                              relation_name = 'registrazioni_commesse', 
+                              onDelete = 'raise')
 
         tbl.column('desc', dtype='A', size=':256', 
                    name_long='!![it]Descrizione rilevazione', 

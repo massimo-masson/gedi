@@ -182,7 +182,7 @@ class Table(object):
                                    #unmodifiable=True,
                                    validate_notnull = False
                                    )
-        divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
+        divisione__id.relation('anagr.divisione.id', mode = 'foreignkey',
                                relation_name = 'divisione_rccoacam', 
                                onDelete = 'raise')
         

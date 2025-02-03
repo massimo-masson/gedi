@@ -103,9 +103,9 @@ class Table(object):
                                      name_long = '!![it]Divisione',
                                      #validate_notnull = True
                                      )
-        divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
-                                relation_name = 'registrazioni_divisione', 
-                                onDelete = 'raise')
+        divisione__id.relation('anag.divisione.id', mode = 'foreignkey',
+                               relation_name = 'registrazioni_divisione', 
+                               onDelete = 'raise')
 
         # foreign key to commessa - eventuale commessa di testata
         commessa__id = tbl.column('commessa__id', dtype = 'A', size = '22',

@@ -145,22 +145,6 @@ Tabella: cdacentro
 
 Sviluppo dei codici dei centri di analisi afferenti un determinato centro
 
-Tabelle configurazione commesse
--------------------------------
-
-Tabella: commessa
-*****************
-
-Tabella anagrafica di commessa
-
-Tabelle configurazione divisioni
---------------------------------
-
-Tabella: divisione
-******************
-
-Tabella anagrafica divisioni contabili
-
 Tabelle configurazione IVA
 --------------------------
 

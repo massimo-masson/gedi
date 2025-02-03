@@ -180,7 +180,7 @@ class Table(object):
                                    #unmodifiable=True,
                                    validate_notnull = False
                                    )
-        divisione__id.relation('pn.divisione.id', mode = 'foreignkey',
+        divisione__id.relation('anag.divisione.id', mode = 'foreignkey',
                                relation_name = 'divisione_riga', 
                                onDelete = 'raise')
         

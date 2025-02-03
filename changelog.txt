@@ -1,3 +1,9 @@
+20250203
+Refractoring: spostamento tabella "divisioni" da package pn a package anag
+
+20250202
+spostato tab analitica da bottom a left-h in th_rcrcg
+
 20250202
 Refractoring: spostamento tabella "commessa" da package pn a package anag
 

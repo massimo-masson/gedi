@@ -42,20 +42,20 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('sog__cod')
-        #r.fieldcell('rcgrpcls__cod')
-        r.fieldcell('esercizio__id')
+        r.fieldcell('esercizi__cod')
+        #r.fieldcell('rc_grp_cls__cod')
         r.fieldcell('desc')
         r.fieldcell('rc_data')
         r.fieldcell('rc_rif')
         r.fieldcell('rc_docdata')
         r.fieldcell('rc_docnum')
-        r.fieldcell('ivaregistro__id')
-        r.fieldcell('divisione__id')
-        r.fieldcell('commessa__id')
-        r.fieldcell('rcgrp__id')
+        r.fieldcell('iva_registri__cod')
+        r.fieldcell('divisioni__id')
+        r.fieldcell('commesse__id')
+        r.fieldcell('rc_grp__id')
 
     def th_order(self):
-        return 'sog__cod, esercizio__id, rc_data'
+        return 'sog__cod, esercizi__cod, rc_data'
 
     def th_query(self):
         return dict(column='sog__cod', op='contains', val='')
@@ -76,7 +76,7 @@ class Form(BaseComponent):
         # pane = form.record
         # fb = pane.formbuilder(cols=2, border_spacing='4px')
         # fb.field('sog__cod')
-        # fb.field('rcgrpcls__cod')
+        # fb.field('rc_grp_cls__cod')
         # fb.field('desc')
         # fb.field('rc_data')
         # fb.field('rc_rif')
@@ -92,21 +92,25 @@ class Form(BaseComponent):
 
         #fb.field('sog__cod', readOnly=True)
         
-        fb.field('rcgrp__id', hasDownArrow=True,
+        fb.field('rc_grp__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:sog',
                  condition_sog='=.sog__cod',
                  )
-        fb.field('@rcgrp__id.classe_desc', readOnly=True)
+        fb.field('@rc_grp__id.classe_desc', readOnly=True)
         fb.div('')
 
-        fb.field('esercizio__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 #auxColumns='$cod,$desc',
-                 condition='$sog__cod=:sog',
-                 condition_sog='=.sog__cod',
-                 )
+        fb.dbSelect('^.esercizi__cod', dbtable='pn.sog_esercizi',
+                    lbl='!![it]Esercizio', 
+                    hasDownArrow=True,
+                    columns='$cod,$desc',
+                    auxColumns='$cod,$desc',
+                    condition='$sog__cod=:sog',
+                    condition_sog='=.sog__cod',
+                    alternatePkey='cod',
+                    )
+
         fb.field('rc_data')
         fb.field('rc_rif')
 
@@ -116,13 +120,13 @@ class Form(BaseComponent):
         fb.field('rc_docnum')
         fb.div('')
 
-        fb.field('commessa__id', hasDownArrow=True,
+        fb.field('commesse__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:sog',
                  condition_sog='=.sog__cod',
                  )
-        fb.field('divisione__id', hasDownArrow=True,
+        fb.field('divisioni__id', hasDownArrow=True,
                  columns='$cod,$desc',
                  #auxColumns='$cod,$desc',
                  condition='$sog__cod=:sog',
@@ -131,13 +135,17 @@ class Form(BaseComponent):
                  )
         fb.div('')
 
-        fb.field('ivaregistro__id', hasDownArrow=True,
-                 columns='$cod,$desc',
-                 #auxColumns='$cod,$desc',
-                 condition='$sog__cod=:ws',
-                 #condition_ws='=#FORM.record.sog__cod', # anche questa funziona
-                 condition_ws='=.sog__cod'
-                 )
+#        fb.field('iva_registri__id', hasDownArrow=True,
+        fb.dbSelect('^.iva_registri__cod', dbtable='pn.iva_registri',
+                    lbl='!![it]Registro IVA',
+                    hasDownArrow=True,
+                    columns='$cod,$desc',
+                    auxColumns='$cod,$desc',
+                    condition='$sog__cod=:sog',
+                    #condition_sog='=#FORM.record.sog__cod', # alternativa
+                    condition_sog='=.sog__cod',
+                    alternatePkey='cod'
+                    )
         fb.field('iva_protocollo')
         fb.field('iva_protocollo_appendice')
 

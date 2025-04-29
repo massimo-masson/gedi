@@ -1,3 +1,63 @@
+20250324
+Nuovo refractoring su nomi tabelle.
+Inserimento del simbolo "_" (underscore) rispetto ai gruppi
+"logici" di tabelle.
+
+NUOVO			VECCHIO
+ateco_codici		atecocodici
+cda_centri		cdacentri
+cda_cod			cdacod
+iva_attivita		ivaattivita
+iva_cod			ivacod
+iva_registri		ivaregistri
+pdc_cod			pdccod
+pdc_conti		pdcconti
+pdc_natura_conti	pdcnaturaconti
+pdv_cod			pdvcod
+pdv_voci		pdvvoci
+rc			rc
+rc_coa_cam		rccoacam
+rc_grp			rcgrp
+rc_grp_cfg		rcgrpcfg
+rc_grp_cls		rcgrpcls
+rc_grp_nn_cfg		rcgrpnncfg
+rc_rcg			rcrcg
+rc_rcg_cda		rcrcgcda
+rc_rcg_com		rcrcgcom
+rc_rcg_flf		rcrcgflf
+rc_riva			rcriva
+sog			sog
+sog_esercizi		sogesercizi
+
+20250319
+rcriva		-pk singola, non cambiato
+rcrcgflf	-pk singola, non cambiato
+
+20250318
+sog		- pk singola, tolta id da sysFields
+sogesercizi	- cpk composta, modificato
+
+20250317
+Passaggio a chiavi primarie composte.
+cpk = composite primary key, per le tabelle con chiave composta
+atecocodici	- pk singola
+cdacentri	- cpk composta, modificato
+cdacod		- pk singola, non cambiato
+ivaattivita	- pk singola, non cambiato
+ivacod		- pk singola, non cambiato
+ivaregistri	- cpk composta, modificato
+
+20250310
+Refractoring per nomi plurali terminato (pn, anag, ftel)
+
+20250306
+Continua refractoring. Package resources di: pn, anag, ftel
+
+20250304 PASSAGGIO A BRANCH DEVELOP
+Inizio pesante refcactoring. ogni tabella con nome singolare viene
+cambiata con nome plurale.
+In corso... (model, no ancora risorse)
+
 20250203
 Refractoring: spostamento tabella "divisioni" da package pn a package anag
 

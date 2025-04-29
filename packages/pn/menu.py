@@ -70,25 +70,25 @@ def config(root,application=None):
                 formResource = 'FormCFG'
                 )
 
-    conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rcgrpcls')
+    conf.thpage('!![it]Classi dei gruppi di registrazione', table = 'pn.rc_grp_cls')
 
 
     # menu CONFIGURAZIONE - PDC / PDV / CDA
     conf_pdc = conf.branch('!![it]Piani: PDC - PDV - CDA')
 
-    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdcnaturaconti')
+    conf_pdc.thpage('!![it]Natura dei conti', table = 'pn.pdc_natura_conti')
 
-    conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdccod')
-    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdcconto')
+    conf_pdc.thpage('!![it]Piani dei conti', table = 'pn.pdc_cod')
+    #conf_pdc.thpage('!![it]...singoli conti', table = 'pn.pdc_conto')
 
-    conf_pdc.thpage('!![it]Piani delle voci', table = 'pn.pdvcod')
-    conf_pdc.thpage('!![it]Piani dei centri', table = 'pn.cdacod')
+    conf_pdc.thpage('!![it]Piani delle voci', table = 'pn.pdv_cod')
+    conf_pdc.thpage('!![it]Piani dei centri', table = 'pn.cda_cod')
 
 
     # menu CONFIGURAZIONE - IVA
     conf_iva = conf.branch('!![it]IVA')
 
-    conf_iva.thpage('!![it]Codici IVA', table = 'pn.ivacod')
+    conf_iva.thpage('!![it]Codici IVA', table = 'pn.iva_cod')
 
 
     # menu CONFIGURAZIONE - FATTURA ELETTRONICA
@@ -100,4 +100,4 @@ def config(root,application=None):
     # menu CONFIGURAZIONE - ATECO
     conf_ateco = conf.branch('!![it]ATECO')
     conf_ateco.thpage('!![it]Codici ATECO', 
-                    table = 'pn.atecocodice')
+                    table = 'pn.ateco_codici')

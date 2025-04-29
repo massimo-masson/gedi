@@ -43,9 +43,9 @@ class View(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('cod')
         r.fieldcell('desc')
-        r.fieldcell('pdccod__cod')
-        r.fieldcell('pdvcod__cod')
-        r.fieldcell('cdacod__cod')
+        r.fieldcell('pdc_cod__cod')
+        r.fieldcell('pdv_cod__cod')
+        r.fieldcell('cda_cod__cod')
         #r.fieldcell('note')
 
     def th_order(self):
@@ -108,9 +108,9 @@ class FormCFG(Form):
         fb.field('cod')
         fb.field('desc', colspan=2, width='100%')
 
-        fb.field('pdccod__cod', hasDownArrow=True)
-        fb.field('pdvcod__cod', hasDownArrow=True)
-        fb.field('cdacod__cod', hasDownArrow=True)
+        fb.field('pdc_cod__cod', hasDownArrow=True)
+        fb.field('pdv_cod__cod', hasDownArrow=True)
+        fb.field('cda_cod__cod', hasDownArrow=True)
 
 
     def FBody(self, pane):

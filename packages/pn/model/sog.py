@@ -36,63 +36,68 @@
 
 class Table(object):
     def config_db(self, pkg):
-        '''sog: soggetto operativo nel db (multiditta)'''
+        '''sog: soggetti operativi nel db (multiditta)'''
 
         tbl = pkg.table('sog', pkey='cod', 
-                name_long='!![it]Soggetto operativo',
-                name_plural='!![it]Soggetti operativi',
-                caption_field='desc')
+                        name_long='!![it]Soggetto operativo',
+                        name_plural='!![it]Soggetti operativi',
+                        caption_field='desc'
+                        )
 
-        self.sysFields(tbl)
+        self.sysFields(tbl, id=False)
 
         tbl.column('cod', dtype='A', size=':32', 
-                name_long='!![it]Soggetto operativo',
-                unmodifiable=True,
-                unique=True, validate_notnull=True, indexed=True)
+                   name_long='!![it]Soggetto operativo',
+                   unmodifiable=True,
+                   unique=True,
+                   validate_notnull=True,
+                   indexed=True
+                   )
 
         tbl.column('desc', dtype='A', size=':256', 
-                name_long='!![it]Descrizione', 
-                validate_notnull=True)
+                   name_long='!![it]Descrizione', 
+                   validate_notnull=True
+                   )
 
         tbl.column('note', dtype='A', size=':1024', 
-                name_long='!![it]Note')
+                   name_long='!![it]Note'
+                   )
         
-        # pdccod__id: foreign key to pdccod
-        tbl_pdccod__cod = tbl.column('pdccod__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]PDC',
-                                    #unmodifiable=True,
-                                    validate_notnull = True
-                                    )
-        tbl_pdccod__cod.relation('pn.pdccod.cod', mode = 'foreignkey',
-                                relation_name = 'pdccod', 
-                                one_one=True,
-                                onDelete = 'raise'
-                                )
+        # pdc_cod__id: foreign key to pdc_cod
+        pdc_cod__cod = tbl.column('pdc_cod__cod', dtype = 'A', size = ':32',
+                                  name_long = '!![it]PDC',
+                                  #unmodifiable=True,
+                                  validate_notnull = True
+                                  )
+        pdc_cod__cod.relation('pn.pdc_cod.cod', mode = 'foreignkey',
+                              relation_name = 'pdccod', 
+                              one_one=True,
+                              onDelete = 'raise'
+                              )
 
-        # pdvcod__cod: foreign key to pdvcod
-        tbl_pdvcod__cod = tbl.column('pdvcod__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]PDV',
-                                    #unmodifiable=True,
-                                    validate_notnull = False
-                                    )
-        tbl_pdvcod__cod.relation('pn.pdvcod.cod', mode = 'foreignkey',
-                                relation_name = 'pdvcod', 
-                                one_one=True,
-                                onDelete = 'raise'
-                                )
+        # pdv_cod__cod: foreign key to pdv_cod
+        pdv_cod__cod = tbl.column('pdv_cod__cod', dtype = 'A', size = ':32',
+                                  name_long = '!![it]PDV',
+                                  #unmodifiable=True,
+                                  validate_notnull = False
+                                  )
+        pdv_cod__cod.relation('pn.pdv_cod.cod', mode = 'foreignkey',
+                              relation_name = 'pdvcod', 
+                              one_one=True,
+                              onDelete = 'raise'
+                              )
 
-        # cdacod__cod: foreign key to cdacod
-        tbl_cdacod__cod = tbl.column('cdacod__cod', dtype = 'A', size = ':32',
-                                    name_long = '!![it]CDA',
-                                    #unmodifiable=True,
-                                    validate_notnull = False
-                                    )
-        tbl_cdacod__cod.relation('pn.cdacod.cod', mode = 'foreignkey',
-                                relation_name = 'cdacod', 
-                                one_one=True,
-                                onDelete = 'raise'
-                                )
-
+        # cda_cod__cod: foreign key to cdacod
+        cda_cod__cod = tbl.column('cda_cod__cod', dtype = 'A', size = ':32',
+                                  name_long = '!![it]CDA',
+                                  #unmodifiable=True,
+                                  validate_notnull = False
+                                  )
+        cda_cod__cod.relation('pn.cda_cod.cod', mode = 'foreignkey',
+                              relation_name = 'cdacod', 
+                              one_one=True,
+                              onDelete = 'raise'
+                              )
 
 
     def partitioning_pkeys(self):
